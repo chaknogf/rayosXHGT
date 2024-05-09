@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <TablaPacientes></TablaPacientes>
+      <TablaPacientes  ></TablaPacientes>
       
        
     </>
