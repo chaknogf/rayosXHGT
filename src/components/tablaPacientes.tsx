@@ -1,8 +1,6 @@
-import "../style.css";
-import { calcularEdad } from "../utils/edad";
-import { formatoFecha } from "../utils/fecha";
-import React from "react";
-import DataTable from "./DataTable"; // Asegúrate de que la ruta sea correcta
+import "@/style.css";
+import { calcularEdad } from "@/utils/edad";
+import { formatoFecha } from "@/utils/fecha";
 
 //import  { useState } from 'react';
 
@@ -82,7 +80,7 @@ const TablaPacientes = () => {
                       width="24"
                       height="24"
                       fill="ffff"
-                      class="bi bi-database-add"
+                      className="bi bi-database-add"
                       viewBox="0 0 16 16"
                     >
                       <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0" />
@@ -108,7 +106,7 @@ const TablaPacientes = () => {
                       width="36"
                       height="36"
                       fill="#c2ecfe"
-                      class="bi bi-person-standing"
+                      className="bi bi-person-standing"
                       viewBox="0 0 16 16"
                     >
                       <path d="M8 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M6 6.75v8.5a.75.75 0 0 0 1.5 0V10.5a.5.5 0 0 1 1 0v4.75a.75.75 0 0 0 1.5 0v-8.5a.25.25 0 1 1 .5 0v2.5a.75.75 0 0 0 1.5 0V6.5a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v2.75a.75.75 0 0 0 1.5 0v-2.5a.25.25 0 0 1 .5 0" />
@@ -120,7 +118,7 @@ const TablaPacientes = () => {
                       width="36"
                       height="36"
                       fill="#df7ca8"
-                      class="bi bi-person-standing-dress"
+                      className="bi bi-person-standing-dress"
                       viewBox="0 0 16 16"
                     >
                       <path d="M8 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m-.5 12.25V12h1v3.25a.75.75 0 0 0 1.5 0V12h1l-1-5v-.215a.285.285 0 0 1 .56-.078l.793 2.777a.711.711 0 1 0 1.364-.405l-1.065-3.461A3 3 0 0 0 8.784 3.5H7.216a3 3 0 0 0-2.868 2.118L3.283 9.079a.711.711 0 1 0 1.365.405l.793-2.777a.285.285 0 0 1 .56.078V7l-1 5h1v3.25a.75.75 0 0 0 1.5 0Z" />

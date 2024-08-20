@@ -1,12 +1,11 @@
 import React from "react";
 
-// Extiende la interfaz para permitir un SVG o una función personalizada
 interface TableColumn<T> {
   label: string;
-  key: keyof T;
+  key?: keyof T; // Hacer que key sea opcional si usas render
   render?: (data: T) => React.ReactNode;
   svgIcon?: React.ReactNode; // SVG opcional para la columna
-  customFunction?: (data: T) => void; // Función personalizada opcional
+  customFunction?: (data: T) => React.ReactNode; // Función personalizada opcional
 }
 
 interface TableProps<T> {
@@ -21,10 +20,7 @@ const DataTable = <T,>({ data, columns }: TableProps<T>) => {
         <thead>
           <tr>
             {columns.map((column, index) => (
-              <th key={index}>
-                {column.svgIcon && <span>{column.svgIcon}</span>}
-                {column.label}
-              </th>
+              <th key={index}>{column.label}</th>
             ))}
           </tr>
         </thead>
@@ -35,9 +31,13 @@ const DataTable = <T,>({ data, columns }: TableProps<T>) => {
                 <td key={colIndex}>
                   {column.customFunction
                     ? column.customFunction(item)
+                    : column.svgIcon
+                    ? column.svgIcon
                     : column.render
                     ? column.render(item)
-                    : item[column.key]}
+                    : column.key
+                    ? item[column.key]
+                    : null}
                 </td>
               ))}
             </tr>

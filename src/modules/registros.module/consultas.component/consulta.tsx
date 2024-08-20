@@ -36,8 +36,7 @@ const consulta: Consulta[] = [
 
 const columns = [
   { label: "Expediente", key: "expediente" },
-  { label: "Nombres", key: "nombres" },
-  { label: "Apellidos", key: "apellidos" },
+  { label: "Paciente", render: (data) => `${data.nombres} ${data.apellidos}`},
   { label: "Hoja", key: "hoja" },
   { label: "Fecha de Consulta", key: "fecha_consulta" },
   { label: "Hora", key: "hora" },
