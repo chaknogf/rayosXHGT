@@ -3,7 +3,7 @@ import { calcularEdad } from "@/utils/edad";
 import { formatoFecha } from "@/utils/fecha";
 import DataTable from "@/components/dataTable";
 import React, {useState} from "react";
-import UserForm from "./formularioPaciente";
+import PacienteForm from "@/modules/registros.module/pacientes/formularioPaciente";
 
 
 
@@ -55,13 +55,13 @@ const paciente: Paciente[] = [
 
 const PacienteTable: React.FC = () => {
 
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState<JSX.Element | null>( null);
 
   const handleButtonClick = () => {
-    setShowForm(true);
+    setShowForm(<PacienteForm />);
   };
 
-  
+
 
   const columns = [
     {
@@ -187,7 +187,7 @@ const PacienteTable: React.FC = () => {
   return (
     <div>
       <DataTable data={paciente} columns={columns} />
-      {showForm && <UserForm />}
+      {showForm && <PacienteForm />}
     </div>
   );
 }
