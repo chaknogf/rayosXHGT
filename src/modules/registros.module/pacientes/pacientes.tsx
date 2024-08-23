@@ -61,6 +61,8 @@ const PacienteTable: React.FC = () => {
     setShowForm(true);
   };
 
+  
+
   const columns = [
     {
       label: "ver", customFunction: () => (
