@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import ReusForm from "@/components/reusForm";
+import PacienteTable from "./pacientes";
+import "@/style.css"
 
 interface UserFormValues {
   firstName: string;
@@ -17,7 +19,7 @@ const PacienteForm: React.FC = () => {
   };
 
   const fields = [
-    { name: "firstName", label: "First Name", type: "text", className: "input-class" },
+    { name: "firstName", label: "First Name", type: "text", className: "bg-primary bg-opacity-75 text-uppercase m-0" },
     { name: "lastName", label: "Last Name", type: "text", className: "input-class" },
     { name: "email", label: "Email", type: "email", className: "input-class" },
     { name: "password", label: "Password", type: "password", className: "input-class" },
@@ -27,13 +29,28 @@ const PacienteForm: React.FC = () => {
     console.log("Form submitted:", values);
   };
 
+  const [showTable, setShowTable] = useState(false);
+
+  const handleBack = () => {
+    setShowTable(true);
+  };
+
   return (
-    <ReusForm<PacienteFormValues>
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      fields={fields}
-      className="form-class"
-    />
+    <>
+      {showTable ? (
+        <PacienteTable />
+      ) : (
+        <div>
+          <ReusForm<UserFormValues>
+            initialValues={initialValues}
+            onSubmit={handleSubmit}
+            fields={fields}
+            className="form-class"
+          />
+          <button onClick={handleBack}>Regresar</button>
+        </div>
+      )}
+    </>
   );
 };
 

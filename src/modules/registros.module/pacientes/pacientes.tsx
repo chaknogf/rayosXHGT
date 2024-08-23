@@ -55,10 +55,10 @@ const paciente: Paciente[] = [
 
 const PacienteTable: React.FC = () => {
 
-  const [showForm, setShowForm] = useState<JSX.Element | null>( null);
+  const [showForm, setShowForm] = useState(false);
 
   const handleButtonClick = () => {
-    setShowForm(<PacienteForm />);
+    setShowForm(true);
   };
 
 
@@ -186,8 +186,11 @@ const PacienteTable: React.FC = () => {
 
   return (
     <div>
-      <DataTable data={paciente} columns={columns} />
-      {showForm && <PacienteForm />}
+      {showForm ? (
+        <PacienteForm />
+      ) : (
+        <DataTable data={paciente} columns={columns} />
+      )}
     </div>
   );
 }

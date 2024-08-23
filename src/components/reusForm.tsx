@@ -57,3 +57,11 @@ const ReusForm = <T,>({ initialValues, onSubmit, fields, className }: FormProps<
 };
 
 export default ReusForm;
+
+
+{/* <div class="form__group field">
+    <input type="input" class="form__field" placeholder="Name" required="">
+    <label for="name" class="form__label">Nombre</label>
+</div> */}
+
+{/* <input type="text" name="text" class="input-robot" placeholder="Write a message"></input> */}
