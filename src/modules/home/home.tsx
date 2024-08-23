@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import NavComponent from "./nav";
-import TablaPacientes from "../../components/tablaPacientes"; // Importa el componente que deseas mostrar
+import PacienteTable from "../registros.module/pacientes/pacientes";
 import ConsultaTable from "../../modules/registros.module/consultas.component/consulta";
 
 const Home: React.FC = () => {
@@ -9,7 +9,7 @@ const Home: React.FC = () => {
   );
 
   const handlePacienteClick = () => {
-    setContenidoActual(<TablaPacientes />);
+    setContenidoActual(<PacienteTable />);
   };
 
   const handleConsultasClick = () => {

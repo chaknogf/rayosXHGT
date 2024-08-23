@@ -6,6 +6,7 @@ interface TableColumn<T> {
   render?: (data: T) => React.ReactNode;
   svgIcon?: React.ReactNode; // SVG opcional para la columna
   customFunction?: (data: T) => React.ReactNode; // Función personalizada opcional
+  className?: string;
 }
 
 interface TableProps<T> {
@@ -26,19 +27,19 @@ const DataTable = <T,>({ data, columns }: TableProps<T>) => {
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index}>
-              {columns.map((column, colIndex) => (
-                <td key={colIndex}>
-                  {column.customFunction
-                    ? column.customFunction(item)
-                    : column.svgIcon
-                    ? column.svgIcon
-                    : column.render
-                    ? column.render(item)
-                    : column.key
-                    ? item[column.key]
-                    : null}
-                </td>
+             <tr key={index}>
+             {columns.map((column, colIndex) => (
+               <td key={colIndex} className={column.className}>
+                 {column.customFunction
+                   ? column.customFunction(item)
+                   : column.svgIcon
+                   ? column.svgIcon
+                   : column.render
+                   ? column.render(item)
+                   : column.key
+                   ? String(item[column.key]) // Conversión a string para evitar el error
+                   : null}
+               </td>
               ))}
             </tr>
           ))}
