@@ -4,8 +4,8 @@ import DataTable from "@/components/dataTable"; // Asegúrate de que la ruta del
 interface Consulta {
   id: number;
   expediente: number;
-  nombres: string;
-  apellidos: string;
+  nombre: string;
+  apellido: string;
   hoja: string;
   fecha_consulta: string;
   hora: string;
@@ -21,8 +21,8 @@ const consulta: Consulta[] = [
   {
     id: 0,
     expediente: 25463,
-    nombres: "juanito",
-    apellidos: "mercadito",
+    nombre: "juanito",
+    apellido: "mercadito",
     hoja: "145632",
     fecha_consulta: "2024-03-25",
     hora: "14:52",
@@ -31,12 +31,13 @@ const consulta: Consulta[] = [
     servicio: 2,
     tipo_consulta: 2,
     status: 2,
+    sexo: 'm'
   },
 ];
 
 const columns = [
   { label: "Expediente", key: "expediente" },
-  { label: "Paciente", render: (data) => `${data.nombres} ${data.apellidos}`},
+  { label: "Paciente", key: "nombre"},
   { label: "Hoja", key: "hoja" },
   { label: "Fecha de Consulta", key: "fecha_consulta" },
   { label: "Hora", key: "hora" },
@@ -45,6 +46,7 @@ const columns = [
   { label: "Servicio", key: "servicio" },
   { label: "Tipo de Consulta", key: "tipo_consulta" },
   { label: "Estado", key: "status" },
+  { label: "sexo", key: "sexo"}
 ];
 
 const ConsultaTable: React.FC = () => {

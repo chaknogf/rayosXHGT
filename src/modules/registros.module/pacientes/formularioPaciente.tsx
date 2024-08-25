@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReusForm from "@/components/reusForm";
 import PacienteTable from "./pacientes";
-import "@/style.css"
+
 
 interface UserFormValues {
   firstName: string;
