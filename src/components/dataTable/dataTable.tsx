@@ -1,9 +1,11 @@
 import React from "react";
-import "@/components/dataTable.css"
+import "@/components/dataTable/dataTable.css"
 import "@/style.css"
 import { calcularEdad } from "@/utils/edad";
 import { formatoFecha } from "@/utils/fecha";
-import { obtenerVecindad } from "@/utils/direcciones";
+import { obtenerVecindad } from "@/dictionary/direcciones/direcciones";
+import { obtenerEspecialidad, obtenerServicios, obtenerTipoConsulta } from "@/dictionary/enums/especialidad";
+import { obtenerStatusDocumento } from "@/dictionary/enums/enum";
 
 interface TableColumn<T> {
   label: string;
@@ -114,14 +116,51 @@ const renderEdadFunction = (nacimiento: string) => {
 }
 
 const renderDireccion = (direccion: string, municipio: number) => {
-  const vecindad: string = obtenerVecindad(municipio); 
+  const etiqueta: string = obtenerVecindad(municipio); 
   
   return (
     <>
-      <p>{direccion}, <br />{vecindad}</p>
+      <p>{direccion}, <br />{etiqueta}</p>
     </>
   );
 };
+
+const renderEspecialidad = (value: number) => {
+  const etiqueta: string = obtenerEspecialidad(value);
+  return (
+    <>
+      <p>{ etiqueta }</p>
+    </>
+  )
+}
+
+const renderServicio = (value: number) => {
+  const etiqueta: string = obtenerServicios(value);
+  return (
+    <>
+      <p>{ etiqueta }</p>
+    </>
+  )
+}
+
+const renderTipoConsulta = (value: number) => {
+  const etiqueta: string = obtenerTipoConsulta(value);
+  return (
+    <>
+      <p>{ etiqueta }</p>
+    </>
+  )
+}
+
+const renderStatusDocumento = (value: number) => {
+  const etiqueta: string = obtenerStatusDocumento(value);
+  return (
+    <>
+      <p>{ etiqueta }</p>
+    </>
+  )
+}
+
 
 const DataTable = <T extends Person>({ data, columns }: TableProps<T>) => {
   return (
@@ -149,6 +188,14 @@ const DataTable = <T extends Person>({ data, columns }: TableProps<T>) => {
                     ? renderEdadFunction(item[column.key] as string)
                     : column.key === "direccion"
                     ? renderDireccion(item.direccion, item.municipio)
+                    : column.key === "especialidad"
+                    ? renderEspecialidad(item[column.key] as string)
+                    : column.key === "servicio"
+                    ? renderServicio(item[column.key] as string )
+                    : column.key === "tipoConsulta" || column.key === "tipo_consulta"
+                    ? renderTipoConsulta (item[column.key] as string)
+                    : column.key === "status" || column.key === "statusDocumento"
+                    ? renderStatusDocumento(item[column.key] as string)
                     : column.customFunction
                     ? column.customFunction(item)
                     : column.svgIcon

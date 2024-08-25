@@ -1,5 +1,5 @@
 import React from "react";
-import DataTable from "@/components/dataTable"; // Asegúrate de que la ruta del import sea correcta
+import DataTable from "@/components/dataTable/dataTable"; // Asegúrate de que la ruta del import sea correcta
 
 interface Consulta {
   id: number;
@@ -12,7 +12,7 @@ interface Consulta {
   fecha_egreso: string;
   especialidad: number;
   servicio: number;
-  tipo_consulta: number;
+  tipo_citas: number;
   status: number;
   sexo?: string;
 }
@@ -29,7 +29,7 @@ const consulta: Consulta[] = [
     fecha_egreso: "2024-03-26",
     especialidad: 1,
     servicio: 2,
-    tipo_consulta: 2,
+    tipo_citas: 2,
     status: 2,
     sexo: 'm'
   },
@@ -44,8 +44,8 @@ const columns = [
   { label: "Fecha de Egreso", key: "fecha_egreso" },
   { label: "Especialidad", key: "especialidad" },
   { label: "Servicio", key: "servicio" },
-  { label: "Tipo de Consulta", key: "tipo_consulta" },
-  { label: "Estado", key: "status" },
+  { label: "Tipo de Consulta", key: "tipo_citas" },
+  { label: "Estatus", key: "status" },
   { label: "sexo", key: "sexo"}
 ];
 
