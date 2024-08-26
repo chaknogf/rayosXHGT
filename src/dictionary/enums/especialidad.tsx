@@ -161,6 +161,7 @@ export const servicioProcedimiento: ServicioProcedimiento[] = [
 
 export const obtenerEspecialidad = crearObtenerEtiqueta(especialidad);
 export const obtenerCitas = crearObtenerEtiqueta(citas);
+export const obtenerTipoCitas = crearObtenerEtiqueta(tipoCitas)
 export const obtenerEspecialistas = crearObtenerEtiqueta(especialistas);
 export const obtenerTipoConsulta = crearObtenerEtiqueta(tipoConsulta);
 export const obtenerServicios = crearObtenerEtiqueta(servicios);

@@ -4,8 +4,9 @@ import "@/style.css"
 import { calcularEdad } from "@/utils/edad";
 import { formatoFecha } from "@/utils/fecha";
 import { obtenerVecindad } from "@/dictionary/direcciones/direcciones";
-import { obtenerEspecialidad, obtenerServicios, obtenerTipoConsulta } from "@/dictionary/enums/especialidad";
-import { obtenerStatusDocumento } from "@/dictionary/enums/enum";
+import { obtenerCitas, obtenerEncamamiento, obtenerEspecialidad, obtenerEspecialistas, obtenerServicios, obtenerTipoCitas, obtenerTipoConsulta } from "@/dictionary/enums/especialidad";
+import { obtenerEstadoSalud, obtenerStatusDocumento } from "@/dictionary/enums/enum";
+import { obtenerReferencia } from "@/dictionary/enums/hospitales";
 
 interface TableColumn<T> {
   label: string;
@@ -161,6 +162,62 @@ const renderStatusDocumento = (value: number) => {
   )
 }
 
+const renderReferencia = (value: number) => {
+  const etiqueta: string = obtenerReferencia(value);
+  return (
+    <>
+      <p>{etiqueta}</p>
+    </>
+  )
+}
+
+const renderEstadoSalud = (value: number) => {
+  const etiqueta: string = obtenerEstadoSalud(value);
+  return (
+    <>
+      <p>{ etiqueta }</p>
+    </>
+  )
+}
+
+const renderCitas = (value: number) => {
+  const etiqueta: string = obtenerCitas(value);
+  return (
+    <>
+      <p>{etiqueta}</p>
+    </>
+  )
+}
+
+const renderTipoCitas = (value: number) => {
+  const etiqueta: string = obtenerTipoCitas(value);
+  return (
+    <>
+      <p>{ etiqueta }</p>
+    </>
+  )
+}
+
+const renderEspecialistas = (value: number) => {
+  const etiqueta: string = obtenerEspecialistas(value);
+  return (
+    <>
+      <p>{ etiqueta }</p>
+    </>
+  )
+}
+
+const renderEncamamiento = (value: number) => {
+  const etiqueta: string = obtenerEncamamiento(value);
+  return (
+    <>
+      <p>{ etiqueta }</p>
+    </>
+  )
+}
+
+
+
 
 const DataTable = <T extends Person>({ data, columns }: TableProps<T>) => {
   return (
@@ -188,6 +245,10 @@ const DataTable = <T extends Person>({ data, columns }: TableProps<T>) => {
                     ? renderEdadFunction(item[column.key] as string)
                     : column.key === "direccion"
                     ? renderDireccion(item.direccion, item.municipio)
+                    : column.key === "cita" || column.key === "citas"
+                    ? renderCitas(item[column.key] as string)
+                    : column.key === "tipoCitas" || column.key === "tipo_citas"
+                    ? renderTipoCitas(item[column.key] as string)
                     : column.key === "especialidad"
                     ? renderEspecialidad(item[column.key] as string)
                     : column.key === "servicio"
@@ -196,6 +257,14 @@ const DataTable = <T extends Person>({ data, columns }: TableProps<T>) => {
                     ? renderTipoConsulta (item[column.key] as string)
                     : column.key === "status" || column.key === "statusDocumento"
                     ? renderStatusDocumento(item[column.key] as string)
+                    : column.key === "referencias"
+                    ? renderReferencia(item[column.key] as string)
+                    : column.key === "estadoSalud" || column.key === "estado_salud"
+                    ? renderEstadoSalud(item[column.key] as string)
+                    : column.key === "especialistas"
+                    ? renderEspecialistas(item[column.key] as string)
+                    : column.key === "encamamiento"
+                    ? renderEncamamiento(item[column.key] as string)
                     : column.customFunction
                     ? column.customFunction(item)
                     : column.svgIcon
