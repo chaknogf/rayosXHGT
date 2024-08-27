@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import ReusForm from "@/components/reusForm";
+import CustomForm from "@/components/formularioData/formularioData";
 import PacienteTable from "./pacientes";
-
 
 interface UserFormValues {
   firstName: string;
@@ -19,7 +18,7 @@ const PacienteForm: React.FC = () => {
   };
 
   const fields = [
-    { name: "firstName", label: "First Name", type: "text", className: "bg-primary bg-opacity-75 text-uppercase m-0" },
+    { name: "firstName", label: "First Name", type: "text", className: "input-class" },
     { name: "lastName", label: "Last Name", type: "text", className: "input-class" },
     { name: "email", label: "Email", type: "email", className: "input-class" },
     { name: "password", label: "Password", type: "password", className: "input-class" },
@@ -41,11 +40,11 @@ const PacienteForm: React.FC = () => {
         <PacienteTable />
       ) : (
         <div>
-          <ReusForm<UserFormValues>
+          <CustomForm<UserFormValues>
             initialValues={initialValues}
             onSubmit={handleSubmit}
             fields={fields}
-            className="form-class"
+            className="form"
           />
           <button onClick={handleBack}>Regresar</button>
         </div>
