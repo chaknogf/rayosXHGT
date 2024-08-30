@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CustomForm from "@/components/formularioData/formularioData";
 import PacienteTable from "./pacientes";
+import "@/components/formularioData/formularioData.css"
 
 interface UserFormValues {
   firstName: string;
@@ -44,7 +45,9 @@ const PacienteForm: React.FC = () => {
             initialValues={initialValues}
             onSubmit={handleSubmit}
             fields={fields}
-            className="form"
+            title="Registro de Pacientes"
+            message="Complete los campos a continuación"
+            className="form-class"
           />
           <button onClick={handleBack}>Regresar</button>
         </div>
