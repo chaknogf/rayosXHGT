@@ -4,8 +4,8 @@ import CustomForm from "@/components/formularioData/formularioData";
 import "@/components/formularioData/formularioData.css";
 
 interface UserFormValues {
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   email: string;
   password: string;
 }
@@ -19,9 +19,9 @@ const PacienteForm: React.FC = () => {
   };
 
   const fields = [
-    { name: "firstName", label: "First Name", type: "text", className: "flex"},
-    { name: "lastName", label: "Last Name", type: "text", className: "flex" },
-    { name: "email", label: "Email", type: "email", className: "input-class" },
+    
+   
+    { name: "email", label: "Email", type: "", className: "input-class" },
     { name: "password", label: "Password", type: "password", className: "input-class" },
   ];
 
@@ -35,11 +35,25 @@ const PacienteForm: React.FC = () => {
     setShowTable(true);
   };
 
-  const renderButtons = (values: UserFormValues) => [
+  const renderButtons = () => [
     <button type="submit" className="submit" key="submit">Submit</button>,
     
     <button type="button" className="gap-2 bg-light" key="cancel" onClick={handleBack}>Back</button>,
   ];
+
+  const renderNombres = () => (
+    <div className="flex-div">
+      <label>
+        <input className="input" type="text" placeholder="" required />
+        <span>Firstname</span>
+      </label>
+      <label>
+        <input className="input" type="text" placeholder="" required />
+        <span>Lastname</span>
+      </label>
+    </div>
+  );
+
 
   return (
     <>
@@ -49,6 +63,7 @@ const PacienteForm: React.FC = () => {
         <div>
           <CustomForm<UserFormValues>
             initialValues={initialValues}
+            renderInput={renderNombres}
             funcButton={handleSubmit}
             fields={fields}
             title="Registro de Pacientes"

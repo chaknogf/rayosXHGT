@@ -7,7 +7,7 @@ interface FieldProps<T> {
   type: string;
   placeholder?: string;
   className?: string;
-  useFlex?: boolean; // Nueva propiedad
+  useFlex?: boolean;
 }
 
 interface FormProps<T> {
@@ -18,6 +18,7 @@ interface FormProps<T> {
   fields: FieldProps<T>[];
   className?: string;
   renderButtons?: (values: T) => React.ReactNode;
+  renderInput?: () => React.ReactNode; // Nueva propiedad para renderizar campos personalizados
 }
 
 const CustomForm = <T,>({
@@ -28,6 +29,7 @@ const CustomForm = <T,>({
   title,
   message,
   renderButtons,
+  renderInput, // Se agrega aquí
 }: FormProps<T>) => {
   const [values, setValues] = React.useState<T>(initialValues);
 
@@ -47,7 +49,11 @@ const CustomForm = <T,>({
     <form onSubmit={handleSubmit} className={`cuadro ${className}`}>
       {title && <p className="title">{title}</p>}
       {message && <p className="message">{message}</p>}
-      <div className="form">
+      
+      {/* Renderizar campos adicionales */}
+      {renderInput && renderInput()}
+
+      <div className={`form ${fields.some((field) => field.useFlex) ? "flex" : ""}`}>
         {fields.map((field, index) => (
           <label key={index} className={field.useFlex ? "flex" : ""}>
             <input
@@ -62,8 +68,8 @@ const CustomForm = <T,>({
           </label>
         ))}
       </div>
-      <div className="flex-buttom">
-        {renderButtons && renderButtons(values as T)}
+      <div className="flex-button">
+        {renderButtons ? renderButtons(values) : <button type="submit" className="submit">Submit</button>}
       </div>
     </form>
   );
