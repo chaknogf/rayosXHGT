@@ -12,10 +12,9 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 @import url("https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap");
-:root {
-  transition: background-color 0.3s, color 0.3s;
-},
+:root ,
 [data-bs-theme=light] {
+  transition: background-color 0.3s, color 0.3s;
   --bs-blue: #eb6864;
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;

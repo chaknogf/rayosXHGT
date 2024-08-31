@@ -3,7 +3,8 @@ import "@/modules/home/nav.css";
 
 interface NavComponentProps<T> {
   items: { 
-    label: string; 
+    clasName?: string;
+    label?: string; 
     onClick?: () => void;
     customFunction?: () => React.ReactNode; 
   }[];
