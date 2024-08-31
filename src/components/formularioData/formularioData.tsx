@@ -76,3 +76,9 @@ const CustomForm = <T,>({
 };
 
 export default CustomForm;
+
+
+// /* From Uiverse.io by vinodjangid07 */ 
+// <input type="checkbox" id="checkboxInput">
+// <label for="checkboxInput" class="toggleSwitch">
+// </label>

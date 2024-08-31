@@ -38,7 +38,7 @@ const PacienteForm: React.FC = () => {
   const renderButtons = () => [
     <button type="submit" className="submit" key="submit">Submit</button>,
     
-    <button type="button" className="gap-2 bg-light" key="cancel" onClick={handleBack}>Back</button>,
+    <button type="button" className="gap-2 bg-info" key="cancel" onClick={handleBack}>Back</button>,
   ];
 
   const renderNombres = () => (
