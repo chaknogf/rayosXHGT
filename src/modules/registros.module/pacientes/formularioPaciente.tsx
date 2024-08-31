@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import CustomForm from "@/components/formularioData/formularioData";
 import PacienteTable from "./pacientes";
-import "@/components/formularioData/formularioData.css"
+import CustomForm from "@/components/formularioData/formularioData";
+import "@/components/formularioData/formularioData.css";
 
 interface UserFormValues {
   firstName: string;
@@ -19,8 +19,8 @@ const PacienteForm: React.FC = () => {
   };
 
   const fields = [
-    { name: "firstName", label: "First Name", type: "text", className: "input-class" },
-    { name: "lastName", label: "Last Name", type: "text", className: "input-class" },
+    { name: "firstName", label: "First Name", type: "text", className: "flex"},
+    { name: "lastName", label: "Last Name", type: "text", className: "flex" },
     { name: "email", label: "Email", type: "email", className: "input-class" },
     { name: "password", label: "Password", type: "password", className: "input-class" },
   ];
@@ -35,6 +35,12 @@ const PacienteForm: React.FC = () => {
     setShowTable(true);
   };
 
+  const renderButtons = (values: UserFormValues) => [
+    <button type="submit" className="submit" key="submit">Submit</button>,
+    
+    <button type="button" className="gap-2 bg-light" key="cancel" onClick={handleBack}>Back</button>,
+  ];
+
   return (
     <>
       {showTable ? (
@@ -43,13 +49,14 @@ const PacienteForm: React.FC = () => {
         <div>
           <CustomForm<UserFormValues>
             initialValues={initialValues}
-            onSubmit={handleSubmit}
+            funcButton={handleSubmit}
             fields={fields}
             title="Registro de Pacientes"
             message="Complete los campos a continuación"
-            className="form-class"
+            className="form"
+            renderButtons={renderButtons}
+            useFlex={true}
           />
-          <button onClick={handleBack}>Regresar</button>
         </div>
       )}
     </>

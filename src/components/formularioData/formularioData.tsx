@@ -1,25 +1,34 @@
 import React from "react";
-import "@/style.css"
+import "@/style.css";
 
 interface FieldProps<T> {
   name: keyof T;
   label: string;
   type: string;
   placeholder?: string;
-  className?: string; // Para personalizar el estilo de cada campo
-  render?: (field: FieldProps<T>, value: T[keyof T], onChange: (value: T[keyof T]) => void) => React.ReactNode;
+  className?: string;
+  useFlex?: boolean; // Nueva propiedad
 }
 
 interface FormProps<T> {
   title?: string;
   message?: string;
   initialValues: T;
-  onSubmit: (values: T) => void;
+  funcButton: (values: T) => void;
   fields: FieldProps<T>[];
-  className?: string; // Para personalizar el estilo del formulario
+  className?: string;
+  renderButtons?: (values: T) => React.ReactNode;
 }
 
-const CustomForm = <T,>({ initialValues, onSubmit, fields, className, title, message }: FormProps<T>) => {
+const CustomForm = <T,>({
+  initialValues,
+  funcButton,
+  fields,
+  className,
+  title,
+  message,
+  renderButtons,
+}: FormProps<T>) => {
   const [values, setValues] = React.useState<T>(initialValues);
 
   const handleChange = (name: keyof T, value: T[keyof T]) => {
@@ -31,7 +40,7 @@ const CustomForm = <T,>({ initialValues, onSubmit, fields, className, title, mes
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    onSubmit(values);
+    funcButton(values);
   };
 
   return (
@@ -40,7 +49,7 @@ const CustomForm = <T,>({ initialValues, onSubmit, fields, className, title, mes
       {message && <p className="message">{message}</p>}
       <div className="form">
         {fields.map((field, index) => (
-          <label key={index}>
+          <label key={index} className={field.useFlex ? "flex" : ""}>
             <input
               required
               placeholder={field.placeholder}
@@ -53,13 +62,9 @@ const CustomForm = <T,>({ initialValues, onSubmit, fields, className, title, mes
           </label>
         ))}
       </div>
-      <div className="flex ">
-        <button type="submit" className="submit">Submit</button>
-        <button type="submit" className="submit">Submit</button>
-        <button type="submit" className="submit">Submit</button>
-        
+      <div className="flex-buttom">
+        {renderButtons && renderButtons(values as T)}
       </div>
-      
     </form>
   );
 };
