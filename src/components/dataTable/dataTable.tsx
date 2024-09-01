@@ -23,7 +23,32 @@ interface CardProps<T> {
 }
 
 interface Person {
-  [key: string]: any;
+  fecha?: Date;
+  fecha_consulta?: Date;
+  fecha_egreso?: Date;
+  fecha_recepcion?: Date;
+  servicioProcedimiento?: string;
+  situacionPaciente?: string;
+  situacion?: string;
+  estadia?: number;
+  sexo?: string;
+  nombre?: string;
+  apellido?: string;
+  estado?: string;
+  nacimiento?: string;
+  direccion?: string;
+  municipio?: string;
+  cita?: number;
+  citas?: number;
+  tipoCitas?: number;
+  especialidad?: number;
+  servicio?: number;
+  tipoConsulta?: number;
+  status?: number;
+  statusDocumento?: number;
+  referencias?: number;
+  estadoSalud?: number;
+  especialistas?: number;
 }
 
 const renderSexoIcon = (sexo: string) => {
@@ -332,7 +357,7 @@ const DataCard = <T extends Person>({ data, cells }: CardProps<T>) => {
             {cell.key && data[cell.key] !== undefined
               ? String(data[cell.key])
               : cell.customFunction
-              ? cell.customFunction(data)[cell.key]
+              ? cell.customFunction(data[cell.key])
               : cell.svgIcon
               ? cell.svgIcon
               : cell.render
