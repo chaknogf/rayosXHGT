@@ -1,6 +1,6 @@
 import React from "react";
 import "@/components/dataTable/dataTable.css"
-import "@/style.css"
+// import "@/style.css"
 import { calcularEdad } from "@/utils/edad";
 import { formatoFecha } from "@/utils/fecha";
 import { obtenerVecindad } from "@/dictionary/direcciones/direcciones";
@@ -339,43 +339,35 @@ const renderFunctions: Record<string, (item: T) => React.ReactNode> = {
   encamamiento: item => renderEncamamiento(Number(item.encamamiento)),
 };
 
-const DataTable = <T extends Person>({ data, columns }: TableProps<T>) => {
+const DataCard: React.FC<{ item: any; columns: Column<any>[] }> = ({ item, columns }) => {
   return (
-    <div className="table-radius zoomable-content">
-      <table className="table table-hover table-black">
-        <thead>
-          <tr>
-            {columns.map((column, index) => (
-              <th key={index}>{column.label}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
-              {columns.map((column, colIndex) => (
-                <td key={colIndex} className={column.className}>
-                  {column.key && renderFunctions[column.key as string]
-                    ? renderFunctions[column.key as string](item)
-                    : column.customFunction
-                    ? column.customFunction(item)
-                    : column.svgIcon
-                    ? column.svgIcon
-                    : column.render
-                    ? column.render(item)
-                    : column.key
-                    ? String(item[column.key])
-                    : null}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="card">
+      {columns.map((column, index) => (
+        <div key={index} className="card-item">
+          <strong>{column.label}:</strong>{" "}
+          {column.key && item[column.key]
+            ? String(item[column.key])
+            : column.customFunction
+            ? column.customFunction(item)
+            : column.svgIcon
+            ? column.svgIcon
+            : column.render
+            ? column.render(item)
+            : null}
+        </div>
+      ))}
     </div>
   );
 };
 
-
+const DataTable = <T extends Person>({ data, columns }: TableProps<T>) => {
+  return (
+    <div className="card-container">
+      {data.map((item, index) => (
+        <DataCard key={index} item={item} columns={columns} />
+      ))}
+    </div>
+  );
+};
 
 export default DataTable;

@@ -3,15 +3,15 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  max-width: 900px;
-  background-color: #19171700;
-  padding: 20px;
+  max-width: 40%x;
+  /* background-color: #191717ce; */
+  padding: 10px;
   border-radius: 20px;
   position: relative;
 }
 
 .cuadro {
-  width: 650px;
+  width: 100%;
   background-color: #191717ea;
   padding: 10px;
   border-radius: 20px;
@@ -85,7 +85,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-content: stretch;
-  width: auto;
+  width: 20%;
   gap: 6px;
 
 }
@@ -115,7 +115,7 @@
   position: absolute;
   left: 10px;
   top: 15px;
-  color: rgb(118, 227, 251);
+  color: rgb(118, 251, 180);
   font-size: 0.9em;
   cursor: text;
   transition: 0.3s ease;

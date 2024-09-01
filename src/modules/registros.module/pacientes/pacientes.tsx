@@ -2,7 +2,7 @@
 import DataTable from "@/components/dataTable/dataTable";
 import React, { useState } from "react";
 import PacienteForm from "@/modules/registros.module/pacientes/formularioPaciente";
-import "@/customstyles.css"
+// import "@/customstyles.css"
 
 
 interface Paciente {

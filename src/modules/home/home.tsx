@@ -34,9 +34,7 @@ const Home: React.FC = () => {
   return (
     <div>
       <NavComponent items={navItems} />
-      <div style={{ marginLeft: "220px", padding: "20px" }}>
-        {contenidoActual || <h1>Contenido principal</h1>}
-      </div>
+      {contenidoActual}
     </div>
   );
 };

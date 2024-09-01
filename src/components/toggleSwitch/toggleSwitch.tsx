@@ -25,11 +25,12 @@ const ThemeToggle = () => {
     
 
   return (
-    <div>
+    <div className="toggle-switch">
 
      
-      <label className="switch">
+      <label className="switch-label">
         <input
+          className="checkbox"
           type="checkbox"
           id="checkboxInput"
           checked={isDarkMode}
