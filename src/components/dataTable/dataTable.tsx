@@ -8,27 +8,22 @@ import { obtenerCitas, obtenerEncamamiento, obtenerEspecialidad, obtenerEspecial
 import { obtenerEstadia, obtenerEstadoSalud, obtenerSituacionPaciente, obtenerStatusDocumento } from "@/dictionary/enums/enum";
 import { obtenerReferencia } from "@/dictionary/enums/hospitales";
 
-interface TableColumn<T> {
+interface CardCell<T> {
   label: string;
-  key?: keyof T; // Hacer que key sea opcional si usas render
+  key?: keyof T;
   render?: (data: T) => React.ReactNode;
-  svgIcon?: React.ReactNode; // SVG opcional para la columna
-  customFunction?: (data: T) => React.ReactNode; // Función personalizada opcional
+  svgIcon?: React.ReactNode;
+  customFunction?: (data: T) => React.ReactNode;
   className?: string;
 }
 
-interface TableProps<T> {
+interface CardProps<T> {
   data: T[];
-  columns: TableColumn<T>[];
+  cells: CardCell<T>[];
 }
 
 interface Person {
-  sexo?: string;
-  nombre?: string;
-  apellido?: string;
-  direccion?: string;
-  municipio?: number;
-  departamento?: number;
+  [key: string]: any;
 }
 
 const renderSexoIcon = (sexo: string) => {
@@ -144,15 +139,6 @@ const renderStatusDocumento = (value: number) => {
   
 }
 
-// const renderStatusDocumento = (value: number) => {
-//   const etiqueta: string = obtenerStatusDocumento(value);
-//   return (
-//     <>
-//       <p>{ etiqueta }</p>
-//     </>
-//   )
-// }
-
 const renderNombreColor = (sexo: string, nombre: string, apellido: string) => {
   
   const className = sexo === "m" ? "hombre m-0" : "mujer m-0";
@@ -184,7 +170,6 @@ const renderFecha = (value: string) => {
     
   )
 }
-
 
 const renderDireccion = (direccion: string, municipio: number) => {
   const etiqueta: string = obtenerVecindad(municipio); 
@@ -222,8 +207,6 @@ const renderTipoConsulta = (value: number) => {
     </>
   )
 }
-
-
 
 const renderReferencia = (value: number) => {
   const etiqueta: string = obtenerReferencia(value);
@@ -307,7 +290,7 @@ const renderServicoProsc = (value: number) => {
 }
 
 
-const renderFunctions: Record<string, (item: T) => React.ReactNode> = {
+const renderFunctions: Record<string, (item: Person) => React.ReactNode> = {
   fecha: item => renderFecha(item.fecha),
   fecha_consulta: item => renderFecha(item.fecha_consulta),
   fecha_egreso: item => renderFecha(item.fecha_egreso),
@@ -336,35 +319,57 @@ const renderFunctions: Record<string, (item: T) => React.ReactNode> = {
   estadoSalud: item => renderEstadoSalud(Number(item.estadoSalud)),
   estado_salud: item => renderEstadoSalud(Number(item.estado_salud)),
   especialistas: item => renderEspecialistas(Number(item.especialistas)),
-  encamamiento: item => renderEncamamiento(Number(item.encamamiento)),
+  // Asegúrate de cerrar la lista de claves correctamente
 };
 
-const DataCard: React.FC<{ item: any; columns: Column<any>[] }> = ({ item, columns }) => {
+const DataCard = <T extends Person>({ data, cells }: CardProps<T>) => {
   return (
     <div className="card">
-      {columns.map((column, index) => (
-        <div key={index} className="card-item">
-          <strong>{column.label}:</strong>{" "}
-          {column.key && item[column.key]
-            ? String(item[column.key])
-            : column.customFunction
-            ? column.customFunction(item)
-            : column.svgIcon
-            ? column.svgIcon
-            : column.render
-            ? column.render(item)
-            : null}
-        </div>
-      ))}
+      <div className="card-header">
+        {cells.map((cell, index) => (
+          <div key={index} className="card-item">
+            <strong>{cell.label}:</strong>{" "}
+            {cell.key && data[cell.key] !== undefined
+              ? String(data[cell.key])
+              : cell.customFunction
+              ? cell.customFunction(data)[cell.key]
+              : cell.svgIcon
+              ? cell.svgIcon
+              : cell.render
+              ? cell.render(data)
+              : null}
+          </div>
+        ))}
+      </div>
+      <div className="card-body">
+        {cells.map((cell, index) => (
+          <div key={index} className="card-item">
+            {cell.key && data[cell.key] !== undefined
+              ? String(data[cell.key])
+              : cell.customFunction
+              ? cell.customFunction(data)
+              : cell.render
+              ? cell.render(data)
+              : cell.svgIcon
+              ? cell.svgIcon
+              
+              : null}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-const DataTable = <T extends Person>({ data, columns }: TableProps<T>) => {
+const DataTable = <T extends Person>({ data, cells }: { data: T[]; cells: Cell<T>[] }) => {
   return (
     <div className="card-container">
       {data.map((item, index) => (
-        <DataCard key={index} item={item} columns={columns} />
+        <DataCard
+          key={index}
+          data={item}
+          cells={cells}
+          renderEdadFunction={renderFunctions} />
       ))}
     </div>
   );

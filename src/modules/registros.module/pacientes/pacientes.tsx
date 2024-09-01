@@ -109,7 +109,7 @@ const PacienteTable: React.FC = () => {
       {showForm ? (
         <PacienteForm />
       ) : (
-        <DataTable data={paciente} columns={columns} />
+        <DataTable data={paciente} cells={columns} />
       )}
     </div>
   );

@@ -80,7 +80,7 @@ const columns = [
 ];
 
 const ConsultaTable: React.FC = () => {
-  return <DataTable data={consulta} columns={columns} />;
+  return <DataTable data={consulta} cells={columns} />;
 };
 
 export default ConsultaTable;
