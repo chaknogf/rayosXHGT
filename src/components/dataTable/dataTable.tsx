@@ -9,47 +9,31 @@ import { obtenerEstadia, obtenerEstadoSalud, obtenerSituacionPaciente, obtenerSt
 import { obtenerReferencia } from "@/dictionary/enums/hospitales";
 
 interface CardCell<T> {
-  label: string;
-  key?: keyof T;
-  render?: (data: T) => React.ReactNode;
-  svgIcon?: React.ReactNode;
-  customFunction?: (data: T) => React.ReactNode;
-  className?: string;
+  label: string; // El nombre de la columna o campo
+  key?: keyof T; // La key que mapea a los datos de la fila
+  render?: (data: T) => React.ReactNode; // Función de renderización personalizada
+  svgIcon?: React.ReactNode; // SVG o icono a mostrar en la celda
+  customFunction?: (data: T) => React.ReactNode; // Función adicional personalizada
+  className?: string; // Clase CSS opcional para estilizar la celda
+  section?: "header" | "body";
 }
 
 interface CardProps<T> {
-  data: T[];
-  cells: CardCell<T>[];
+  data: T[]; // Arreglo de datos que se muestran en las celdas
+  cells: CardCell<T>[]; // Arreglo de celdas que indican cómo renderizar cada campo
 }
 
-interface Person {
-  fecha?: Date;
-  fecha_consulta?: Date;
-  fecha_egreso?: Date;
-  fecha_recepcion?: Date;
-  servicioProcedimiento?: string;
-  situacionPaciente?: string;
-  situacion?: string;
-  estadia?: number;
+
+interface ObjetX {
   sexo?: string;
   nombre?: string;
   apellido?: string;
-  estado?: string;
+  fecha?: string;
   nacimiento?: string;
-  direccion?: string;
-  municipio?: string;
-  cita?: number;
-  citas?: number;
-  tipoCitas?: number;
-  especialidad?: number;
-  servicio?: number;
-  tipoConsulta?: number;
-  status?: number;
-  statusDocumento?: number;
-  referencias?: number;
-  estadoSalud?: number;
-  especialistas?: number;
+  estado?: string;
+  [key: string]: string | number | undefined;
 }
+
 
 const renderSexoIcon = (sexo: string) => {
   if (sexo === "m") {
@@ -79,7 +63,7 @@ const renderSexoIcon = (sexo: string) => {
       </svg>
     );
   }
-  return null;
+  return "";
 };
 
 const renderEstado = (estado: string) => {
@@ -315,7 +299,7 @@ const renderServicoProsc = (value: number) => {
 }
 
 
-const renderFunctions: Record<string, (item: Person) => React.ReactNode> = {
+const renderFunctions: Record<string, (item: ObjetX) => React.ReactNode> = {
   fecha: item => renderFecha(item.fecha),
   fecha_consulta: item => renderFecha(item.fecha_consulta),
   fecha_egreso: item => renderFecha(item.fecha_egreso),
@@ -347,57 +331,62 @@ const renderFunctions: Record<string, (item: Person) => React.ReactNode> = {
   // Asegúrate de cerrar la lista de claves correctamente
 };
 
-const DataCard = <T extends Person>({ data, cells }: CardProps<T>) => {
+const DataCard = <T extends ObjetX>({ data, cells }: CardProps<T>) => {
   return (
     <div className="card">
+      {/* Renderizar el encabezado */}
       <div className="card-header">
-        {cells.map((cell, index) => (
-          <div key={index} className="card-item">
-            <strong>{cell.label}:</strong>{" "}
-            {cell.key && data[cell.key] !== undefined
-              ? String(data[cell.key])
-              : cell.customFunction
-              ? cell.customFunction(data[cell.key])
-              : cell.svgIcon
-              ? cell.svgIcon
-              : cell.render
-              ? cell.render(data)
-              : null}
-          </div>
-        ))}
+        {cells
+          .filter(cell => cell.section === 'header')  // Filtrar celdas para el encabezado
+          .map((cell, cellIndex) => {
+            const renderFnHeader = cell.render || renderFunctions[cell.key as string];
+            return (
+              <div key={cellIndex} className={`card-header-item ${cell.className || ''}`}>
+                <strong>{cell.label}</strong>: {/* Mostrar la etiqueta en el encabezado */}
+                {renderFnHeader
+                  ? renderFnHeader(data[0]) // Usar renderFnHeader para mostrar el valor
+                  : cell.key && data.length > 0 && data[0][cell.key] !== undefined
+                    ? String(data[0][cell.key]) // Mostrar el valor si renderFnHeader no está definido
+                    : null}
+              </div>
+            );
+          })}
       </div>
-      <div className="card-body">
-        {cells.map((cell, index) => (
-          <div key={index} className="card-item">
-            {cell.key && data[cell.key] !== undefined
-              ? String(data[cell.key])
-              : cell.customFunction
-              ? cell.customFunction(data)
-              : cell.render
-              ? cell.render(data)
-              : cell.svgIcon
-              ? cell.svgIcon
-              
-              : null}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
 
-const DataTable = <T extends Person>({ data, cells }: { data: T[]; cells: Cell<T>[] }) => {
-  return (
-    <div className="card-container">
+      {/* Renderizar el cuerpo de cada elemento de datos */}
       {data.map((item, index) => (
-        <DataCard
-          key={index}
-          data={item}
-          cells={cells}
-          renderEdadFunction={renderFunctions} />
+        <div key={index} className="card-content">
+          {cells
+            .filter(cell => cell.section === 'body')  // Filtrar celdas para el cuerpo
+            .map((cell, cellIndex) => {
+              const renderFn = cell.render || renderFunctions[cell.key as string];
+              return (
+                <div key={cellIndex} className={`card-body-item ${cell.className || ''}`}>
+                  {renderFn
+                    ? renderFn(item)
+                    : cell.svgIcon
+                    ? cell.svgIcon
+                    : cell.key && item[cell.key] !== undefined
+                    ? String(item[cell.key])
+                    : null}
+                </div>
+              );
+            })}
+        </div>
       ))}
     </div>
   );
 };
 
+
+
+const DataTable = <T extends ObjetX>({ data, cells }: { data: T[]; cells: CardCell<T>[] }) => {
+  return (
+    <div className="card-container">
+      {data.map((item, index) => (
+        <DataCard key={index} data={[item]} cells={cells} />
+      ))}
+    </div>
+  );
+};
 export default DataTable;

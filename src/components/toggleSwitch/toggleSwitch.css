@@ -33,7 +33,7 @@
   border-radius: 25px;
   -webkit-transition: 0.3s;
   transition: 0.3s;
-  border: #d8dbe0 solid 1.3px;
+  border: #d8dbe0 solid 2px;
 }
 
 .checkbox:checked ~ .slider {
