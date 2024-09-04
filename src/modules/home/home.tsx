@@ -3,7 +3,7 @@ import NavComponent from "@/modules/home/nav";
 import PacienteTable from "@/modules/registros.module/pacientes/pacientes";
 import ConsultaTable from "@/modules/registros.module/consultas.component/consulta";
 import ThemeToggle from "@/components/toggleSwitch/toggleSwitch";
-
+import "@/modules/home/home.css"
 
 const Home: React.FC = () => {
   const [contenidoActual, setContenidoActual] = useState<JSX.Element | null>(null);
@@ -32,10 +32,14 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div>
-      <NavComponent items={navItems} />
-      {contenidoActual}
-    </div>
+    <>
+      <div className="div-nav">
+        <NavComponent items={navItems} />
+      </div>
+      <div className="div-content">
+          {contenidoActual}
+      </div>
+    </>
   );
 };
 

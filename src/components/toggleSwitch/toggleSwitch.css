@@ -45,8 +45,8 @@
   position: absolute;
   top: 4px;
   left: 4px;
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   -webkit-box-shadow: inset 18px -5px 0px 0px var(--light);
   box-shadow: inset 06.6px -3.9px 0px 0px var(--light);
