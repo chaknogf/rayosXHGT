@@ -66,9 +66,9 @@ const consulta: Consulta[] = [
 ];
 
 const columns = [
-  { label: "Expediente", key: "expediente" },
-  { label: "Paciente", key: "nombre"},
-  { label: "Hoja", key: "hoja" },
+  { label: "Expediente", key: "expediente", section: "header" },
+  { label: "Paciente", key: "nombre", section: "header"},
+  { label: "Hoja", key: "hoja", section: "header" },
   { label: "Fecha de Consulta", key: "fecha_consulta" },
   { label: "Hora", key: "hora" },
   { label: "Fecha de Egreso", key: "fecha_egreso" },

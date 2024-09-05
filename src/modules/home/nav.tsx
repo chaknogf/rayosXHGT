@@ -8,11 +8,12 @@ interface NavComponentProps<T> {
     onClick?: () => void;
     customFunction?: () => React.ReactNode; 
   }[];
+  theme: 'dark' | 'light';  // Nuevo prop para tema
 }
 
-const NavComponent = <T,>({ items }: NavComponentProps<T>) => {
+const NavComponent = <T,>({ items, theme }: NavComponentProps<T>) => {
   return (
-    <div className="navbar-container nav">
+    <div className={`navbar-container ${theme === 'dark' ? 'dark-theme' : 'light-theme'}`}>
       <nav className="navbar-vertical">
         {items.map((item, index) => (
           <button

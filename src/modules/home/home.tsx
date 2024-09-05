@@ -34,9 +34,9 @@ const Home: React.FC = () => {
   return (
     <>
       <div className="div-nav">
-        <NavComponent items={navItems} />
+        <NavComponent items={navItems} theme={"dark"} />
       </div>
-      <div className="div-content">
+      <div className="div-content zoomable-content">
           {contenidoActual}
       </div>
     </>

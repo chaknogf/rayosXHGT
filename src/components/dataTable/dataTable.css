@@ -91,7 +91,7 @@ tr:hover .text-exp {
   .zoomable-content {
     font-size: 1rem;
     transform: scale(1);
-    padding: 25px;
+    padding: 3.1rem;
     margin: 0 auto;
     width: 75%;
   }
@@ -100,20 +100,34 @@ tr:hover .text-exp {
 
 .card-container {
   margin-left: 0px; /* Elimina el margen izquierdo */
-  display: flexbox;
+  display: flex;
   flex-direction: column;
-  width:100%;
-  position: relative;
+  width: 100%;
+  position:relative;
 }
 
-.card {
-  padding: 0.2rem;
-  width: 100%; /* Asegura que cada tarjeta ocupe todo el ancho disponible */
-  margin: 0; /* Elimina cualquier margen alrededor de las tarjetas */
-  border-bottom: 1px solid #ccc; /* Añade una línea divisoria entre las tarjetas, si es necesario */
+.card-table {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Para que use todo el ancho */
 }
 
-.card:last-child {
-  border-bottom: none; /* Elimina la línea divisoria del último elemento */
+.card-table-row {
+  margin-bottom: 0; /* Elimina espacios entre tarjetas */
+}
+
+.card-table-item {
+  border: 1px  #ddd;
+  border-radius: 16px; /* Simula una tabla */
+  width: 100%;
+  display: flex;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-text {
+  margin: 0;
 }
 

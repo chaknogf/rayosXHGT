@@ -3,8 +3,9 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
+    box-sizing: border-box;
+    
+    
   }
   
   .div-nav {
@@ -15,10 +16,44 @@ body {
   }
   
   .div-content {
-    width: 100%; /* Asegura que el contenido ocupe el 100% del espacio disponible */
-    margin-left: 10%; /* Deja espacio para el navbar */
+    width:100%; 
+    margin-left: 6rem; 
     padding: 0;
-    box-sizing: border-box; /* Incluye padding y border dentro del width */
-    position: relative;
+    display: flex;
+    flex: content;
+    justify-content: center;
+    position: fixed;
+    box-sizing: border-box;
   }
   
+  @media screen and (min-width: 577px) and (max-width: 768px) {
+    .zoomable-content {
+      font-size: 0.55rem;
+      transform: scale(0.8);
+      padding: 15px;
+      margin: 0 auto;
+      width: 85%;
+    }
+  }
+  
+  /* Pantallas grandes (escritorios pequeños) */
+  @media screen and (min-width: 769px) and (max-width: 992px) {
+    .zoomable-content {
+      font-size: 1.1rem;
+      transform: scale(0.95);
+      padding: 0;
+      margin: 0 auto;
+      width: 80%;
+    }
+  }
+  
+  /* Pantallas extra grandes (escritorios grandes) */
+  @media screen and (min-width: 993px) {
+    .zoomable-content {
+      font-size: 1rem;
+      transform: scale(1);
+      padding: 3.1rem;
+      margin: 0 auto;
+      width: 75%;
+    }
+  }

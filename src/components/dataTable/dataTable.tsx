@@ -333,24 +333,29 @@ const renderFunctions: Record<string, (item: ObjetX) => React.ReactNode> = {
 
 const DataCard = <T extends ObjetX>({ data, cells }: CardProps<T>) => {
   return (
-    <div className="card">
+    <div className="container-fluid">
       {/* Renderizar el encabezado */}
-      <div className="card-header">
-        {cells
-          .filter(cell => cell.section === 'header')  // Filtrar celdas para el encabezado
-          .map((cell, cellIndex) => {
-            const renderFnHeader = cell.render || renderFunctions[cell.key as string];
-            return (
-              <div key={cellIndex} className={`card-header-item ${cell.className || ''}`}>
-                <strong>{cell.label}</strong>: {/* Mostrar la etiqueta en el encabezado */}
-                {renderFnHeader
-                  ? renderFnHeader(data[0]) // Usar renderFnHeader para mostrar el valor
-                  : cell.key && data.length > 0 && data[0][cell.key] !== undefined
-                    ? String(data[0][cell.key]) // Mostrar el valor si renderFnHeader no está definido
-                    : null}
-              </div>
-            );
-          })}
+      <div className="row card-table">
+        <div className="col-12 card-table-row" >
+          <div className="card-table-item">
+          {cells
+            .filter(cell => cell.section === 'header')  // Filtrar celdas para el encabezado
+            .map((cell, cellIndex) => {
+              const renderFnHeader = cell.render || renderFunctions[cell.key as string];
+              return (
+                <div key={cellIndex} className={`card card-table-item ${cell.className || ''}`}>
+                  <strong>{cell.label}</strong>: {/* Mostrar la etiqueta en el encabezado */}
+                  {renderFnHeader
+                    ? renderFnHeader(data[0]) // Usar renderFnHeader para mostrar el valor
+                    : cell.key && data.length > 0 && data[0][cell.key] !== undefined
+                      ? String(data[0][cell.key]) // Mostrar el valor si renderFnHeader no está definido
+                      : null}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        
       </div>
 
       {/* Renderizar el cuerpo de cada elemento de datos */}
@@ -390,3 +395,4 @@ const DataTable = <T extends ObjetX>({ data, cells }: { data: T[]; cells: CardCe
   );
 };
 export default DataTable;
+

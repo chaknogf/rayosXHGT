@@ -95,13 +95,13 @@ const PacienteTable: React.FC = () => {
         </button>
       ),
     },
-    { label: "Expediente", key: "expediente", className: "text-exp ", section: 'header' },
-    {label: "paciente", key: "nombre", section: 'header'},
-    { label: "Sexo", key: "sexo", section: "body" },
-    { label: "direccion", key: "direccion", section: "body"},
-    { label: "edad", key: "nacimiento", section: "body"},
-    { label: "estado", key: "estado", section: "body" },
-    { label: "id", key: "id", section: "body" },
+    { label: "Expediente", key: "expediente", section: 'header' },
+    {label: "paciente", key: "nombre"},
+    { label: "Sexo", key: "sexo" },
+    { label: "direccion", key: "direccion"},
+    { label: "edad", key: "nacimiento"},
+    { label: "estado", key: "estado" },
+    { label: "id", key: "id"},
   ];
 
   return (
