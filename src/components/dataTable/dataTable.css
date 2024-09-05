@@ -103,7 +103,7 @@ tr:hover .text-exp {
   display: flex;
   flex-direction: column;
   width: 100%;
-  position:relative;
+  position: absolute;
 }
 
 .card-table {

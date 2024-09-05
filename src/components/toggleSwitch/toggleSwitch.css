@@ -1,7 +1,7 @@
 /* From Uiverse.io by Madflows */ 
 .toggle-switch {
   position: relative;
-  width: 95px;
+  width: 6rem;
   height: 25px;
   --light: #d8dbe0;
   --dark: #020508;
