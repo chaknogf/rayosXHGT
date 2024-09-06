@@ -47,3 +47,25 @@
   align-items: center;
   margin-left: 10px;
 }
+
+/* styles.css */
+
+/* Navbar Styling */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+  font-size: 1.1rem;
+  margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+  }
+  .nav-link {
+    padding: 0.5rem 0;
+  }
+}

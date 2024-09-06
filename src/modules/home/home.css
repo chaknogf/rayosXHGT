@@ -1,0 +1,17 @@
+.div-nav {
+    margin-bottom: 20px;
+  }
+  
+  .div-content {
+    padding: 20px;
+    background-color: #f8f9fa; /* Color claro para el fondo del contenido */
+  }
+  
+  .zoomable-content {
+    transition: transform 0.3s ease;
+  }
+  
+  .zoomable-content:hover {
+    transform: scale(1.02); /* Añade un pequeño efecto de zoom al contenido */
+  }
+  
