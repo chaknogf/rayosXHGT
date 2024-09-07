@@ -3,46 +3,62 @@ import NavComponent from "@/modules/home/nav";
 import PacienteTable from "@/modules/registros.module/pacientes/pacientes";
 import ConsultaTable from "@/modules/registros.module/consultas.component/consulta";
 import "@/modules/home/home.css";
+import "@/style.css";
+import AppAcordion from "@/components/acordion/acordion";
+import Appcard from "@/components/card/card";
 
 const HomeComponent: React.FC = () => {
   const [contenidoActual, setContenidoActual] = useState<JSX.Element | null>(null);
 
-  const handleHomeClick = () => {
-    setContenidoActual(<div>Home</div>);
-  };
-
-  const handlePacientesClick = () => {
+  // Maneja clics para cambiar el contenido
+  const handlePacienteClick = () => {
     setContenidoActual(<PacienteTable />);
-  };
-
-  const handleSearchClick = () => {
-    setContenidoActual(<div>Search Content</div>);
-  };
-
-  const handleNotificationClick = () => {
-    setContenidoActual(<div>Notifications</div>);
   };
 
   const handleConsultasClick = () => {
     setContenidoActual(<ConsultaTable />);
   };
 
+  const handleCardClick = () => {
+    setContenidoActual(<Appcard />);
+  };
+
+  const handleAcordionClick = () => {
+    setContenidoActual(<AppAcordion />);
+  };
+
+  // Items para el NavComponent
   const navItems = [
-    { label: "Home", onClick: handleHomeClick },
-    { label: "Pacientes", onClick: handlePacientesClick },
-    { label: "Search", onClick: handleSearchClick },
-    { label: "Notifications", onClick: handleNotificationClick },
-    { label: "Messages", onClick: handleConsultasClick },
+    { 
+      label: "Paciente", 
+      onClick: handlePacienteClick, // Cambia a la tabla de pacientes
+      href: "#" // O puedes omitir esto si no es necesario
+    },
+    { 
+      label: "Consultas", 
+      onClick: handleConsultasClick, // Cambia a la tabla de consultas
+      href: "#"
+    },
+    {
+      label: "Card",
+      onClick: handleCardClick, // Corrige 'onclick' a 'onClick'
+      href: "#"
+    },
+    {
+      label: "Accordion",
+      onClick: handleAcordionClick, // Corrige 'onclick' a 'onClick'
+      href: "#"
+    }
   ];
 
   return (
     <>
       <div className="div-nav">
-        {/* Barra de navegación tipo hamburguesa */}
+        {/* Barra de navegación con el toggle de tema */}
         <NavComponent items={navItems} theme={"dark"} />
       </div>
-      <div className="div-content">
-        {/* Renderiza el contenido dinámico */}
+      <div className="div-content zoomable-content">
+        {/* Renderiza el contenido actual */}
         {contenidoActual}
       </div>
     </>

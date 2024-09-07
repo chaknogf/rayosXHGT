@@ -8,11 +8,14 @@ const ThemeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    // Inicializar el tema según el valor guardado en el localStorage
+    // Inicializar el tema según el valor guardado en localStorage
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setIsDarkMode(savedTheme === "dark");
-      document.documentElement.setAttribute("data-bs-theme", savedTheme);
+    if (savedTheme === "dark") {
+      setIsDarkMode(true);
+      document.documentElement.setAttribute("data-bs-theme", "dark");
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.setAttribute("data-bs-theme", "light");
     }
   }, []);
 
