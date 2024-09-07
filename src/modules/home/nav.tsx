@@ -25,9 +25,17 @@ const NavComponent: React.FC<NavComponentProps> = ({ items, theme }) => {
 
   return (
     <div className="hamburger-menu">
-      <div className={`navbar ${theme === 'dark' ? 'bg-primary text-light' : 'bg-light '}`}>
-        <FaReact className="hamburger-icon " onClick={toggleMenu} />
-        <h3 className="navbar-tabs">Tableta Sheika</h3>
+      <div className={`navbar ${theme === 'dark' ? 'bg-dark text-light' : 'bg-light '}`}>
+        {/* <FaReact className="hamburger-icon " onClick={toggleMenu} /> */}
+        <div className="icon-ld" onClick={toggleMenu} >
+          <div className="loading">
+            <svg width="auto" height="42" viewBox="0 0 72 64" preserveAspectRatio="xMidYMid meet">
+              <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="back"></polyline>
+              <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="front"></polyline>
+            </svg>
+          </div>
+        </div>
+      <h3 className="navbar-tabs">Tableta Sheika</h3>
       </div>
       <div className={`side-menu ${isOpen ? "open" : ""}`}>
         <div className="toggleTheme"><ThemeToggle /></div>

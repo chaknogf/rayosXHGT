@@ -1,5 +1,5 @@
 import React from "react";
-import "@/components/dataTable/dataTable.css"
+import "@/components/card/card.css"
 // import "@/style.css"
 import { calcularEdad } from "@/utils/edad";
 import { formatoFecha } from "@/utils/fecha";
@@ -8,31 +8,28 @@ import { obtenerCitas, obtenerEncamamiento, obtenerEspecialidad, obtenerEspecial
 import { obtenerEstadia, obtenerEstadoSalud, obtenerSituacionPaciente, obtenerStatusDocumento } from "@/dictionary/enums/enum";
 import { obtenerReferencia } from "@/dictionary/enums/hospitales";
 
-interface CardCell<T> {
-  label: string; // El nombre de la columna o campo
+// Interfaz para definir las propiedades de cada campo en el card
+interface RegistoCard<T> {
+  label?: string; // El nombre de la columna o campo
   key?: keyof T; // La key que mapea a los datos de la fila
   render?: (data: T) => React.ReactNode; // Función de renderización personalizada
   svgIcon?: React.ReactNode; // SVG o icono a mostrar en la celda
   customFunction?: (data: T) => React.ReactNode; // Función adicional personalizada
   className?: string; // Clase CSS opcional para estilizar la celda
-  section?: "header" | "body";
+  section?: "header" | "body"; // Sección de la celda, puede ser "header" o "body"
 }
 
+// Interfaz para el componente CardProps
 interface CardProps<T> {
   data: T[]; // Arreglo de datos que se muestran en las celdas
-  cells: CardCell<T>[]; // Arreglo de celdas que indican cómo renderizar cada campo
+  items: RegistoCard<T>[]; // Arreglo de celdas que indican cómo renderizar cada campo
 }
 
-
+// Interfaz para un objeto con valores de tipo string, number o undefined
 interface ObjetX {
-  sexo?: string;
-  nombre?: string;
-  apellido?: string;
-  fecha?: string;
-  nacimiento?: string;
-  estado?: string;
   [key: string]: string | number | undefined;
 }
+
 
 
 const renderSexoIcon = (sexo: string) => {
@@ -153,7 +150,7 @@ const renderNombreColor = (sexo: string, nombre: string, apellido: string) => {
   const className = sexo === "m" ? "hombre m-0" : "mujer m-0";
   
   return (
-    <div>
+    <div >
       <p className={className}>{nombre}</p>
       <p>{apellido}</p>
     </div>
@@ -331,68 +328,69 @@ const renderFunctions: Record<string, (item: ObjetX) => React.ReactNode> = {
   // Asegúrate de cerrar la lista de claves correctamente
 };
 
-const DataCard = <T extends ObjetX>({ data, cells }: CardProps<T>) => {
+const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
   return (
-    <div className="container-fluid">
-      {/* Renderizar el encabezado */}
-      <div className="row card-table">
-        <div className="col-12 card-table-row" >
-          <div className="card-table-item">
-          {cells
-            .filter(cell => cell.section === 'header')  // Filtrar celdas para el encabezado
-            .map((cell, cellIndex) => {
-              const renderFnHeader = cell.render || renderFunctions[cell.key as string];
-              return (
-                <div key={cellIndex} className={`card card-table-item ${cell.className || ''}`}>
-                  <strong>{cell.label}</strong>: {/* Mostrar la etiqueta en el encabezado */}
-                  {renderFnHeader
-                    ? renderFnHeader(data[0]) // Usar renderFnHeader para mostrar el valor
-                    : cell.key && data.length > 0 && data[0][cell.key] !== undefined
-                      ? String(data[0][cell.key]) // Mostrar el valor si renderFnHeader no está definido
+    <>
+      <div className="card">
+        {/* Header */}
+        <div className="titulos">
+          <div className="titulos">
+            {items
+              .filter((item) => item.section === "header") // Filtrar celdas para el encabezado
+              .map((item, itemIndex) => {
+                const renderFnHeader = item.render || renderFunctions[item.key as string]; // Usar función personalizada o renderFunction
+                return (
+                  <div key={itemIndex} className={`item-label ${item.className || ""}`}>
+                    <strong>{item.label}</strong>: {/* Mostrar la etiqueta en el encabezado */}
+                    {renderFnHeader
+                      ? renderFnHeader(data[0]) // Usar renderFnHeader para mostrar el valor del primer elemento
+                      : item.key && data.length > 0 && data[0][item.key] !== undefined
+                      ? String(data[0][item.key]) // Mostrar el valor si renderFnHeader no está definido
                       : null}
-                </div>
-              );
-            })}
+                  </div>
+                );
+              })}
           </div>
         </div>
-        
-      </div>
 
-      {/* Renderizar el cuerpo de cada elemento de datos */}
-      {data.map((item, index) => (
-        <div key={index} className="card-content">
-          {cells
-            .filter(cell => cell.section === 'body')  // Filtrar celdas para el cuerpo
-            .map((cell, cellIndex) => {
-              const renderFn = cell.render || renderFunctions[cell.key as string];
-              return (
-                <div key={cellIndex} className={`card-body-item ${cell.className || ''}`}>
-                  {renderFn
-                    ? renderFn(item)
-                    : cell.svgIcon
-                    ? cell.svgIcon
-                    : cell.key && item[cell.key] !== undefined
-                    ? String(item[cell.key])
-                    : null}
-                </div>
-              );
-            })}
+        {/* Body */}
+        <div className="card-body">
+          {data.map((rowData, index) => (
+            <div key={index} className="card-content">
+              {items
+                .filter((item) => item.section === "body") // Filtrar celdas para el cuerpo
+                .map((item, itemIndex) => {
+                  const renderFn = item.render || renderFunctions[item.key as string]; // Usar función personalizada o renderFunction
+                  return (
+                    <div key={itemIndex} className={`card-body-item ${item.className || ""}`}>
+                      {renderFn
+                        ? renderFn(rowData) // Usar renderFn para mostrar el valor en el cuerpo
+                        : item.svgIcon // Mostrar SVG si existe
+                        ? item.svgIcon
+                        : item.key && rowData[item.key] !== undefined // Mostrar el valor si no se pasa renderFn
+                        ? String(rowData[item.key])
+                        : null}
+                    </div>
+                  );
+                })}
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </>
   );
 };
 
 
-
-const DataTable = <T extends ObjetX>({ data, cells }: { data: T[]; cells: CardCell<T>[] }) => {
+// Componente DataCards que recibe un arreglo de datos y las configuraciones de las celdas
+const DataCards = <T extends ObjetX>({ data, items }: { data: T[]; items: RegistoCard<T>[] }) => {
   return (
-    <div className="card-container">
+    <div className="registro-card-container">
       {data.map((item, index) => (
-        <DataCard key={index} data={[item]} cells={cells} />
+        <DataCard key={index} data={[item]} items={items} />
       ))}
     </div>
   );
 };
-export default DataTable;
 
+export default DataCards;

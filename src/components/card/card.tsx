@@ -16,10 +16,17 @@ interface RegistroCardProps {
 const RegistroCard: React.FC<RegistroCardProps> = ({ data }) => {
   return (
     <div className="registro-card-container">
+      
       {data.map((registro) => (
         <div className="card" key={registro.id}>
+          <div className="titulos">
+            <div className="item-label"> <label>Nombre: </label>  {registro.nombre}</div>
+            <div className="item-label"><label>Fecha: </label> {registro.fecha}</div>
+            <div className="item-label"> <label>Nombre: </label>  {registro.nombre}</div>
+            <div className="item-label"><label>Fecha: </label> {registro.fecha}</div>
+          </div>
           <div className="card-body">
-            <h5 className="card-title">{registro.nombre}</h5>
+           
             <p className="card-text">Fecha: {registro.fecha}</p>
             <p className="card-text">Detalle: {registro.detalle}</p>
           </div>

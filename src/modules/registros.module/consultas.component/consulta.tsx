@@ -1,5 +1,6 @@
 import React from "react";
 import DataTable from "@/components/dataTable/dataTable"; // Asegúrate de que la ruta del import sea correcta
+import DataCards from "@/components/dataTable/dataTable";
 
 interface Consulta {
   id: number;
@@ -69,7 +70,7 @@ const columns = [
   { label: "Expediente", key: "expediente", section: "header" },
   { label: "Paciente", key: "nombre", section: "header"},
   { label: "Hoja", key: "hoja", section: "header" },
-  { label: "Fecha de Consulta", key: "fecha_consulta" },
+  { label: "Fecha de Consulta", key: "fecha_consulta", section: "body" },
   { label: "Hora", key: "hora" },
   { label: "Fecha de Egreso", key: "fecha_egreso" },
   { label: "Especialidad", key: "especialidad" },
@@ -80,7 +81,7 @@ const columns = [
 ];
 
 const ConsultaTable: React.FC = () => {
-  return <DataTable data={consulta} cells={columns} />;
+  return <DataCards data={consulta} items={columns} />;
 };
 
 export default ConsultaTable;
