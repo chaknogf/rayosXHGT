@@ -38,11 +38,21 @@
   display: flex;
   justify-content: space-evenly; /* O ajustar con otro valor si lo deseas */
   align-items: flex-start; /* Alinea los items verticalmente */
-  gap: 0.2rem; /* Ajusta el espacio entre los elementos si es necesario */
+  gap: 0.5rem; /* Ajusta el espacio entre los elementos si es necesario */
 }
 
 .item-label {
 margin: 0;
 padding: 0;
 
+}
+
+.hombre {
+  color: #1bc5e6;
+  font-weight: bold;
+}
+
+.mujer {
+  color: #df7ca8;
+  font-weight: bold;
 }

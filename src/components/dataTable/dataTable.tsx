@@ -146,13 +146,13 @@ const renderStatusDocumento = (value: number) => {
 }
 
 const renderNombreColor = (sexo: string, nombre: string, apellido: string) => {
-  
   const className = sexo === "m" ? "hombre m-0" : "mujer m-0";
   
   return (
-    <div >
-      <p className={className}>{nombre}</p>
-      <p>{apellido}</p>
+    <div style={{ display: "flex" }}>
+      <p className={className} >{nombre } </p>
+      <span> </span>
+      <p> {apellido}</p>
     </div>
   );
 };
