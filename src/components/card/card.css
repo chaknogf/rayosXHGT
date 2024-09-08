@@ -13,7 +13,27 @@
   }
   
   .card-body {
-    text-align: left;
+    /* display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0; */
+    
+  }
+
+  .card-content {
+    /* margin: 0;
+    padding: 0;
+    justify-items: center;
+    line-height: 0.98;
+    flex-wrap: nowrap;
+    gap: 0.73rem; */
+
+  }
+
+  .card-body-item {
+    display: flex;
+    justify-content: center;
   }
   
   .registro-accordion-container {
@@ -62,7 +82,7 @@ justify-content: center;
 .zero {
   display: flex;
   justify-content: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   margin: 0;
   padding: 0;
 }

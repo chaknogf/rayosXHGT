@@ -76,10 +76,10 @@ const PacienteTable: React.FC = () => {
     {label: "paciente", key: "nombre", section: 'header'},
     { label: "Sexo", key: "sexo", section:"header" },
     { label: "direccion", key: "direccion", section: "body"},
-    { label: "edad", key: "nacimiento", section: "header"},
+    { label: "edad", key: "nacimiento", section: "body"},
     { label: "estado", key: "estado", section: "header" },
     { label: "id", key: "id" },
-    { label: "dpi", key: "dpi", section: "header"}
+    { label: "dpi", key: "dpi", section: "body"}
   ];
 
   return (

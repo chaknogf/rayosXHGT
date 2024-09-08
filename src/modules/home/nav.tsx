@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaReact } from "react-icons/fa"; // Icono de hamburguesa
 import "@/modules/home/nav.css";
 import ThemeToggle from "@/components/toggleSwitch/toggleSwitch";
 
@@ -32,6 +31,9 @@ const NavComponent: React.FC<NavComponentProps> = ({ items, theme }) => {
             <svg width="auto" height="42" viewBox="0 0 72 64" preserveAspectRatio="xMidYMid meet">
               <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="back"></polyline>
               <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="front"></polyline>
+              <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="back"></polyline>
+              <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="front"></polyline>
+              
             </svg>
           </div>
         </div>

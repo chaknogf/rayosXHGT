@@ -200,7 +200,7 @@ const renderDireccion = (direccion: string, municipio: number) => {
   
   return (
     <>
-      <p>{direccion}, <br />{etiqueta}</p>
+      <p className="zero">{direccion}, {etiqueta}</p>
     </>
   );
 };
