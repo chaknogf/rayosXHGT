@@ -1,6 +1,6 @@
 .registro-card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(650px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
     gap: 0.15rem 0.15rem 0.15rem;
     padding: 0px;
   }
@@ -99,16 +99,16 @@ justify-content: center;
 /* Define la animación de pulso */
 @keyframes pulse {
   0% {
-    transform: scale(1);
+    transform: scale(0);
   }
   25%{
-    transform: scale(1.1);
+    transform: scale(1.025);
   }
   50% {
-    transform: scale(1.2);
+    transform: scale(1.05);
   }
   75%{
-    transform: scale(1.1);
+    transform: scale(1.025);
   }
   100% {
     transform: scale(1);
@@ -118,7 +118,7 @@ justify-content: center;
 
 
 .card:hover .pulse {
-  animation: pulse 1.5s infinite;
+  animation: pulse 1.8s infinite;
 }
 
 tr:hover .dir {
@@ -131,7 +131,7 @@ tr:hover .dir {
 }
 
 .card:hover .expand-text {
-  font-size: 2rem;
+  font-size: 1.3rem;
   font-weight: lighter;
   line-height: 0.9;
   transition: 0.4s;
@@ -139,3 +139,4 @@ tr:hover .dir {
   margin: 0;
   flex-wrap: wrap;
 }
+

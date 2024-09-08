@@ -18,7 +18,7 @@ const LoginComponent: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
     
 
   useEffect(() => {

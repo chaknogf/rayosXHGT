@@ -75,7 +75,7 @@ const columns = [
   { label: "Especialidad", key: "especialidad" },
   { label: "Servicio", key: "servicio" },
   { label: "Tipo de Consulta", key: "tipo_citas" },
-  { label: "Estatus", key: "status" },
+  { label: "Estatus", key: "status", section: "header" },
   { label: "sexo", key: "sexo"}
 ];
 
