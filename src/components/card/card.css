@@ -36,14 +36,16 @@
   
  .titulos {
   display: flex;
-  justify-content: space-evenly; /* O ajustar con otro valor si lo deseas */
-  align-items: flex-start; /* Alinea los items verticalmente */
+  justify-content: space-around; /* O ajustar con otro valor si lo deseas */
+  align-items: center; /* Alinea los items verticalmente */
   gap: 0.5rem; /* Ajusta el espacio entre los elementos si es necesario */
 }
 
 .item-label {
 margin: 0;
 padding: 0;
+line-height: 0.98;
+justify-content: center;
 
 }
 
@@ -55,4 +57,65 @@ padding: 0;
 .mujer {
   color: #df7ca8;
   font-weight: bold;
+}
+
+.zero {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+.labelStrong {
+  display: flex;
+  justify-content: center;
+  font-weight: lighter;
+  line-height: 1.6;
+}
+
+
+
+/* Define la animación de pulso */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  25%{
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  75%{
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+
+.card:hover .pulse {
+  animation: pulse 1.5s infinite;
+}
+
+tr:hover .dir {
+  transition: 0.8s; 
+}
+
+/* texto de expediente expande */
+.text-exp {
+  color: #93cdef ;
+}
+
+.card:hover .expand-text {
+  font-size: 2rem;
+  font-weight: lighter;
+  line-height: 0.9;
+  transition: 0.4s;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
 }

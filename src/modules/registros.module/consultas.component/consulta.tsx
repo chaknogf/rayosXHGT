@@ -1,6 +1,5 @@
 import React from "react";
-import DataTable from "@/components/dataTable/dataTable"; // Asegúrate de que la ruta del import sea correcta
-import DataCards from "@/components/dataTable/dataTable";
+import DataCards from "@/components/card/card";
 
 interface Consulta {
   id: number;

@@ -5,7 +5,6 @@ import ConsultaTable from "@/modules/registros.module/consultas.component/consul
 import "@/modules/home/home.css";
 import "@/style.css";
 import AppAcordion from "@/components/acordion/acordion";
-import Appcard from "@/components/card/card";
 
 const HomeComponent: React.FC = () => {
   const [contenidoActual, setContenidoActual] = useState<JSX.Element | null>(null);
@@ -17,10 +16,6 @@ const HomeComponent: React.FC = () => {
 
   const handleConsultasClick = () => {
     setContenidoActual(<ConsultaTable />);
-  };
-
-  const handleCardClick = () => {
-    setContenidoActual(<Appcard />);
   };
 
   const handleAcordionClick = () => {
@@ -39,11 +34,7 @@ const HomeComponent: React.FC = () => {
       onClick: handleConsultasClick, // Cambia a la tabla de consultas
       href: "#"
     },
-    {
-      label: "Card",
-      onClick: handleCardClick, // Corrige 'onclick' a 'onClick'
-      href: "#"
-    },
+   
     {
       label: "Accordion",
       onClick: handleAcordionClick, // Corrige 'onclick' a 'onClick'

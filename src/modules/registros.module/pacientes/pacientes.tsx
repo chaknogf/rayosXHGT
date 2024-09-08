@@ -1,8 +1,8 @@
 
-import DataTable from "@/components/dataTable/dataTable";
+import "@/components/card/card.css";
 import React, { useState } from "react";
 import PacienteForm from "@/modules/registros.module/pacientes/formularioPaciente";
-import DataCards from "@/components/dataTable/dataTable";
+import DataCards from "@/components/card/card";
 // import "@/customstyles.css"
 
 
@@ -17,6 +17,7 @@ interface Paciente {
   direccion?: string;
   municipio?: number;
   departamento?: number;
+  dpi?: string;
 }
 
 const paciente: Paciente[] = [
@@ -30,7 +31,8 @@ const paciente: Paciente[] = [
     sexo: "m",
     direccion: "aldea buena vistas",
     municipio: 401,
-    departamento: 4
+    departamento: 4,
+    dpi: "1344678900101"
   },
   {
     id: 2,
@@ -40,11 +42,12 @@ const paciente: Paciente[] = [
     expediente: 24490,
     estado: "m",
     sexo: "f",
+    dpi: "6789013450406"
   },
   {
     id: 3,
-    nombre: "Carlos",
-    apellido: "López",
+    nombre: "Carlos Gudiel",
+    apellido: "López Aragon",
     nacimiento: "1999-02-17",
     expediente: 1245,
     estado: "v",
@@ -73,9 +76,10 @@ const PacienteTable: React.FC = () => {
     {label: "paciente", key: "nombre", section: 'header'},
     { label: "Sexo", key: "sexo", section:"header" },
     { label: "direccion", key: "direccion", section: "body"},
-    { label: "edad", key: "nacimiento"},
-    { label: "estado", key: "estado" },
-    { label: "id", key: "id"},
+    { label: "edad", key: "nacimiento", section: "header"},
+    { label: "estado", key: "estado", section: "header" },
+    { label: "id", key: "id" },
+    { label: "dpi", key: "dpi", section: "header"}
   ];
 
   return (
