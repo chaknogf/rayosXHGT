@@ -130,10 +130,10 @@ const renderNombreColor = (sexo: string, nombre: string, apellido: string) => {
 
 const renderEdadFunction = (nacimiento: string) => {
   return (
-    <>
-      <p style={{padding: 0, marginLeft: 0}}>{formatoFecha(nacimiento)}</p>
-      <p style={{padding: 0, marginRight: '0.12rem'}}> {calcularEdad(nacimiento)}</p>
-    </>
+    <div className="renE">
+      <p className="renEdad">{formatoFecha(nacimiento)}</p>
+      <p className="renEdad_"> {calcularEdad(nacimiento)}</p>
+    </div>
     
   )
 }
@@ -351,19 +351,18 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
                   .map((item, itemIndex) => {
                     const renderFn = item.render || renderFunctions[item.key as string]; // Usar función personalizada o renderFunction
                     return (
-                      <>
-                        
-                        <div key={itemIndex} className={`card-body-item ${item.className || ""}`}>
+                      <div className="item-body">
                         <label className="label-item-body">{item.label}:</label>
-                          {renderFn
+                        <div key={itemIndex} className={`card-body-item ${item.className || ""}`}>
+                         {renderFn
                           ? renderFn(rowData) // Usar renderFn para mostrar el valor en el cuerpo
                           : item.svgIcon // Mostrar SVG si existe
                           ? item.svgIcon
                           : item.key && rowData[item.key] !== undefined // Mostrar el valor si no se pasa renderFn
                           ? String(rowData[item.key])
                           : null}
+                        </div>
                       </div>
-                      </>
                     );
                   })}
               </div>

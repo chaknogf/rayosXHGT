@@ -21,24 +21,32 @@
 
   .card-content {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center; /* Centra horizontalmente el contenido */
     align-items: center; /* Centra verticalmente el contenido */
     gap: 0.38rem;
     width: 60%;
     margin-left: 0.5rem;
     text-align: center; /* Centra el texto horizontalmente */
+    
+  }
+
+  .item-body {
+   padding: 0;
+   margin: 0; 
+   
   }
   
   .card-body-item {
     display: flex;
-    justify-content:space-around; /* Centra horizontalmente el contenido */
-    align-items: center; /* Centra verticalmente el contenido */
+    justify-content:center; /* Centra horizontalmente el contenido */
+    align-items: flex-end; /* Centra verticalmente el contenido */
     line-height: 1.2; /* Ajusta el espaciado de línea para mejor apariencia */
     border-radius: 8px;
     border: #cccccc7b solid 1px; /* Ajusta el borde si es necesario */
-    padding: 0.5rem; /* Agrega padding para mejor visualización */
+    padding: 0.2rem; /* Agrega padding para mejor visualización */
     text-align: center; /* Centra el texto horizontalmente */
+    
   }
   
   .label-item-body {
@@ -46,24 +54,7 @@
     
 
   }
-  .registro-accordion-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px;
-  }
-  
-  .accordion-item {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .accordion-item p {
-    margin-top: 10px;
-  }
-  
+   
  .titulos {
   display: flex;
   justify-content: space-around; /* O ajustar con otro valor si lo deseas */
@@ -76,6 +67,7 @@ margin: 0;
 padding: 0;
 line-height: 0.98;
 justify-content: center;
+
 
 }
 
@@ -147,3 +139,25 @@ tr:hover .dir {
   flex-wrap: wrap;
 }
 
+.renE {
+  display: flex;
+  gap: 0.3rem;
+  width:100%;
+  padding: 0;
+}
+
+.renEdad {
+  padding: auto;
+  margin: 0;
+
+  border-radius: 8%;
+}
+
+.renEdad_ {
+  padding: auto;
+  margin: 0;
+  border: #ccc solid 0.23px;
+  border-radius: 8%;
+  width: 5;
+
+}
