@@ -13,29 +13,39 @@
   }
   
   .card-body {
-    /* display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    resize: horizontal;
     margin: 0;
-    padding: 0; */
+    padding: 0;
     
   }
 
   .card-content {
-    /* margin: 0;
-    padding: 0;
-    justify-items: center;
-    line-height: 0.98;
-    flex-wrap: nowrap;
-    gap: 0.73rem; */
-
-  }
-
-  .card-body-item {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    gap: 0.38rem;
+    width: 60%;
+    margin-left: 0.5rem;
+    text-align: center; /* Centra el texto horizontalmente */
   }
   
+  .card-body-item {
+    display: flex;
+    justify-content:space-around; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    line-height: 1.2; /* Ajusta el espaciado de línea para mejor apariencia */
+    border-radius: 8px;
+    border: #cccccc7b solid 1px; /* Ajusta el borde si es necesario */
+    padding: 0.5rem; /* Agrega padding para mejor visualización */
+    text-align: center; /* Centra el texto horizontalmente */
+  }
+  
+  .label-item-body {
+    margin-right: 0.32rem;
+    
+
+  }
   .registro-accordion-container {
     display: flex;
     flex-direction: column;
@@ -80,9 +90,6 @@ justify-content: center;
 }
 
 .zero {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
   margin: 0;
   padding: 0;
 }
