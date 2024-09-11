@@ -19,6 +19,17 @@
     
   }
 
+  .item-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin: 0;
+    padding: 0;
+    
+    
+  }
+
   .card-content {
     display: flex;
     flex-wrap: nowrap;
@@ -45,11 +56,16 @@
     align-items: flex-end; /* Centra verticalmente el contenido */
     line-height: 1.2; /* Ajusta el espaciado de línea para mejor apariencia */
     border-radius: 8px;
-    border: #cccccc7b solid 1px; /* Ajusta el borde si es necesario */
-    padding: 0.25rem; /* Agrega padding para mejor visualización */
+    padding: 0.05rem; /* Agrega padding para mejor visualización */
     text-align: center; /* Centra el texto horizontalmente */
+    box-shadow: 0px 1.6px 1.9px #8884847a; /* Agrega una sombra ligera */
+    transition: box-shadow 0.3s ease; /* Transición suave al hover */
     
   }
+
+.card-body-item:hover {
+  box-shadow: 0px 2px 4px #4f81f6e7; /* Aumenta la sombra al hacer hover */
+}
   
   .label-item-body {
     margin-right: 0.32rem;
@@ -175,10 +191,14 @@ tr:hover .dir {
 .renEdad_ {
   padding: auto;
   margin: 0;
-  border: #ccc solid 0.23px;
+  border: #cccccc8a solid 0.03px;
   border-radius: 8%;
   width: 5;
-  width: 65px;
-  
+  width: 55px;
+}
 
+.dpi {
+  margin: 0;
+  padding: 0;
+  width: 55px;
 }

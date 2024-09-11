@@ -39,7 +39,7 @@ interface ObjetX {
 
 
 const renderSexoIcon = (sexo: string) => {
-  const iconZice: number = 30;
+  const iconZice: string = '1.7rem';
   if (sexo === "m") {
     return (
       <svg
@@ -47,7 +47,7 @@ const renderSexoIcon = (sexo: string) => {
         width={iconZice}
         height={iconZice}
         fill="#1bc5e6"
-        className="bi bi-person-standing mt-1"
+        className="bi bi-person-standing zero"
         viewBox="0 0 16 16"
       >
         <path d="M8 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M6 6.75v8.5a.75.75 0 0 0 1.5 0V10.5a.5.5 0 0 1 1 0v4.75a.75.75 0 0 0 1.5 0v-8.5a.25.25 0 1 1 .5 0v2.5a.75.75 0 0 0 1.5 0V6.5a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v2.75a.75.75 0 0 0 1.5 0v-2.5a.25.25 0 0 1 .5 0" />
@@ -60,7 +60,7 @@ const renderSexoIcon = (sexo: string) => {
         width={iconZice}
         height={iconZice}
         fill="#df7ca8"
-        className="bi bi-person-standing-dress mt-1"
+        className="bi bi-person-standing-dress zero"
         viewBox="0 0 16 16"
       >
         <path d="M8 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m-.5 12.25V12h1v3.25a.75.75 0 0 0 1.5 0V12h1l-1-5v-.215a.285.285 0 0 1 .56-.078l.793 2.777a.711.711 0 1 0 1.364-.405l-1.065-3.461A3 3 0 0 0 8.784 3.5H7.216a3 3 0 0 0-2.868 2.118L3.283 9.079a.711.711 0 1 0 1.365.405l.793-2.777a.285.285 0 0 1 .56.078V7l-1 5h1v3.25a.75.75 0 0 0 1.5 0Z" />
@@ -80,14 +80,14 @@ const renderEstado = (estado: string) => {
   
   if (estado === "m") {
     return (
-      <FaRibbon style={{height: "1.5rem", width: "1.5rem"}} />
+      <FaRibbon style={{height: "1.5rem", width: "1.7rem"}} />
 
 
     );
   } else if (estado === "v") { 
 
     return (
-      <PiHeartbeatFill className="pulse" style={{height: "1.5rem", width: "1.5rem", color: "red"}} />
+      <PiHeartbeatFill className="pulse zero" style={{height: "1.7rem", width: "1.5rem", color: "red"}} />
     );
   }
   return null;
@@ -151,7 +151,7 @@ const renderFecha = (value: string) => {
 const renderDPI = (value: string) => {
   return (
     <>
-      <p className="zero">{FormartDPI(value) }</p>
+      <p className="dpi">{FormartDPI(value) }</p>
     </>
   )
 }
