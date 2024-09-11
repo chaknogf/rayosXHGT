@@ -28,6 +28,8 @@
     width: 60%;
     margin-left: 0.5rem;
     text-align: center; /* Centra el texto horizontalmente */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight:lighter;
     
   }
 
@@ -44,13 +46,17 @@
     line-height: 1.2; /* Ajusta el espaciado de línea para mejor apariencia */
     border-radius: 8px;
     border: #cccccc7b solid 1px; /* Ajusta el borde si es necesario */
-    padding: 0.2rem; /* Agrega padding para mejor visualización */
+    padding: 0.25rem; /* Agrega padding para mejor visualización */
     text-align: center; /* Centra el texto horizontalmente */
     
   }
   
   .label-item-body {
     margin-right: 0.32rem;
+    font-weight: bolder;
+    font-size: 0.8rem;
+    
+
     
 
   }
@@ -141,16 +147,29 @@ tr:hover .dir {
 
 .renE {
   display: flex;
-  gap: 0.3rem;
-  width:100%;
+  gap: 0.17rem;
   padding: 0;
+  width: 97px;
+  
 }
 
+.label-fn {
+  font-weight: lighter;
+  line-height: 0.80;
+  font-size: 0.6rem;
+  
+}
 .renEdad {
-  padding: auto;
+  
+  padding:0;
   margin: 0;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 30px;
   border-radius: 8%;
+  
 }
 
 .renEdad_ {
@@ -159,5 +178,7 @@ tr:hover .dir {
   border: #ccc solid 0.23px;
   border-radius: 8%;
   width: 5;
+  width: 65px;
+  
 
 }
