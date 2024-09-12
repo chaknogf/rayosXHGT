@@ -1,0 +1,145 @@
+/* App.css */
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f5;
+    overflow-x: hidden;
+    margin: 0;
+    height: 100vh;
+  }
+  
+  /* Contenedor principal de la app */
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  /* Estilos del header */
+  .app-header {
+    background-color: #6200ea;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Contenido principal */
+  .app-content {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Estilo de la tarjeta */
+  .card {
+    background: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.32rem;
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Barra de navegación inferior */
+  .app-footer {
+    background-color: #6200ea;
+    color: white;
+    padding: 0.5rem;
+    text-align: center;
+  }
+  
+  .bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5rem;
+  }
+  
+  .bottom-nav button {
+    flex: 1;
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 0;
+    transition: background-color 0.3s;
+  }
+  
+  .bottom-nav button:hover {
+    background-color: #3700b3;
+  }
+  
+  .bottom-nav button:active {
+    background-color: #03dac5;
+  }
+  
+  /* Diseño responsive para pantallas pequeñas */
+  @media (max-width: 480px) {
+    .card {
+      width: 100%;
+      padding: 1rem;
+    }
+  }
+  
+  /* Diseño para pantallas más grandes (modo escritorio) */
+  @media (min-width: 768px) {
+    .app-container {
+      flex-direction: row; /* Cambia la disposición a horizontal */
+      justify-content: space-between; /* Distribuye el espacio entre los elementos */
+      padding: 2rem;
+    }
+  
+    .app-header {
+      flex-basis: 100%; /* El header sigue ocupando el ancho total */
+      text-align: left; /* Cambiamos la alineación a la izquierda */
+    }
+  
+    .app-content {
+      flex: 3; /* Ocupa más espacio en pantalla */
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 2rem;
+    }
+  
+    .card {
+      max-width: 600px; /* Ajustamos el tamaño de las tarjetas */
+      margin: 1rem; /* Añadimos margen entre tarjetas */
+    }
+  
+    .app-footer {
+      flex-basis: 100%;
+      text-align: right; /* Footer alineado a la derecha */
+    }
+  
+    .bottom-nav {
+      justify-content: flex-end; /* Navegación al final en pantallas grandes */
+    }
+  }
+  
+  /* Para pantallas aún más grandes (1024px o más) */
+  @media (min-width: 1024px) {
+    .app-content {
+      padding: 3rem;
+    }
+  
+    .card {
+      max-width: 800px; /* Más espacio en tarjetas */
+    }
+  }
+  

@@ -9,6 +9,14 @@
   padding: 0.78rem;
 }
 
+.navbar-tabs {
+  padding: 0;
+  width: 0;
+  font-size: 1.5rem;
+  line-height: 1.2rem;
+  align-content: center;
+}
+
 .hamburger-icon {
   margin-left: 1.78rem;
   font-size: 38px;
@@ -87,7 +95,8 @@
 }
 
 .icon-ld {
-  padding-top: 0.35rem;
+  display: flex;
+  padding-top: 0.15rem;
   width: auto;
   height: auto;
   margin-left: 1.2rem;

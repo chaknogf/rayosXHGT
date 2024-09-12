@@ -24,7 +24,7 @@ const NavComponent: React.FC<NavComponentProps> = ({ items, theme }) => {
 
   return (
     <div className="hamburger-menu">
-      <div className={`navbar ${theme === 'dark' ? 'bg-dark text-light' : 'bg-light '}`}>
+      <div className={`app-header ${theme === 'dark' ? 'bg-dark text-light' : 'bg-light '}`}>
         {/* <FaReact className="hamburger-icon " onClick={toggleMenu} /> */}
         <div className="icon-ld" onClick={toggleMenu} >
           <div className="loading">
@@ -36,8 +36,9 @@ const NavComponent: React.FC<NavComponentProps> = ({ items, theme }) => {
               
             </svg>
           </div>
-        </div>
-      <h3 className="navbar-tabs">Tableta Sheika</h3>
+          <h3 className="navbar-tabs">Sys HospTecpan</h3>
+      </div>
+      
       </div>
       <div className={`side-menu ${isOpen ? "open" : ""}`}>
         <div className="toggleTheme"><ThemeToggle /></div>
