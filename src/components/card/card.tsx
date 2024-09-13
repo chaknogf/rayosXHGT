@@ -130,9 +130,9 @@ const renderNombreColor = (sexo: string, nombre: string, apellido: string) => {
 
 const renderEdadFunction = (nacimiento: string) => {
   return (
-    <div className="renE">
-      <p className="renEdad">{formatoFecha(nacimiento)}</p>
-      <p className="renEdad_"> {calcularEdad(nacimiento)}</p>
+    <div className="renE zero">
+      <p className="renEdad zero">{formatoFecha(nacimiento)}</p>
+      <p className="renEdad_ zero"> {calcularEdad(nacimiento)}</p>
     </div>
     
   )
@@ -342,25 +342,26 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
         </div>
 
         {/* Body */}
-        {showBody && ( // Solo mostrar el cuerpo si showBody es true
-          <div className="card-body" onBlur={() => setShowBody(false)} onFocus={() => setShowBody(true)}>
+        {showBody && (
+          // Mostrar el cuerpo solo si showBody es true
+          <div className="table-vertical">
             {data.map((rowData, index) => (
-              <div key={index} className="card-content">
+              <div key={index} className="table-row">
                 {items
-                  .filter((item) => item.section === "body") // Filtrar celdas para el cuerpo
+                  .filter((item) => item.section === "body")
                   .map((item, itemIndex) => {
                     const renderFn = item.render || renderFunctions[item.key as string]; // Usar función personalizada o renderFunction
                     return (
-                      <div className="item-body">
-                        <label className="label-item-body">{item.label}:</label>
-                        <div key={itemIndex} className={`card-body-item ${item.className || ""}`}>
-                         {renderFn
-                          ? renderFn(rowData) // Usar renderFn para mostrar el valor en el cuerpo
-                          : item.svgIcon // Mostrar SVG si existe
-                          ? item.svgIcon
-                          : item.key && rowData[item.key] !== undefined // Mostrar el valor si no se pasa renderFn
-                          ? String(rowData[item.key])
-                          : null}
+                      <div className="table-item" key={itemIndex}>
+                        <div className="table-header">{item.label}:</div>
+                        <div className="table-body">
+                          {renderFn
+                            ? renderFn(rowData) // Usar renderFn para mostrar el valor
+                            : item.svgIcon // Mostrar SVG si existe
+                            ? item.svgIcon
+                            : item.key && rowData[item.key] !== undefined // Mostrar el valor si no se pasa renderFn
+                            ? String(rowData[item.key])
+                            : null}
                         </div>
                       </div>
                     );
@@ -370,7 +371,8 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
           </div>
         )}
 
-        <button className="btn" onClick={() => setShowBody((prev) => !prev)}>
+
+        <button className="btn zero detalle-btn" onClick={() => setShowBody((prev) => !prev)}>
           {showBody ? "Ocultar" : "Mostrar"} Detalles
         </button>
       </div>

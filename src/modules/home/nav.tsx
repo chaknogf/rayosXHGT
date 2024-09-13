@@ -24,7 +24,7 @@ const NavComponent: React.FC<NavComponentProps> = ({ items, theme }) => {
 
   return (
     <div className="hamburger-menu">
-      <div className={`app-header ${theme === 'dark' ? 'bg-dark text-light' : 'bg-light '}`}>
+     <div className={`app-header ${theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'}`}>
         {/* <FaReact className="hamburger-icon " onClick={toggleMenu} /> */}
         <div className="icon-ld" onClick={toggleMenu} >
           <div className="loading">

@@ -8,6 +8,16 @@ import AppAcordion from "@/components/acordion/acordion";
 
 const HomeComponent: React.FC = () => {
   const [contenidoActual, setContenidoActual] = useState<JSX.Element | null>(null);
+  // const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  // useEffect(() => {
+  //   // Inicializar el tema según lo guardado en localStorage
+  //   const savedTheme = localStorage.getItem("theme") as 'light' | 'dark';
+  //   if (savedTheme) {
+  //     setTheme(savedTheme);
+  //   }
+  // }, []);
+
 
   // Maneja clics para cambiar el contenido
   const handlePacienteClick = () => {

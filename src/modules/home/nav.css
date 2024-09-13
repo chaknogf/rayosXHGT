@@ -1,3 +1,25 @@
+/* Tema oscuro */
+.bg-dark {
+  background-color: #333; /* Fondo oscuro */
+  color: #fff; /* Texto claro */
+}
+
+/* Tema claro */
+.bg-light {
+  background-color: #f0f0f5; /* Fondo claro */
+  color: #000; /* Texto oscuro */
+}
+
+/* Estilos adicionales para asegurar el contraste adecuado */
+.text-light {
+  color: #fff !important;
+}
+
+.text-dark {
+  color: #000 !important;
+}
+
+
 .hamburger-menu {
   position: relative;
 }

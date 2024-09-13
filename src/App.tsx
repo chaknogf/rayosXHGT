@@ -19,31 +19,3 @@ function App() {
 
 export default App
 
-// import React from 'react';
-// import './App.css';
-// import { FaHome, FaUserAlt, FaCog } from 'react-icons/fa';
-
-// function App() {
-//   return (
-//     <div className="app-container">
-//       <header className="app-header">
-//         <h1>AppHosp</h1>
-//       </header>
-//       <main className="app-content">
-//         <div className="card">
-//           <h2>Bienvenido</h2>
-//           <p>Esta es una tarjeta de ejemplo para simular una app móvil.</p>
-//         </div>
-//       </main>
-//       <footer className="app-footer">
-//         <nav className="bottom-nav">
-//           <button><FaHome /> Home</button>
-//           <button><FaUserAlt /> Profile</button>
-//           <button><FaCog /> Settings</button>
-//         </nav>
-//       </footer>
-//     </div>
-//   );
-// }
-
-// export default App;

@@ -7,7 +7,7 @@
   
   .card {
     border: 1px solid #ccc;
-    padding: 0.18rem;
+    padding: 0.09rem;
     border-radius: 5px;
     /* background-color: #f9f9f9; */
   }
@@ -16,6 +16,7 @@
     resize: horizontal;
     margin: 0;
     padding: 0;
+    line-height: 3;
     
   }
 
@@ -79,8 +80,9 @@
    
  .titulos {
   display: flex;
-  justify-content: space-around; /* O ajustar con otro valor si lo deseas */
+  justify-content: space-evenly; /* O ajustar con otro valor si lo deseas */
   align-items: center; /* Alinea los items verticalmente */
+  align-content: center;
   gap: 0.5rem; /* Ajusta el espacio entre los elementos si es necesario */
 }
 
@@ -112,7 +114,9 @@ justify-content: center;
   display: flex;
   justify-content: center;
   font-weight: lighter;
-  line-height: 1.6;
+  line-height: 0.87;
+  padding: 0;
+  margin: 0;
 }
 
 
@@ -161,7 +165,7 @@ tr:hover .dir {
   flex-wrap: wrap;
 }
 
-.renE {
+/* .renE {
   display: flex;
   gap: 0.17rem;
   padding: 0;
@@ -201,4 +205,64 @@ tr:hover .dir {
   margin: 0;
   padding: 0;
   width: 55px;
+} */
+
+
+.table-vertical {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-row {
+  display: flex;
+  flex-direction: row ;
+  margin-bottom: 1px;
+  gap: 0.2rem;
+}
+
+.table-item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0px;
+  border: 1px solid #a3999956;
+  border-radius: 6px;
+  line-height: 1.1rem;
+  flex-wrap: nowrap;
+}
+
+.table-header {
+  flex: 1;
+  font-weight: bold;
+  padding: 1.8px;
+  border-right: 1px solid #dddddd53;
+}
+
+.table-body {
+  flex: 2;
+  padding: auto;
+}
+
+.table-item:hover {
+  background-color: #55beb38f;
+}
+
+/* Diseño adaptable a pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  .table-row {
+    flex-direction: column;
+  }
+
+  .table-header {
+    width: 1rem;;
+    text-align: left;
+    border-right: 1px solid white; 
+    padding: 1px;
+  }
+
+  .table-body {
+    text-align: left;
+  }
 }

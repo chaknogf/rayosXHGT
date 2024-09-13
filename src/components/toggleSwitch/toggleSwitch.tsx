@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "@/components/toggleSwitch/toggleSwitch.css"
+import "@/components/toggleSwitch/toggleSwitch.css";
 import '@/style.css';
 
-
-
-const ThemeToggle = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const ThemeToggle: React.FC = () => {
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   useEffect(() => {
     // Inicializar el tema según el valor guardado en localStorage
@@ -25,25 +23,19 @@ const ThemeToggle = () => {
     document.documentElement.setAttribute("data-bs-theme", newTheme);
     localStorage.setItem("theme", newTheme); // Guarda el tema en localStorage
   };
-    
 
   return (
     <div className="toggle-switch">
-
-     
       <label className="switch-label">
         <input
           className="checkbox"
           type="checkbox"
-          id="checkboxInput"
           checked={isDarkMode}
           onChange={handleToggle}
-          style={{ display: 'none' }} // Oculta el input
+          aria-label="Toggle Dark Mode"
         />
         <span className="slider"></span>
-
       </label>
-      
     </div>
   );
 };
