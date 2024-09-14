@@ -1,15 +1,26 @@
 .registro-card-container {
     display: grid;
+    align-items: center;
     grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
     gap: 0.15rem 0.15rem 0.15rem;
     padding: 0px;
+  }
+
+  .card-container {
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 10px;
+    /* transition: all 2.3s ease-in-out;
+    overflow: hidden;  */
   }
   
   .card {
     border: 1px solid #ccc;
     padding: 0.09rem;
     border-radius: 5px;
-    /* background-color: #f9f9f9; */
+    transition: transform 3.3s ease-in-out;
+    cursor: pointer;
   }
   
   .card-body {
@@ -81,7 +92,7 @@
  .titulos {
   display: flex;
   justify-content: space-evenly; /* O ajustar con otro valor si lo deseas */
-  align-items: center; /* Alinea los items verticalmente */
+  align-items: flex-start; /* Alinea los items verticalmente */
   align-content: center;
   gap: 0.5rem; /* Ajusta el espacio entre los elementos si es necesario */
 }
@@ -89,8 +100,9 @@
 .item-label {
 margin: 0;
 padding: 0;
-line-height: 0.98;
+line-height: 1.1rem;
 justify-content: center;
+
 
 
 }
@@ -114,7 +126,9 @@ justify-content: center;
   display: flex;
   justify-content: center;
   font-weight: lighter;
-  line-height: 0.87;
+  line-height: 0.90;
+  font-size: 0.8rem;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -140,6 +154,10 @@ justify-content: center;
   }
 }
 
+.detalle-btn {
+  border: #1bc5e6 solid;
+
+}
 
 
 .card:hover .pulse {
@@ -153,6 +171,8 @@ tr:hover .dir {
 /* texto de expediente expande */
 .text-exp {
   color: #93cdef ;
+  margin: 0;
+  padding: 0;
 }
 
 .card:hover .expand-text {
@@ -165,47 +185,6 @@ tr:hover .dir {
   flex-wrap: wrap;
 }
 
-/* .renE {
-  display: flex;
-  gap: 0.17rem;
-  padding: 0;
-  width: 97px;
-  
-}
-
-.label-fn {
-  font-weight: lighter;
-  line-height: 0.80;
-  font-size: 0.6rem;
-  
-}
-.renEdad {
-  
-  padding:0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: nowrap;
-  width: 30px;
-  border-radius: 8%;
-  
-}
-
-.renEdad_ {
-  padding: auto;
-  margin: 0;
-  border: #cccccc8a solid 0.03px;
-  border-radius: 8%;
-  width: 5;
-  width: 55px;
-}
-
-.dpi {
-  margin: 0;
-  padding: 0;
-  width: 55px;
-} */
 
 
 .table-vertical {
@@ -213,6 +192,7 @@ tr:hover .dir {
   flex-direction: column;
   width: 100%;
   border-collapse: collapse;
+  
 }
 
 .table-row {
@@ -250,7 +230,7 @@ tr:hover .dir {
 }
 
 /* Diseño adaptable a pantallas pequeñas */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 728px) {
   .table-row {
     flex-direction: column;
   }

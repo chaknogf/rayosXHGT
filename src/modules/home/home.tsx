@@ -54,10 +54,10 @@ const HomeComponent: React.FC = () => {
 
   return (
     <>
-      <div className="div-nav">
+      <nav className="div-nav">
         {/* Barra de navegación con el toggle de tema */}
         <NavComponent items={navItems} theme={"dark"} />
-      </div>
+      </nav>
       <div className="div-content zoomable-content">
         {/* Renderiza el contenido actual */}
         {contenidoActual}

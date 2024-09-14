@@ -63,31 +63,24 @@ const PacienteTable: React.FC = () => {
   };
 
   const items = [
-    
-    {
-      label: "agregar",
-      customFunction: () => (
-        <button className="btn p-1 m-0 btn-q" onClick={handleButtonClick}>
-         form
-        </button>
-      )
-    },
+    { label: "agregar", onClick: handleButtonClick, section: 'option' }, // Cambiado
     { label: "Expediente", key: "expediente", section: 'header' },
-    {label: "paciente", key: "nombre", section: 'header'},
-    { label: "Sexo", key: "sexo", section:"header" },
-    { label: "Direccion", key: "direccion", section: "body"},
-    { label: "F.Nac   __   edad", key: "nacimiento", section: "body"},
+    { label: "paciente", key: "nombre", section: 'header' },
+    { label: "Sexo", key: "sexo", section: "header" },
+    { label: "Direccion", key: "direccion", section: "body" },
+    { label: "F.Nac edad", key: "nacimiento", section: "body" },
     { label: "estado", key: "estado", section: "header" },
     { label: "id", key: "id" },
-    { label: "DPI", key: "dpi", section: "body"}
+    { label: "DPI", key: "dpi", section: "body" },
   ];
+  
 
   return (
     <div>
       {showForm ? (
-        <PacienteForm />
+        <PacienteForm /> // Renderiza el formulario si showForm es true
       ) : (
-        <DataCards data={paciente} items={items} />
+        <DataCards data={paciente} items={items} /> // Renderiza los datos si showForm es false
       )}
     </div>
   );

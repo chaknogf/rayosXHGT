@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+    }
   
   body {
     font-family: Arial, sans-serif;
@@ -14,7 +14,7 @@
   }
 /* Estilos globales para el contenedor de Home */
 .home-container.light {
-  background-color: #f0f0f5;
+  background-color: #b4b4f3;
   color: #000;
 }
 
@@ -68,7 +68,7 @@
     max-width: 384px;
     padding: 1.3rem;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px #fffcfc4b;
     margin-bottom: 0.32rem;
     transition: transform 0.2s;
   }
@@ -113,8 +113,10 @@
   /* Diseño responsive para pantallas pequeñas */
   @media (max-width: 480px) {
     .card {
-      width: 100%;
-      padding: 1rem;
+      width: 64%;
+      padding: 0.5rem;
+      margin: 0.1rem;
+      box-shadow: #03dac5 inset;
     }
   }
   

@@ -22,8 +22,14 @@ interface RegistoCard<T> {
   svgIcon?: React.ReactNode; // SVG o icono a mostrar en la celda
   customFunction?: (data: T) => React.ReactNode; // Función adicional personalizada
   className?: string; // Clase CSS opcional para estilizar la celda
-  section?: "header" | "body"; // Sección de la celda, puede ser "header" o "body"
+  section?: "header" | "body" | "option"; // Sección de la celda, puede ser "header" o "body"
+  buttons?: { // Opcional: Configuración de botones para cada celda
+    label: string; // Texto del botón
+    onClick: (data: T) => void; // Función a ejecutar al hacer clic en el botón
+  }[]; // Array de botones
 }
+
+
 
 // Interfaz para el componente CardProps
 interface CardProps<T> {
@@ -39,7 +45,7 @@ interface ObjetX {
 
 
 const renderSexoIcon = (sexo: string) => {
-  const iconZice: string = '1.7rem';
+  const iconZice: string = '1.6rem';
   if (sexo === "m") {
     return (
       <svg
@@ -80,14 +86,14 @@ const renderEstado = (estado: string) => {
   
   if (estado === "m") {
     return (
-      <FaRibbon style={{height: "1.5rem", width: "1.7rem"}} />
+      <FaRibbon style={{height: "1.6rem", width: "1.6rem"}} />
 
 
     );
   } else if (estado === "v") { 
 
     return (
-      <PiHeartbeatFill className="pulse zero" style={{height: "1.7rem", width: "1.5rem", color: "red"}} />
+      <PiHeartbeatFill className="pulse zero" style={{height: "1.6rem", width: "1.6rem", color: "red"}} />
     );
   }
   return null;
@@ -125,8 +131,6 @@ const renderNombreColor = (sexo: string, nombre: string, apellido: string) => {
     </div>
   );
 };
-
-
 
 const renderEdadFunction = (nacimiento: string) => {
   return (
@@ -312,13 +316,33 @@ const renderFunctions: Record<string, (item: ObjetX) => React.ReactNode> = {
 
 
 const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
-  const [showBody, setShowBody] = useState(false);
+  const [showBody, setShowBody] = useState<boolean>(false);
+  let enterTimeout: ReturnType<typeof setTimeout>;
+  let leaveTimeout: ReturnType<typeof setTimeout>;
+
+  const handleMouseEnter = () => {
+    clearTimeout(leaveTimeout); // Limpiar cualquier timeout anterior de salida
+    enterTimeout = setTimeout(() => {
+      setShowBody(true);
+    }, 100); // Retraso de 300ms antes de mostrar el cuerpo
+  };
+
+  const handleMouseLeave = () => {
+    clearTimeout(enterTimeout); // Limpiar cualquier timeout anterior de entrada
+    leaveTimeout = setTimeout(() => {
+      setShowBody(false);
+    }, 1500); // Retraso de 300ms antes de ocultar el cuerpo
+  };
 
   return (
     <>
-      <div className="card">
+      <div className="card-container" tabIndex={0}>
+        <div className="card" 
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
         {/* Header */}
-        <div className="">
+        <div className="card-header">
           <div className="titulos">
             {items
               .filter((item) => item.section === "header") // Filtrar celdas para el encabezado
@@ -344,6 +368,26 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
         {/* Body */}
         {showBody && (
           // Mostrar el cuerpo solo si showBody es true
+           <div>
+            <div className="card-options">
+              {items
+                .filter((item) => item.section === "body")
+                .map((item, itemIndex) => (
+                  <div key={itemIndex} className="card-options-item">
+                    {item.buttons && item.buttons.map((button, buttonIndex) => (
+                      <button
+                        key={buttonIndex}
+                        onClick={() => button.onClick(item)} // Asegúrate de que 'item' esté disponible aquí
+                        className="card-option-button"
+                      >
+                        {button.label}
+                      </button>
+                    ))}
+                  </div>
+                ))}
+            </div>
+
+           
           <div className="table-vertical">
             {data.map((rowData, index) => (
               <div key={index} className="table-row">
@@ -369,13 +413,15 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
               </div>
             ))}
           </div>
+           </div>
+           
         )}
 
 
-        <button className="btn zero detalle-btn" onClick={() => setShowBody((prev) => !prev)}>
-          {showBody ? "Ocultar" : "Mostrar"} Detalles
-        </button>
+        
+        </div>
       </div>
+      
     </>
   );
 };
