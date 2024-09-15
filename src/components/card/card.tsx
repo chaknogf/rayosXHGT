@@ -23,12 +23,13 @@ interface RegistoCard<T> {
   customFunction?: (data: T) => React.ReactNode; // Función adicional personalizada
   className?: string; // Clase CSS opcional para estilizar la celda
   section?: "header" | "body" | "option"; // Sección de la celda, puede ser "header" o "body"
-  buttons?: { // Opcional: Configuración de botones para cada celda
-    label: string; // Texto del botón
-    onClick: (data: T) => void; // Función a ejecutar al hacer clic en el botón
-  }[]; // Array de botones
+  buttons?: Button[];
 }
 
+interface Button {
+  label: string;
+  onClick: () => void;
+}
 
 
 // Interfaz para el componente CardProps
@@ -331,7 +332,7 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
     clearTimeout(enterTimeout); // Limpiar cualquier timeout anterior de entrada
     leaveTimeout = setTimeout(() => {
       setShowBody(false);
-    }, 1500); // Retraso de 300ms antes de ocultar el cuerpo
+    }, 3000); // Retraso de 300ms antes de ocultar el cuerpo
   };
 
   return (
@@ -340,6 +341,7 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
         <div className="card" 
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          
         >
         {/* Header */}
         <div className="card-header">
@@ -367,25 +369,33 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
 
         {/* Body */}
         {showBody && (
-          // Mostrar el cuerpo solo si showBody es true
+          
            <div>
-            <div className="card-options">
-              {items
-                .filter((item) => item.section === "body")
-                .map((item, itemIndex) => (
-                  <div key={itemIndex} className="card-options-item">
-                    {item.buttons && item.buttons.map((button, buttonIndex) => (
-                      <button
-                        key={buttonIndex}
-                        onClick={() => button.onClick(item)} // Asegúrate de que 'item' esté disponible aquí
-                        className="card-option-button"
-                      >
-                        {button.label}
+             <div className="card-options">
+            {items
+              .filter(item => item.section === 'option')
+              .map((item, itemIndex) => {
+                const renderFnHeader = item.render || renderFunctions[item.key as string]; // Usar función personalizada o renderFunction
+                return (
+                  <div key={itemIndex} className={`item-label ${item.className || ""}`}>
+                    <button className="btn zero"
+                    key={itemIndex}
+                    onClick={item.onClick}
+                    
+                    >
+                    {renderFnHeader
+                      ? renderFnHeader(data[0]) // Usar renderFnHeader para mostrar el valor del primer elemento
+                      : item.key && data.length > 0 && data[0][item.key] !== undefined
+                      ? String(data[0][item.key]) // Mostrar el valor si renderFnHeader no está definido
+                      : null}
+                     
+                      {item.label}
                       </button>
-                    ))}
                   </div>
-                ))}
-            </div>
+                );
+              })}
+          </div>
+
 
            
           <div className="table-vertical">

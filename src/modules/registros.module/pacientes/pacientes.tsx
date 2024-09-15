@@ -23,6 +23,77 @@ interface Paciente {
 const paciente: Paciente[] = [
   {
     id: 1,
+    nombre: "David",
+    apellido: "Pérez",
+    nacimiento: "1986-08-12",
+    expediente: 23555,
+    estado: "v",
+    sexo: "m",
+    direccion: "aldea buena vistas",
+    municipio: 401,
+    departamento: 4,
+    dpi: "1344678900101"
+  },
+  {
+    id: 2,
+    nombre: "María",
+    apellido: "González",
+    nacimiento: "1982-01-23",
+    expediente: 24490,
+    estado: "m",
+    sexo: "f",
+    dpi: "6789013450406"
+  },
+  {
+    id: 3,
+    nombre: "Carlos Gudiel",
+    apellido: "López Aragon",
+    nacimiento: "1999-02-17",
+    expediente: 1245,
+    estado: "v",
+    sexo: "m",
+  },
+  {
+    id: 4,
+    nombre: "Juan",
+    apellido: "Pérez",
+    nacimiento: "1986-08-12",
+    expediente: 23555,
+    estado: "v",
+    sexo: "m",
+    direccion: "aldea buena vistas",
+    municipio: 401,
+    departamento: 4,
+    dpi: "1344678900101"
+  },
+  {
+    id: 5,
+    nombre: "Juan",
+    apellido: "Pérez",
+    nacimiento: "1986-08-12",
+    expediente: 23555,
+    estado: "v",
+    sexo: "m",
+    direccion: "aldea buena vistas",
+    municipio: 401,
+    departamento: 4,
+    dpi: "1344678900101"
+  },
+  {
+    id: 6,
+    nombre: "Juan",
+    apellido: "Pérez",
+    nacimiento: "1986-08-12",
+    expediente: 23555,
+    estado: "v",
+    sexo: "m",
+    direccion: "aldea buena vistas",
+    municipio: 401,
+    departamento: 4,
+    dpi: "1344678900101"
+  },
+  {
+    id: 1,
     nombre: "Juan",
     apellido: "Pérez",
     nacimiento: "1986-08-12",
@@ -53,6 +124,45 @@ const paciente: Paciente[] = [
     estado: "v",
     sexo: "m",
   },
+  {
+    id: 4,
+    nombre: "Juan",
+    apellido: "Pérez",
+    nacimiento: "1986-08-12",
+    expediente: 23555,
+    estado: "v",
+    sexo: "m",
+    direccion: "aldea buena vistas",
+    municipio: 401,
+    departamento: 4,
+    dpi: "1344678900101"
+  },
+  {
+    id: 5,
+    nombre: "Juan",
+    apellido: "Pérez",
+    nacimiento: "1986-08-12",
+    expediente: 23555,
+    estado: "v",
+    sexo: "m",
+    direccion: "aldea buena vistas",
+    municipio: 401,
+    departamento: 4,
+    dpi: "1344678900101"
+  },
+  {
+    id: 6,
+    nombre: "Juan",
+    apellido: "Pérez",
+    nacimiento: "1986-08-12",
+    expediente: 23555,
+    estado: "v",
+    sexo: "m",
+    direccion: "aldea buena vistas",
+    municipio: 401,
+    departamento: 4,
+    dpi: "1344678900101"
+  }
 ];
 
 const PacienteTable: React.FC = () => {

@@ -2,30 +2,32 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing:content-box;
     }
   
   body {
     font-family: Arial, sans-serif;
-    background-color: #230317;
+    /* background-color: #031d2369; */
     overflow-x: hidden;
     margin: 0;
-    height: 100vh;
+    height: 30vh;
   }
-/* Estilos globales para el contenedor de Home */
-.home-container.light {
-  background-color: #b4b4f3;
-  color: #000;
-}
 
-.home-container.dark {
-  background-color: #333;
-  color: #fff;
-}
 
 /* Estilos para la sección de contenido */
-.content {
-  padding: 2rem;
+.div-nav {
+  position: sticky;
+  top: 0;
+  background-color: #333;
+  color: white;
+  padding: 0;
+  margin: 0;
+  z-index: 100; 
+}
+
+.div-content {
+  padding: 0;
+  margin-top: 10px;
 }
 
 /* Toggle de tema en la parte inferior */
@@ -62,20 +64,7 @@
   }
   
   /* Estilo de la tarjeta */
-  .card {
-   
-    width: 100%;
-    max-width: 384px;
-    padding: 1.3rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px #fffcfc4b;
-    margin-bottom: 0.32rem;
-    transition: transform 0.2s;
-  }
-  
-  .card:hover {
-    transform: scale(1.02);
-  }
+ 
   
   /* Barra de navegación inferior */
   .app-footer {
@@ -142,7 +131,7 @@
   
     .card {
       max-width: 600px; /* Ajustamos el tamaño de las tarjetas */
-      margin: 1rem; /* Añadimos margen entre tarjetas */
+      margin: 0.2rem; /* Añadimos margen entre tarjetas */
     }
   
     .app-footer {
