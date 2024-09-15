@@ -49,7 +49,7 @@ const PacienteForm: React.FC = () => {
       </label>
       <label>
         <input className="input" type="text" placeholder="" required />
-        <span>Lastname</span>
+        <span className="label">Lastname</span>
       </label>
     </div>
   );
@@ -68,7 +68,7 @@ const PacienteForm: React.FC = () => {
             fields={fields}
             title="Registro de Pacientes"
             message="Complete los campos a continuación"
-            className="form"
+            
             renderButtons={renderButtons}
             useFlex={true}
           />

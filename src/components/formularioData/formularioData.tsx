@@ -54,19 +54,22 @@ const CustomForm = <T,>({
       {/* Renderizar campos adicionales */}
       {renderInput && renderInput()}
 
-      <div className={`form ${fields.some((field) => field.useFlex) ? "flex" : ""}`}>
+      <div className="form field">
         {fields.map((field, index) => (
-          <label key={index} className={field.useFlex ? "flex" : ""}>
+          <>
             <input
-              required
+              
               placeholder={field.placeholder}
               type={field.type}
               className={`input ${field.className}`}
               value={values[field.name] as string}
               onChange={(e) => handleChange(field.name, e.target.value as T[keyof T])}
-            />
-            <span>{field.label}</span>
+              />
+          <label key={index} className="label">
+            {field.label}
           </label>
+          </>
+              
         ))}
       </div>
       <div className="flex-button">

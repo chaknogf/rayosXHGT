@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "@/components/card/card.css"
-// import "@/style.css"
 import { calcularEdad } from "@/utils/edad";
 import { formatoFecha } from "@/utils/fecha";
 import { obtenerVecindad } from "@/dictionary/direcciones/direcciones";
@@ -13,6 +12,7 @@ import { PiHeartbeatFill } from "react-icons/pi";
 import { FaUserDoctor } from "react-icons/fa6";
 import { GiMedicalDrip } from "react-icons/gi";
 import { FcExport, FcOpenedFolder } from "react-icons/fc";
+import { BiSolidMessageSquareEdit } from "react-icons/bi";
 
 // Interfaz para definir las propiedades de cada campo en el card
 interface RegistoCard<T> {
@@ -24,11 +24,13 @@ interface RegistoCard<T> {
   className?: string; // Clase CSS opcional para estilizar la celda
   section?: "header" | "body" | "option"; // Sección de la celda, puede ser "header" o "body"
   buttons?: Button[];
+  iconReact?: React.ComponentType; // Componente React para íconos
 }
 
 interface Button {
   label: string;
   onClick: () => void;
+  
 }
 
 
@@ -340,7 +342,7 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
       <div className="card-container" tabIndex={0}>
         <div className="card" 
           onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          // onMouseLeave={handleMouseLeave}
           
         >
         {/* Header */}
@@ -377,20 +379,22 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
               .map((item, itemIndex) => {
                 const renderFnHeader = item.render || renderFunctions[item.key as string]; // Usar función personalizada o renderFunction
                 return (
-                  <div key={itemIndex} className={`item-label ${item.className || ""}`}>
-                    <button className="btn zero"
-                    key={itemIndex}
-                    onClick={item.onClick}
+                  <div key={itemIndex} className="card-options-item">
                     
-                    >
-                    {renderFnHeader
-                      ? renderFnHeader(data[0]) // Usar renderFnHeader para mostrar el valor del primer elemento
-                      : item.key && data.length > 0 && data[0][item.key] !== undefined
-                      ? String(data[0][item.key]) // Mostrar el valor si renderFnHeader no está definido
-                      : null}
-                     
-                      {item.label}
+                    <div className="btn-container">
+                        <button className="btn btn-opt  zero"
+                      key={itemIndex}
+                      onClick={item.onClick}
+                      >
+                      {renderFnHeader
+                        ? renderFnHeader(data[0]) // Usar renderFnHeader para mostrar el valor del primer elemento
+                        : item.key && data.length > 0 && data[0][item.key] !== undefined
+                        ? String(data[0][item.key]) // Mostrar el valor si renderFnHeader no está definido
+                        : null}
                       </button>
+                      <p className="label-btn">{ item.label}</p>
+                    </div>
+                    
                   </div>
                 );
               })}

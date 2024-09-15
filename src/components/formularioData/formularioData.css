@@ -4,10 +4,10 @@
   flex-direction: column;
   gap: 16px;
   max-width: 40%x;
-  /* background-color: #191717ce; */
   padding: 10px;
   border-radius: 20px;
   position: relative;
+  box-sizing: content-box;
 }
 
 .cuadro {
@@ -59,160 +59,61 @@
   padding: 0;
 }
 
-.signin {
-  text-align: center;
-}
+/* From Uiverse.io by mrhyddenn */ 
 
-.signin a {
-  color: royalblue;
-}
 
-.signin a:hover {
-  text-decoration: underline royalblue;
-}
-
-.flex {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.input {
+  font-family: inherit;
   width: 100%;
-  gap: 9px;
-  padding: 10px;
-}
-
-.flex-div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: stretch;
-  width: 20%;
-  gap: 6px;
-
-}
-
-.flex-button {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-  gap: 4px;
-  padding: 10px;
-}
-
-.form label {
-  position: relative;
-}
-
-.form label .input {
-  width: 100%;
-  padding: 10px 10px 20px 10px;
-  outline: 0;
-  border: 1px solid rgba(207, 219, 217, 0.397);
-  border-radius: 10px;
-}
-
-.form label .input + span {
-  position: absolute;
-  left: 10px;
-  top: 15px;
-  color: rgb(118, 251, 180);
-  font-size: 0.9em;
-  cursor: text;
-  transition: 0.3s ease;
-}
-
-.form label .input:placeholder-shown + span {
-  top: 15px;
-  font-size: 0.9em;
-}
-
-.form label .input:focus + span,.form label .input:valid + span {
-  top: 0px;
-  font-size: 0.7em;
-  font-weight: 600;
-}
-
-.form label .input:valid + span {
-  color: green;
-}
-
-.submit {
   border: none;
-  outline: none;
-  background-color: royalblue;
-  padding: 10px;
-  border-radius: 10px;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 17px;
   color: #fff;
-  font-size: 16px;
-  transform: .3s ease;
-  
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
 }
 
-.submit:hover {
-  background-color: rgb(56, 90, 194);
-  cursor: pointer;
+.input::placeholder {
+  color: transparent;
 }
 
-@keyframes pulse {
-  from {
-    transform: scale(0.4);
-    opacity: 1;
-  }
-
-  to {
-    transform: scale(1.9);
-    opacity: 0;
-  }
+.input:placeholder-shown ~ .label {
+  font-size: 17px;
+  cursor: text;
+  top: 20px;
 }
 
-.gap-2 {
-  gap: 16px;
-}
-
-/* From Uiverse.io by vinodjangid07 */ 
-/* To hide the checkbox */
-#checkboxInput {
-  display: none;
-}
-
-.toggleSwitch {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 50px;
-  height: 30px;
-  background-color: rgb(82, 82, 82);
-  border-radius: 20px;
-  cursor: pointer;
-  transition-duration: .2s;
-}
-
-.toggleSwitch::after {
-  content: "";
+.label {
   position: absolute;
-  height: 10px;
-  width: 10px;
-  left: 5px;
-  background-color: transparent;
-  border-radius: 50%;
-  transition-duration: .2s;
-  box-shadow: 5px 2px 7px rgba(8, 8, 8, 0.26);
-  border: 5px solid white;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 17px;
+  color: #9b9b9b;
+  pointer-events: none;
 }
 
-#checkboxInput:checked+.toggleSwitch::after {
-  transform: translateX(100%);
-  transition-duration: .2s;
-  background-color: white;
-}
-/* Switch background change */
-#checkboxInput:checked+.toggleSwitch {
-  background-color: rgb(148, 118, 255);
-  transition-duration: .2s;
+.input:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #116399, #38caef);
+  border-image-slice: 1;
 }
 
-/* // /* From Uiverse.io by vinodjangid07 */ 
-/* <input type="checkbox" id="checkboxInput">
-<label for="checkboxInput" class="toggleSwitch">
-</label>  */
+.input:focus ~ .label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 17px;
+  color: #38caef;
+  font-weight: 700;
+}
+
+/* reset input */
+.input:required, .input:invalid {
+  box-shadow: none;
+}

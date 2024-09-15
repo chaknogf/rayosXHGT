@@ -3,6 +3,7 @@ import "@/components/card/card.css";
 import React, { useState } from "react";
 import PacienteForm from "@/modules/registros.module/pacientes/formularioPaciente";
 import DataCards from "@/components/card/card";
+
 // import "@/customstyles.css"
 
 
@@ -173,7 +174,9 @@ const PacienteTable: React.FC = () => {
   };
 
   const items = [
-    { label: "agregar", onClick: handleButtonClick, section: 'option' }, // Cambiado
+    { label: "agregar", onClick: handleButtonClick, section: 'option', iconReact: "BiSolidMessageSquareEdit" },
+    { label: "agregar", onClick: handleButtonClick, section: 'option', iconReact: "BiSolidMessageSquareEdit" },
+    { label: "agregar", onClick: handleButtonClick, section: 'option', iconReact: "BiSolidMessageSquareEdit" },
     { label: "Expediente", key: "expediente", section: 'header' },
     { label: "paciente", key: "nombre", section: 'header' },
     { label: "Sexo", key: "sexo", section: "header" },
