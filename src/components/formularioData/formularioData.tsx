@@ -41,20 +41,19 @@ const CustomForm = <T,>({
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    funcButton(values);
-  };
+  // const handleSubmit = (event: React.FormEvent) => {
+  //   event.preventDefault();
+  //   funcButton(values);
+  // };
 
   return (
-    <form onSubmit={handleSubmit} className={`cuadro ${className}`}>
+    <form  className="cuadro" >
       {title && <p className="title">{title}</p>}
-      {message && <p className="message">{message}</p>}
       
       {/* Renderizar campos adicionales */}
       {renderInput && renderInput()}
 
-      <div className="form field">
+      <div className="form ">
         {fields.map((field, index) => (
           <>
             <input
