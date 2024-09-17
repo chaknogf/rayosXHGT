@@ -45,38 +45,30 @@ const CustomForm = <T,>({
   return (
     <>
      
-    <form  className="form gap-2" >
-    {title && <p className="title">{title}</p>}
-      
-      {/* Renderizar campos adicionales */}
-      {renderInput && renderInput()}
-
-      <div className="container_form">
-        {fields.map((field, index) => (
-          <>
-            <div className="field_form">
+     <form className="form">
+        {title && <p className="title">{title}</p>}
+        
+        <div className="container_form">
+          {fields.map((field, index) => (
+            <div className="field_form" key={index}>
               <input
                 placeholder={field.label}
                 type="input"
                 className={`input_field ${field.className}`}
                 value={values[field.input] as string}
                 onChange={(e) => handleChange(field.input, e.target.value as T[keyof T])}
-                />
-              <label key={index} className="form_label">
-              {field.label}
-              </label>
+              />
+              <label className="form_label">{field.label}</label>
             </div>
+          ))}
+        </div>
+        
+        <div className="flex-button">
+          {renderButtons ? renderButtons(values) : <button type="button" className="m-0 p-0">Submit</button>}
+        </div>
+      </form>
 
-           
-                      
-          </>
-              
-        ))}
-      </div>
-      <div className="flex-button">
-        {renderButtons ? renderButtons(values) : <button type="button" className="m-0 p-0">Submit</button>}
-      </div>
-    </form>
+
     </>
     
 
