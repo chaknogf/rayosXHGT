@@ -54,7 +54,7 @@ const PacienteForm: React.FC = () => {
             funcButton={handleSubmit}
             fields={fields}
             title="Registro de Pacientes"
-            className="gap-2"
+            className=""
             renderButtons={renderButtons}
             useFlex={false}
           />

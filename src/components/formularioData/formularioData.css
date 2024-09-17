@@ -43,12 +43,15 @@
   animation: pulse 1s linear infinite;
 }
 
-.container {
+.container_form {
   margin: 0.12rem;
   padding: 0.12rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 2px;
+  background-color: #191717ea;
+
 }
 
 
@@ -92,6 +95,7 @@
   top: -20px; /* Mueve el label hacia arriba cuando se enfoca o tiene valor */
   font-size: 12px; /* Reduce el tamaño del label */
   color: #38caef;
+  font-weight: bolder;
 }
 
 .input_field:focus {

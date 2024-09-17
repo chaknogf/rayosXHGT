@@ -44,14 +44,14 @@ const CustomForm = <T,>({
 
   return (
     <>
-      {title && <p className="title">{title}</p>}
+     
     <form  className="form gap-2" >
-      
+    {title && <p className="title">{title}</p>}
       
       {/* Renderizar campos adicionales */}
       {renderInput && renderInput()}
 
-      <div className="container">
+      <div className="container_form">
         {fields.map((field, index) => (
           <>
             <div className="field_form">
