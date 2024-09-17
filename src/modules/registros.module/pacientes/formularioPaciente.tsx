@@ -4,25 +4,24 @@ import CustomForm from "@/components/formularioData/formularioData";
 import "@/components/formularioData/formularioData.css";
 
 interface UserFormValues {
-  firstName?: string;
-  lastName?: string;
+  nombre?: string;
+  apellido?: string;
   email: string;
   password: string;
 }
 
 const PacienteForm: React.FC = () => {
   const initialValues: UserFormValues = {
-    firstName: "",
-    lastName: "",
+    nombre: "",
+    apellido: "",
     email: "",
     password: "",
   };
 
   const fields = [
+    { input: "nombre", label: "Nombre" },
+    { input: "apellido", label: "apellido"},
     
-   
-    { name: "email", label: "Email", type: "", className: "input-class" },
-    { name: "password", label: "Password", type: "password", className: "input-class" },
   ];
 
   const handleSubmit = (values: UserFormValues) => {
@@ -36,24 +35,12 @@ const PacienteForm: React.FC = () => {
   };
 
   const renderButtons = () => [
-    <button type="submit" className="submit" key="submit">Submit</button>,
+    <button type="button" className="btn mt-2" key="submit">Submit</button>,
     
-    <button type="button" className="gap-2 bg-info" key="cancel" onClick={handleBack}>Back</button>,
+    <button type="button" className="btn mt-2" key="cancel" onClick={handleBack}>Back</button>,
   ];
 
-  const renderNombres = () => (
-    <div className="flex-div">
-      <label>
-        <input className="input" type="text" placeholder="" required />
-        <span>Firstname</span>
-      </label>
-      <label>
-        <input className="input" type="text" placeholder="" required />
-        <span>Lastname</span>
-      </label>
-    </div>
-  );
-
+  
 
   return (
     <>
@@ -63,14 +50,13 @@ const PacienteForm: React.FC = () => {
         <div>
           <CustomForm<UserFormValues>
             initialValues={initialValues}
-            renderInput={renderNombres}
+            
             funcButton={handleSubmit}
             fields={fields}
             title="Registro de Pacientes"
-            message="Complete los campos a continuación"
-            className="form"
+            className="gap-2"
             renderButtons={renderButtons}
-            useFlex={true}
+            useFlex={false}
           />
         </div>
       )}

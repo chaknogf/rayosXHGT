@@ -2,20 +2,11 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  max-width: 40%x;
-  padding: 10px;
   border-radius: 20px;
   position: relative;
   box-sizing: content-box;
-}
-
-.cuadro {
-  width: 100%;
   background-color: #191717ea;
-  padding: 10px;
-  border-radius: 20px;
-  position:sticky;
+  gap: 1.7rem;
 }
 
 .title {
@@ -52,50 +43,58 @@
   animation: pulse 1s linear infinite;
 }
 
-.message, .signin {
-  color: rgba(143, 225, 248, 0.822);
-  font-size: 14px;
-  margin: 0;
-  padding: 0;
+.container {
+  margin: 0.12rem;
+  padding: 0.12rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-/* From Uiverse.io by mrhyddenn */ 
 
+.field_form {
+  padding: 2px 0;
+  width: auto;
+  max-width: 180px;
+  position: relative; /* Asegura que el label esté posicionado en relación con este contenedor */
+  margin-bottom: 30px; /* Espacio entre los campos */
+}
 
-.input {
+.input_field {
   font-family: inherit;
-  width: 100%;
   border: none;
   border-bottom: 2px solid #9b9b9b;
   outline: 0;
-  font-size: 12px;
-  color: #fff;
-  padding: 0px ;
-  background: transparent;
-  transition: border-color 0.2s;
-}
-
-.input::placeholder {
-  color: transparent;
-}
-
-.input:placeholder-shown ~ .label {
   font-size: 17px;
-  cursor: text;
-  top: 20px;
+  color: #fff;
+  padding: 8px 0; /* Espaciado interno del input */
+  background: transparent;
+  transition: border-color 0.2s, padding-bottom 0.2s;
+  width: 100%;
 }
 
-.label {
+.input_field::placeholder {
+  color: transparent; /* Ocultamos el placeholder */
+}
+
+.form_label {
   position: absolute;
-  top: 0;
-  display: block;
-  transition: 0.2s;
+  top: 10px; /* Posición inicial del label */
+  left: 0;
+  transition: 0.2s ease all; /* Suavidad en el movimiento */
   font-size: 17px;
   color: #9b9b9b;
-  pointer-events: none;
+  pointer-events: none; /* No se puede hacer clic en el label */
 }
 
-.input:focus {
+.input_field:focus ~ .form_label,
+.input_field:not(:placeholder-shown) ~ .form_label {
+  top: -20px; /* Mueve el label hacia arriba cuando se enfoca o tiene valor */
+  font-size: 12px; /* Reduce el tamaño del label */
+  color: #38caef;
+}
+
+.input_field:focus {
   padding-bottom: 6px;
   font-weight: 700;
   border-width: 3px;
@@ -103,17 +102,12 @@
   border-image-slice: 1;
 }
 
-.input:focus ~ .label {
-  position: absolute;
-  top: 0;
-  display: block;
-  transition: 0.2s;
-  font-size: 17px;
-  color: #38caef;
-  font-weight: 700;
-}
-
-/* reset input */
-.input:required, .input:invalid {
+/* Reset input */
+.input_field:required, .input_field:invalid {
   box-shadow: none;
 }
+
+.flex-button {
+  margin-top: 20px;
+}
+

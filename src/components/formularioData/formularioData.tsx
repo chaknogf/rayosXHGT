@@ -3,10 +3,9 @@ import "@/components/formularioData/formularioData.css"
 
 
 interface FieldProps<T> {
-  name: keyof T;
+  input: keyof T;
   label: string;
   type: string;
-  placeholder?: string;
   className?: string;
   useFlex?: boolean;
 }
@@ -15,8 +14,8 @@ interface FormProps<T> {
   title?: string;
   message?: string;
   initialValues: T;
-  funcButton: (values: T) => void;
-  fields: FieldProps<T>[];
+  funcButton?: (values: T) => void;
+  fields?: FieldProps<T>[];
   className?: string;
   renderButtons?: (values: T) => React.ReactNode;
   renderInput?: () => React.ReactNode; // Nueva propiedad para renderizar campos personalizados
@@ -24,11 +23,8 @@ interface FormProps<T> {
 
 const CustomForm = <T,>({
   initialValues,
-  funcButton,
   fields,
-  className,
   title,
-  message,
   renderButtons,
   renderInput, // Se agrega aquí
 }: FormProps<T>) => {
@@ -47,34 +43,43 @@ const CustomForm = <T,>({
   // };
 
   return (
-    <form  className="cuadro" >
+    <>
       {title && <p className="title">{title}</p>}
+    <form  className="form gap-2" >
+      
       
       {/* Renderizar campos adicionales */}
       {renderInput && renderInput()}
 
-      <div className="form ">
+      <div className="container">
         {fields.map((field, index) => (
           <>
-            <input
-              
-              placeholder={field.placeholder}
-              type={field.type}
-              className={`input ${field.className}`}
-              value={values[field.name] as string}
-              onChange={(e) => handleChange(field.name, e.target.value as T[keyof T])}
-              />
-          <label key={index} className="label">
-            {field.label}
-          </label>
+            <div className="field_form">
+              <input
+                placeholder={field.label}
+                type="input"
+                className={`input_field ${field.className}`}
+                value={values[field.input] as string}
+                onChange={(e) => handleChange(field.input, e.target.value as T[keyof T])}
+                />
+              <label key={index} className="form_label">
+              {field.label}
+              </label>
+            </div>
+
+           
+                      
           </>
               
         ))}
       </div>
       <div className="flex-button">
-        {renderButtons ? renderButtons(values) : <button type="submit" className="submit">Submit</button>}
+        {renderButtons ? renderButtons(values) : <button type="button" className="m-0 p-0">Submit</button>}
       </div>
     </form>
+    </>
+    
+
   );
 };
 

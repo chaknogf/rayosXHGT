@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import PacienteForm from "@/modules/registros.module/pacientes/formularioPaciente";
 import DataCards from "@/components/card/card";
 
+import { FaEdit } from "react-icons/fa";
 // import "@/customstyles.css"
 
 
@@ -166,6 +167,15 @@ const paciente: Paciente[] = [
   }
 ];
 
+
+const IconReactEdit = () => {
+  
+  return (
+    <FaEdit style={{ height: "1.7rem", width: "1.7rem"}} />
+  )
+
+}
+
 const PacienteTable: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
 
@@ -174,9 +184,9 @@ const PacienteTable: React.FC = () => {
   };
 
   const items = [
-    { label: "agregar", onClick: handleButtonClick, section: 'option', iconReact: "BiSolidMessageSquareEdit" },
-    { label: "agregar", onClick: handleButtonClick, section: 'option', iconReact: "BiSolidMessageSquareEdit" },
-    { label: "agregar", onClick: handleButtonClick, section: 'option', iconReact: "BiSolidMessageSquareEdit" },
+    { label: "agregar", onClick: handleButtonClick, section: 'option', render: () => <IconReactEdit /> },
+    { label: "agregar", onClick: handleButtonClick, section: 'option' },
+    { label: "agregar", onClick: handleButtonClick, section: 'option'},
     { label: "Expediente", key: "expediente", section: 'header' },
     { label: "paciente", key: "nombre", section: 'header' },
     { label: "Sexo", key: "sexo", section: "header" },

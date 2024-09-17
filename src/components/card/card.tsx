@@ -12,7 +12,7 @@ import { PiHeartbeatFill } from "react-icons/pi";
 import { FaUserDoctor } from "react-icons/fa6";
 import { GiMedicalDrip } from "react-icons/gi";
 import { FcExport, FcOpenedFolder } from "react-icons/fc";
-import { BiSolidMessageSquareEdit } from "react-icons/bi";
+
 
 // Interfaz para definir las propiedades de cada campo en el card
 interface RegistoCard<T> {
@@ -24,7 +24,7 @@ interface RegistoCard<T> {
   className?: string; // Clase CSS opcional para estilizar la celda
   section?: "header" | "body" | "option"; // Sección de la celda, puede ser "header" o "body"
   buttons?: Button[];
-  iconReact?: React.ComponentType; // Componente React para íconos
+  iconReact?: string; 
 }
 
 interface Button {
@@ -38,6 +38,7 @@ interface Button {
 interface CardProps<T> {
   data: T[]; // Arreglo de datos que se muestran en las celdas
   items: RegistoCard<T>[]; // Arreglo de celdas que indican cómo renderizar cada campo
+  renderFunctions?: Record<string, (data: T) => React.ReactNode>;
 }
 
 // Interfaz para un objeto con valores de tipo string, number o undefined
@@ -342,7 +343,7 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
       <div className="card-container" tabIndex={0}>
         <div className="card" 
           onMouseEnter={handleMouseEnter}
-          // onMouseLeave={handleMouseLeave}
+          onMouseLeave={handleMouseLeave}
           
         >
         {/* Header */}
@@ -382,15 +383,18 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
                   <div key={itemIndex} className="card-options-item">
                     
                     <div className="btn-container">
-                        <button className="btn btn-opt  zero"
+                      <button className="btn btn-opt  zero"
                       key={itemIndex}
-                      onClick={item.onClick}
+                        onClick={item.onClick}
+                        
                       >
+                     
                       {renderFnHeader
                         ? renderFnHeader(data[0]) // Usar renderFnHeader para mostrar el valor del primer elemento
                         : item.key && data.length > 0 && data[0][item.key] !== undefined
                         ? String(data[0][item.key]) // Mostrar el valor si renderFnHeader no está definido
                         : null}
+                        
                       </button>
                       <p className="label-btn">{ item.label}</p>
                     </div>
