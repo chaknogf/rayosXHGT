@@ -28,7 +28,8 @@ const PacienteForm: React.FC = () => {
     { inputName: "mail", label: "mail", type: "email" },
     { inputName: "password", label: "password", type: "password" },
     { inputName: "fecha", label: "fecha", type: "date" },
-    { inputName: "estado", label: "Estado", type: "radio", options: [{ label: "Activo", value: 1 }, { label: "Inactivo", value: 0 }] },    
+    { inputName: "estado", label: "Estado", type: "radio", options: [{ label: "Vivo", value: "v" }, { label: "Fallecido", value: "m" }] },    
+    { inputName: "servicio", label: "Servicio", type: "select", options: [{ label: "coex", value: 1 }, {label: "emergencia", value: 2}, {label: "hospitalizacion", value: 3}] }
     
   ];
 

@@ -68,6 +68,13 @@
   padding-left: 0.8rem;
 }
 
+.radio_label{
+  top: -20px;
+  font-size: 12px;
+  color: #38caef;
+  font-weight: bolder;
+}
+
 .input_field:focus ~ .form_label,
 .input_field:not(:placeholder-shown) ~ .form_label {
   top: -20px;
