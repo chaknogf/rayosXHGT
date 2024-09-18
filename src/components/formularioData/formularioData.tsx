@@ -46,14 +46,16 @@ const CustomForm = <T,>({
     <>
      
      <form className="form">
-        {title && <p className="title">{title}</p>}
+        <div className="title">
+          {title && <p className="title">{title}</p>}
+        </div> 
         
         <div className="container_form">
           {fields.map((field, index) => (
             <div className="field_form" key={index}>
               <input
                 placeholder={field.label}
-                type="input"
+                type={field.type}
                 className={`input_field ${field.className}`}
                 value={values[field.input] as string}
                 onChange={(e) => handleChange(field.input, e.target.value as T[keyof T])}
