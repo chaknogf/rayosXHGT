@@ -3,11 +3,12 @@ import "@/components/formularioData/formularioData.css"
 
 
 interface FieldProps<T> {
-  input: keyof T;
+  inputName: keyof T;
   label: string;
   type: string;
   className?: string;
   useFlex?: boolean;
+  options?: string;
 }
 
 interface FormProps<T> {
@@ -48,27 +49,54 @@ const CustomForm = <T,>({
      <form className="form">
         <div className="title">
           {title && <p className="title">{title}</p>}
-        </div> 
-        
+        </div>
+
         <div className="container_form">
           {fields.map((field, index) => (
             <div className="field_form" key={index}>
-              <input
-                placeholder={field.label}
-                type={field.type}
-                className={`input_field ${field.className}`}
-                value={values[field.input] as string}
-                onChange={(e) => handleChange(field.input, e.target.value as T[keyof T])}
-              />
-              <label className="form_label">{field.label}</label>
+              {/* Renderizado condicional para tipo 'radio' */}
+              {field.type === "radio" ? (
+                field.options.map((option: { label: string, value: any }, radioIndex: number) => (
+                  <div key={radioIndex} className="radio_option">
+                    <input
+                      type="radio"
+                      id={`${field.label}-${option.value}`}
+                      inputName={field.input}
+                      value={option.value}
+                      checked={values[field.inputName] === option.value}
+                      onChange={(e) =>
+                        handleChange(field.inputName, option.value as T[keyof T])
+                      }
+                      className={`input_radio ${field.className}`}
+                    />
+                    <label htmlFor={`${field.label}-${option.value}`}>{option.label}</label>
+                  </div>
+                ))
+              ) : (
+                <>
+                  <input
+                    placeholder={field.label}
+                    type={field.type}
+                    className={`input_field ${field.className}`}
+                    value={values[field.inputName] as string}
+                    onChange={(e) =>
+                      handleChange(field.inputName, e.target.value as T[keyof T])
+                    }
+                  />
+                  <label className="form_label">{field.label}</label>
+                </>
+              )}
             </div>
           ))}
         </div>
-        
+
         <div className="flex-button">
           {renderButtons ? renderButtons(values) : <button type="button" className="m-0 p-0">Submit</button>}
         </div>
       </form>
+
+
+
 
 
     </>

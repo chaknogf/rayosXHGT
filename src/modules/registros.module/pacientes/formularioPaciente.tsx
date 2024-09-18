@@ -9,6 +9,7 @@ interface UserFormValues {
   email: string;
   password: string;
   fecha: Date;
+  estado: string;
 }
 
 const PacienteForm: React.FC = () => {
@@ -18,15 +19,16 @@ const PacienteForm: React.FC = () => {
     email: "",
     password: "",
     fecha: new Date(),
+    estado: "v",
   };
 
   const fields = [
-    { input: "nombre", label: "Nombre", type: "text" },
-    { input: "apellido", label: "apellido" },
-    { input: "mail", label: "mail", type: "email" },
-    { password: "password", label: "password", type: "password" },
-    { fecha: "fecha", label: "fecha", type: "date"}
-    
+    { inputName: "nombre", label: "Nombre", type: "text" },
+    { inputName: "apellido", label: "apellido" },
+    { inputName: "mail", label: "mail", type: "email" },
+    { inputName: "password", label: "password", type: "password" },
+    { inputName: "fecha", label: "fecha", type: "date" },
+    { inputName: "estado", label: "Estado", type: "radio", options: [{ label: "Activo", value: 1 }, { label: "Inactivo", value: 0 }] },    
     
   ];
 
