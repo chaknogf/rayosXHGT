@@ -1,6 +1,5 @@
 import React from "react";
-import "@/components/formularioData/formularioData.css"
-
+import "@/components/formularioData/formularioData.css";
 
 interface FieldProps<T> {
   inputName: keyof T;
@@ -27,7 +26,7 @@ const CustomForm = <T,>({
   fields,
   title,
   renderButtons,
-  renderInput, // Se agrega aquí
+  renderInput,
 }: FormProps<T>) => {
   const [values, setValues] = React.useState<T>(initialValues);
 
@@ -45,56 +44,99 @@ const CustomForm = <T,>({
 
   return (
     <>
-     
-     <form className="form">
-        <div className="title">
-          {title && <p className="title">{title}</p>}
-        </div>
-
+      <form className="form">
+        <div className="title">{title && <p className="title">{title}</p>}</div>
         <div className="container_form">
           {fields.map((field, index) => (
             <div className="field_form" key={index}>
               {/* Renderizado condicional para tipo 'radio' */}
               {field.type === "radio" ? (
-                <>
-                  {/* El label solo se muestra una vez para el grupo de radios */}
+                <div className="radio_">
                   <label className="radio_label">{field.label}</label>
-
-                  {/* Mapeo de las opciones de radio */}
-                  {field.options.map((option: { label: string, value: any }, radioIndex: number) => (
-                    <div key={radioIndex} className="radio_option">
-                      <input
-                        type="radio"
-                        id={`${field.label}-${option.value}`}
-                        name={field.inputName}
-                        value={option.value}
-                        checked={values[field.inputName] === option.value}
-                        onChange={(e) =>
-                          handleChange(field.inputName, option.value as T[keyof T])
-                        }
-                        className={`input_radio ${field.className}`}
-                      />
-                      <label htmlFor={`${field.label}-${option.value}`}>{option.label}</label>
+                  {field.options.map((option, radioIndex) => (
+                    <div key={radioIndex} className="radio_container">
+                      <label htmlFor={`${field.label}-${option.value}`}>
+                        <input
+                          type="radio"
+                          id={`${field.label}-${option.value}`}
+                          name={field.inputName}
+                          value={option.value}
+                          checked={values[field.inputName] === option.value}
+                          onChange={() =>
+                            handleChange(
+                              field.inputName,
+                              option.value as T[keyof T]
+                            )
+                          }
+                          className={`input_radio ${field.className}`}
+                        />
+                        <span>{option.label}</span>
+                      </label>
                     </div>
                   ))}
-                </>
+                </div>
               ) : field.type === "select" ? (
                 <div className="select_container">
                   <label className="select_label">{field.label}</label>
                   <select
                     name={field.inputName}
                     className={`input_select ${field.className}`}
-                    value={values[field.inputName] as string}
+                    value={values[field.inputName] || ""}
                     onChange={(e) =>
-                      handleChange(field.inputName, e.target.value as T[keyof T])
+                      handleChange(
+                        field.inputName,
+                        e.target.value as T[keyof T]
+                      )
                     }
                   >
-                    {field.options.map((option: { label: string, value: any }, selectIndex: number) => (
+                    {field.options.map((option, selectIndex) => (
                       <option key={selectIndex} value={option.value}>
                         {option.label}
                       </option>
                     ))}
                   </select>
+                </div>
+              ) : field.type === "checkbox" ? (
+                <div className="checkbox_container">
+                  <label className="checkbox_label">{field.label}</label>
+                  <div className="checkbox_options">
+                    {field.options.map((option, checkboxIndex) => (
+                      <div key={checkboxIndex} className="checkbox_option">
+                        <label
+                          className="checkbox-container"
+                          htmlFor={`${field.label}-${option.value}`}
+                        >
+                          <input
+                            type="checkbox"
+                            id={`${field.label}-${option.value}`}
+                            name={field.inputName}
+                            value={option.value}
+                            checked={values[field.inputName]?.includes(
+                              option.value
+                            )}
+                            onChange={(e) => {
+                              const newValue = e.target.checked
+                                ? [
+                                    ...(values[field.inputName] || []),
+                                    option.value,
+                                  ]
+                                : values[field.inputName]?.filter(
+                                    (v) => v !== option.value
+                                  );
+
+                              handleChange(
+                                field.inputName,
+                                newValue as T[keyof T]
+                              );
+                            }}
+                            className={`custom-checkbox ${field.className}`}
+                          />
+                          <span className="checkmark"></span>
+                          {option.label}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ) : (
                 <>
@@ -102,9 +144,12 @@ const CustomForm = <T,>({
                     placeholder={field.label}
                     type={field.type}
                     className={`input_field ${field.className}`}
-                    value={values[field.inputName] as string}
+                    value={values[field.inputName] || ""}
                     onChange={(e) =>
-                      handleChange(field.inputName, e.target.value as T[keyof T])
+                      handleChange(
+                        field.inputName,
+                        e.target.value as T[keyof T]
+                      )
                     }
                   />
                   <label className="form_label">{field.label}</label>
@@ -115,18 +160,16 @@ const CustomForm = <T,>({
         </div>
 
         <div className="flex-button">
-          {renderButtons ? renderButtons(values) : <button type="button" className="m-0 p-0">Submit</button>}
+          {renderButtons ? (
+            renderButtons(values)
+          ) : (
+            <button type="button" className="m-0 p-0">
+              Submit
+            </button>
+          )}
         </div>
       </form>
-
-
-
-
-
-
     </>
-    
-
   );
 };
 

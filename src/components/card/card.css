@@ -21,6 +21,7 @@
     border-radius: 5px;
     transition: transform 3.3s ease-in-out;
     cursor: pointer;
+   
   }
   
   .card-body {
@@ -144,21 +145,25 @@ justify-content: center;
 /* Define la animación de pulso */
 @keyframes pulse {
   0% {
-    transform: scale(0);
+    transform: scale(1); /* Tamaño original */
   }
-  25%{
-    transform: scale(1.025);
+  10% {
+    transform: scale(1.15); /* Primer latido (rápido y fuerte) */
   }
-  50% {
-    transform: scale(1.05);
+  20% {
+    transform: scale(1); /* Vuelve rápidamente al tamaño original */
   }
-  75%{
-    transform: scale(1.025);
+  30% {
+    transform: scale(1.2); /* Segundo latido (más suave que el primero) */
+  }
+  40% {
+    transform: scale(1); /* Vuelve nuevamente al tamaño original */
   }
   100% {
-    transform: scale(1);
+    transform: scale(1); /* Mantiene el tamaño original para el resto del tiempo */
   }
 }
+
 
 .detalle-btn {
   border: #1bc5e6 solid;
@@ -167,7 +172,7 @@ justify-content: center;
 
 
 .card:hover .pulse {
-  animation: pulse 1.8s infinite;
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
 tr:hover .dir {
@@ -262,6 +267,15 @@ tr:hover .dir {
   background-color: #55beb38f;
 }
 
+.loader-container {
+  display: flex;
+  justify-content: start; /* Empieza desde la izquierda */
+  align-items: center; /* Centra verticalmente */
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+  margin-left: -150px;
+  
+}
+
 /* Diseño adaptable a pantallas pequeñas */
 @media screen and (max-width: 728px) {
 
@@ -278,6 +292,14 @@ tr:hover .dir {
 
   .table-body {
     text-align: left;
+  }
+
+  .loader-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: start; /* Centra verticalmente */
+    grid-column: 1 / -1; /* Asegúrate de que cubra todas las columnas */
+    height: 100vh; /* Ocupa toda la altura del viewport */
   }
 }
 
@@ -338,5 +360,10 @@ tr:hover .dir {
   justify-content: center;
 }
 
-
-
+.loader-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: start; /* Centra verticalmente */
+  grid-column: 1 / -1; /* Asegúrate de que cubra todas las columnas */
+  height: 100vh; /* Ocupa toda la altura del viewport */
+}

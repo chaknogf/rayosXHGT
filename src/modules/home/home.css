@@ -1,17 +1,47 @@
 /* Reset básico */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing:content-box;
-    }
-  
-  body {
-    font-family: Arial, sans-serif;
-    /* background-color: #031d2369; */
-    overflow-x: hidden;
-    margin: 0;
-    height: 30vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #1a1a1a; /* Fondo oscuro */
+  color: #fff; /* Color de texto claro */
+  overflow: hidden;
+  background-color: #2d2d3195;
+}
+
+/* Fondo con un diseño de splashes */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 10% 50%, #664747f5, transparent 30%),
+              radial-gradient(circle at 20% 30%, #88c0d5, transparent 30%),
+              radial-gradient(circle at 90% 70%, #192854, transparent 40%),
+              radial-gradient(circle at 80% 20%, #24b2e3, transparent 50%);
+  z-index: -1; /* Colocar detrás del contenido */
+  pointer-events: none; /* Evitar interacciones con el fondo */
+  animation: splashAnimation 10s infinite alternate; /* Animación de los splashes */
+}
+
+/* Animación de los splashes */
+@keyframes splashAnimation {
+  0% {
+    transform: scale(1);
   }
+  100% {
+    transform: scale(1.7);
+  }
+}
 
 
 /* Estilos para la sección de contenido */
@@ -154,4 +184,7 @@
       max-width: 800px; /* Más espacio en tarjetas */
     }
   }
+  
+
+ 
   

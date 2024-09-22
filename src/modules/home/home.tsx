@@ -7,7 +7,9 @@ import "@/style.css";
 import AppAcordion from "@/components/acordion/acordion";
 
 const HomeComponent: React.FC = () => {
-  const [contenidoActual, setContenidoActual] = useState<JSX.Element | null>(null);
+  const [contenidoActual, setContenidoActual] = useState<JSX.Element | null>(
+    null
+  );
   // const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   // useEffect(() => {
@@ -17,7 +19,6 @@ const HomeComponent: React.FC = () => {
   //     setTheme(savedTheme);
   //   }
   // }, []);
-
 
   // Maneja clics para cambiar el contenido
   const handlePacienteClick = () => {
@@ -34,22 +35,22 @@ const HomeComponent: React.FC = () => {
 
   // Items para el NavComponent
   const navItems = [
-    { 
-      label: "Paciente", 
+    {
+      label: "Paciente",
       onClick: handlePacienteClick, // Cambia a la tabla de pacientes
-      href: "#" // O puedes omitir esto si no es necesario
+      href: "#", // O puedes omitir esto si no es necesario
     },
-    { 
-      label: "Consultas", 
+    {
+      label: "Consultas",
       onClick: handleConsultasClick, // Cambia a la tabla de consultas
-      href: "#"
+      href: "#",
     },
-   
+
     {
       label: "Accordion",
       onClick: handleAcordionClick, // Corrige 'onclick' a 'onClick'
-      href: "#"
-    }
+      href: "#",
+    },
   ];
 
   return (
