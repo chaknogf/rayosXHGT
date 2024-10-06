@@ -21,7 +21,7 @@ const Sidebar = () => {
       setShowBody(false); // Ocultar el contenido del sidebar
     }, 200); // Tiempo de retraso antes de ocultar el contenido
   };
-
+ 
   return (
     <>
       <div className="app-header">

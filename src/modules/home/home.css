@@ -11,8 +11,12 @@ body {
   padding: 0;
   font-family: 'Arial', sans-serif;
   background-image: url("/src/assets/vecteezy.svg"); 
-  background-size: cover; 
+  background-size: cover;  
   background-repeat: no-repeat; 
+  background-attachment: fixed;
+  background-position: center;
+  
+
   
  
   
@@ -28,10 +32,10 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 10% 50%, #664747f5, transparent 10%),
-              radial-gradient(circle at 20% 30%, #88c0d5, transparent 10%),
-              radial-gradient(circle at 90% 70%, #192854, transparent 10%),
-              radial-gradient(circle at 80% 20%, #24b2e3, transparent 10%);
+  background: radial-gradient(circle at 10% 50%, #fffffff5, transparent 10%),
+              radial-gradient(circle at 20% 30%, #ffffff, transparent 10%),
+              radial-gradient(circle at 90% 70%, #ffffff, transparent 10%),
+              radial-gradient(circle at 80% 20%, #ffffff, transparent 10%);
   z-index: -1; /* Colocar detrás del contenido */
   pointer-events: none; /* Evitar interacciones con el fondo */
   animation: splashAnimation 10s infinite alternate; /* Animación de los splashes */
@@ -81,7 +85,7 @@ body::before {
   
   /* Estilos del header */
   .app-header {
-    background-color: #6200ea;
+    background-color: #110425;
     color: white;
     padding: 1rem;
     text-align: center;
@@ -102,7 +106,7 @@ body::before {
   
   /* Barra de navegación inferior */
   .app-footer {
-    background-color: #6200ea;
+    
     color: white;
     padding: 0.5rem;
     text-align: center;
