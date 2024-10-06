@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import NavComponent from "@/modules/home/nav";
+// import NavComponent from "@/modules/home/nav";
 import PacienteTable from "@/modules/registros.module/pacientes/pacientes";
 import ConsultaTable from "@/modules/registros.module/consultas.component/consulta";
 import "@/modules/home/home.css";
+import Sidebar from "@/components/sidebar/sidebar";
 import "@/style.css";
 import AppAcordion from "@/components/acordion/acordion";
 
@@ -57,7 +58,8 @@ const HomeComponent: React.FC = () => {
     <>
       <nav className="div-nav">
         {/* Barra de navegación con el toggle de tema */}
-        <NavComponent items={navItems} theme={"dark"} />
+        {/* <NavComponent items={navItems} theme={"dark"} /> */}
+        <Sidebar items={navItems} />
       </nav>
       <div className="div-content zoomable-content">
         {/* Renderiza el contenido actual */}

@@ -6,13 +6,12 @@
   border-radius: 0px;
   position: relative;
   box-sizing: content-box;
-  background: -webkit-linear-gradient(to right, #1f282d, #606c88);
-  background: linear-gradient(to right, #171f22, #393c42);
+  background: linear-gradient(-105deg, #d6d6e5 10%, #40c9ff 45%,  #171f22 10% );
+  /* background: #d6d6e5; */
   padding: 1rem;
   max-width: 100%; /* Para pantallas pequeñas */
   margin: 0 auto;
   margin-top: 10px auto;
-  box-shadow: 2px 4px 3px 8px rgba(255, 255, 255, 0.554); /* Sombra blanca suave */
   overflow: hidden; /* Para ocultar caracteres que se caen fuera del contenedor */
 }
 
@@ -22,11 +21,12 @@
   grid-column: 1 / -1; /* Ocupa toda la fila en el grid */
   font-size: 28px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  color: #38caef;
+  color: #041a20;
   font-weight: 430;
   letter-spacing: -1px;
   text-align: center; /* Centra el título */
   margin-bottom: 1rem;
+  text-shadow: 1px 2px 5px #9393a5;
 }
 
 .container_form {
@@ -35,6 +35,7 @@
   display: grid;
   grid-template-columns: 1fr; /* Un input por fila en móviles */
   gap: 1.5rem;
+  
   
 }
 
@@ -131,16 +132,19 @@
 /* Media query para pantallas grandes */
 @media (min-width: 768px) {
   .form {
-    max-width: 800px; /* Ancho más compacto para pantallas grandes */
-    grid-template-columns: 1fr 1fr; /* Dos inputs por fila */
-    gap: 2rem;
-    padding: 2rem;
-    background-color: #282828; /* Color de fondo actualizado */
+    max-width: auto;
+   
     margin: 0 auto;
     margin-top: 10px auto;
-    display: block;
-    border-radius: 50px;
-    box-shadow: 0px 6px 10px rgba(255, 255, 255, 0.834); /* Sombra blanca suave */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 2rem;
+    /* background: -webkit-linear-gradient(to right, #1f282d, #606c88);
+    background: linear-gradient(to right, #171f22, #393c42); */
+    cursor: pointer;
+    color: white;
   }
 
   .container_form {
@@ -148,7 +152,13 @@
     gap: 2rem;
     background-color: transparent;
     justify-content: center;
-    grid-template-columns: 1fr 1fr; /* Dos columnas de inputs */
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    
+  }
+
+  .title {
+    color: #38caef;;
   }
 
   .field_form {

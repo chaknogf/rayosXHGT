@@ -10,24 +10,28 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #1a1a1a; /* Fondo oscuro */
-  color: #fff; /* Color de texto claro */
-  overflow: hidden;
-  background-color: #2d2d3195;
+  background-image: url("/src/assets/vecteezy.svg"); 
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  
+ 
+  
 }
 
 /* Fondo con un diseño de splashes */
 body::before {
   content: '';
   position: fixed;
+  border: none;
+  border-radius: 18px;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 10% 50%, #664747f5, transparent 30%),
-              radial-gradient(circle at 20% 30%, #88c0d5, transparent 30%),
-              radial-gradient(circle at 90% 70%, #192854, transparent 40%),
-              radial-gradient(circle at 80% 20%, #24b2e3, transparent 50%);
+  background: radial-gradient(circle at 10% 50%, #664747f5, transparent 10%),
+              radial-gradient(circle at 20% 30%, #88c0d5, transparent 10%),
+              radial-gradient(circle at 90% 70%, #192854, transparent 10%),
+              radial-gradient(circle at 80% 20%, #24b2e3, transparent 10%);
   z-index: -1; /* Colocar detrás del contenido */
   pointer-events: none; /* Evitar interacciones con el fondo */
   animation: splashAnimation 10s infinite alternate; /* Animación de los splashes */
@@ -36,7 +40,7 @@ body::before {
 /* Animación de los splashes */
 @keyframes splashAnimation {
   0% {
-    transform: scale(1);
+    transform: scale(0.8);
   }
   100% {
     transform: scale(1.7);
@@ -131,6 +135,11 @@ body::before {
   
   /* Diseño responsive para pantallas pequeñas */
   @media (max-width: 480px) {
+    
+    .body {
+      background-size: cover;
+    }
+    
     .card {
       width: 64%;
       padding: 0.5rem;
@@ -140,11 +149,16 @@ body::before {
   }
   
   /* Diseño para pantallas más grandes (modo escritorio) */
-  @media (min-width: 768px) {
+  @media (min-width: 968px) {
+
+    .body {
+      background-size: cover;
+    }
     .app-container {
       flex-direction: row; /* Cambia la disposición a horizontal */
       justify-content: space-between; /* Distribuye el espacio entre los elementos */
       padding: 2rem;
+      
     }
   
     .app-header {
@@ -160,7 +174,7 @@ body::before {
     }
   
     .card {
-      max-width: 600px; /* Ajustamos el tamaño de las tarjetas */
+      max-width: 800px; /* Ajustamos el tamaño de las tarjetas */
       margin: 0.2rem; /* Añadimos margen entre tarjetas */
     }
   
@@ -176,6 +190,10 @@ body::before {
   
   /* Para pantallas aún más grandes (1024px o más) */
   @media (min-width: 1024px) {
+
+    .body {
+      background-size: cover;
+    }
     .app-content {
       padding: 3rem;
     }

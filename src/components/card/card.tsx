@@ -453,7 +453,7 @@ const DataCards = <T extends ObjetX>({
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false); // Cambia a false después de 1 segundo (ajusta según sea necesario)
-    }, 20000);
+    }, 2000);
 
     return () => clearTimeout(timer); // Limpia el temporizador si el componente se desmonta
   }, []);
