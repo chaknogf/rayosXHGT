@@ -31,7 +31,7 @@ const consulta: Consulta[] = [
     servicio: 2,
     tipo_citas: 2,
     status: 2,
-    sexo: 'm'
+    sexo: "m",
   },
   {
     id: 0,
@@ -46,7 +46,7 @@ const consulta: Consulta[] = [
     servicio: 3,
     tipo_citas: 4,
     status: 1,
-    sexo: 'f'
+    sexo: "f",
   },
   {
     id: 0,
@@ -61,13 +61,13 @@ const consulta: Consulta[] = [
     servicio: 3,
     tipo_citas: 4,
     status: 3,
-    sexo: 'f'
+    sexo: "f",
   },
 ];
 
 const columns = [
   { label: "Expediente", key: "expediente", section: "header" },
-  { label: "Paciente", key: "nombre", section: "header"},
+  { label: "Paciente", key: "nombre", section: "header" },
   { label: "Hoja", key: "hoja", section: "header" },
   { label: "Fecha de Consulta", key: "fecha_consulta", section: "body" },
   { label: "Hora", key: "hora" },
@@ -76,7 +76,7 @@ const columns = [
   { label: "Servicio", key: "servicio" },
   { label: "Tipo de Consulta", key: "tipo_citas" },
   { label: "Estatus", key: "status", section: "header" },
-  { label: "sexo", key: "sexo"}
+  { label: "sexo", key: "sexo" },
 ];
 
 const ConsultaTable: React.FC = () => {

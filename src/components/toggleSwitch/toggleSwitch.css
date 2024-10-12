@@ -1,67 +1,70 @@
-/* From Uiverse.io by Madflows */ 
 .toggle-switch {
+  margin: 1px;
+  padding: 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggle {
   position: relative;
-  width: 6rem;
-  height: 25px;
-  --light: #d0dffa;
-  --dark: #020508;
-  --link: rgb(27, 129, 112);
-  --link-hover: rgb(24, 94, 82);
-  margin: 0;
-  padding: 0;
+  display: inline-block;
+  width: 40px; /* Reducido */
+  height: 22px; /* Reducido */
 }
 
-.switch-label {
-  position: absolute;
-  width: 70%;
-  height: 30px;
-  background-color: var(--dark);
-  border-radius: 25px;
-  cursor: pointer;
-  border: 2px solid var(--dark);
-}
-
-.checkbox {
-  position: absolute;
-  display: none;
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  transition: transform 0.2s ease-in-out;
 }
 
 .slider {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 25px;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-  border: #d8dbe0 solid 2px;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #FF3CAC;
+  background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+  transition: 0.2 ease-in-out;
+  border-radius: 22px; /* Ajustado para mantener proporción */
 }
 
-.checkbox:checked ~ .slider {
-  background-color: var(--light);
-}
-
-.slider::before {
+.slider:before {
+  position: absolute;
   content: "";
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 15px;
-  height: 15px;
+  height: 16px; /* Reducido */
+  width: 16px;  /* Reducido */
+  left: 3px; /* Ajustado para el tamaño pequeño */
+  bottom: 3px; /* Ajustado para el tamaño pequeño */
+  background-color: #4158D0;
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  transition: transform 0.3s ease-in-out;
   border-radius: 50%;
-  -webkit-box-shadow: inset 18px -5px 0px 0px var(--light);
-  box-shadow: inset 06.6px -3.9px 0px 0px var(--light);
-  background-color: var(--dark);
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.checkbox:checked ~ .slider::before {
-  -webkit-transform: translateX(50px);
-  -ms-transform: translateX(50px);
-  transform: translateX(35px);
-  background-color: var(--dark);
-  -webkit-box-shadow: none;
-  box-shadow: none;
+.input:checked + .slider {
+  background-color: #8BC6EC;
+  background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
 }
 
+.input:checked + .slider:before {
+  transform: translateX(18px); /* Ajustado para el nuevo tamaño */
+}
 
+.theme-name {
+  font-size: 12px;
+  line-height: 16px;
+  color: rgb(251, 251, 251);
+  text-shadow: rgba(5, 33, 34, 0.582) 0px 0px 9px ;
+  font-weight: lighter;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}

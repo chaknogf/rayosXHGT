@@ -3,10 +3,10 @@
   display: grid;
   grid-template-columns: 1fr; /* Un input por fila en pantallas pequeñas */
   gap: 1.7rem;
-  border-radius: 0px;
+  border-radius: 10px;
   position: relative;
   box-sizing: content-box;
-  background: linear-gradient(-105deg, #d6d6e5 10%, #40c9ff 45%,  #171f22 10% );
+  background:  #171f22 10% ;
   /* background: #d6d6e5; */
   padding: 1rem;
   max-width: 100%; /* Para pantallas pequeñas */

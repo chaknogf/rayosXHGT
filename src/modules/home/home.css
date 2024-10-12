@@ -66,6 +66,7 @@ body::before {
 .div-content {
   padding: 0;
   margin-top: 10px;
+  margin-left: 52px;
 }
 
 /* Toggle de tema en la parte inferior */
@@ -81,6 +82,8 @@ body::before {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    padding: 0;
+    margin: 0;
   }
   
   /* Estilos del header */
@@ -89,7 +92,10 @@ body::before {
     color: white;
     padding: 1rem;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+   justify-content: center;
+   padding: 0;
+    margin: 0;
   }
   
   /* Contenido principal */
@@ -155,19 +161,28 @@ body::before {
   /* Diseño para pantallas más grandes (modo escritorio) */
   @media (min-width: 968px) {
 
+    .div-content {
+      padding: 0;
+      margin-top: 10px;
+      margin-left: 80px;
+    }
     .body {
       background-size: cover;
     }
     .app-container {
       flex-direction: row; /* Cambia la disposición a horizontal */
       justify-content: space-between; /* Distribuye el espacio entre los elementos */
-      padding: 2rem;
+      padding: 1.1rem;
+      margin: 0;
       
     }
   
     .app-header {
       flex-basis: 100%; /* El header sigue ocupando el ancho total */
       text-align: left; /* Cambiamos la alineación a la izquierda */
+      margin: 0;
+      padding: 0;
+    
     }
   
     .app-content {
@@ -207,6 +222,52 @@ body::before {
     }
   }
   
+.navbar-tabs {
+  display: flex;
+  justify-content: center;
+  line-height: 22px;
 
- 
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
+}
+
+.svg-ld {
+  margin: 0;
+  padding: 0;
+}
+
+/* From Uiverse.io by milley69 */ 
+.loading svg polyline {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.loading svg polyline#back {
+  fill: none;
+  stroke: #ff4d5033;
+}
+
+.loading svg polyline#front {
+  fill: none;
+  stroke: #ff4d4f;
+  stroke-dasharray: 48, 144;
+  stroke-dashoffset: 192;
+  animation: dash_682 1.4s linear infinite;
+}
+
+@keyframes dash_682 {
+  72.5% {
+    opacity: 0;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}

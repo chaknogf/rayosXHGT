@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "@/components/toggleSwitch/toggleSwitch.css";
-import '@/style.css';
+import "@/style.css";
 
 const ThemeToggle: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
@@ -18,7 +18,7 @@ const ThemeToggle: React.FC = () => {
   }, []);
 
   const handleToggle = () => {
-    const newTheme = isDarkMode ? "light" : "dark";
+    const newTheme = isDarkMode ? "dark" : "light";
     setIsDarkMode(!isDarkMode);
     document.documentElement.setAttribute("data-bs-theme", newTheme);
     localStorage.setItem("theme", newTheme); // Guarda el tema en localStorage
@@ -26,9 +26,10 @@ const ThemeToggle: React.FC = () => {
 
   return (
     <div className="toggle-switch">
-      <label className="switch-label">
+      <p className="theme-name">theme</p>
+      <label className="toggle">
         <input
-          className="checkbox"
+          className="input"
           type="checkbox"
           checked={isDarkMode}
           onChange={handleToggle}

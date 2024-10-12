@@ -1,333 +1,89 @@
-:root {
-  --sidebar-bg: rgba(0, 0, 0, 0.32);
-  --sidebar-hover-bg: rgba(0, 0, 0, 0.15);
-  --active-bg: #19315f;
-  --button-text-color: rgba(255, 255, 255, 0.95);
-  --text-color: rgba(255, 255, 255, 0.9);
-  --blur-strength: 30px;
-}
-
+/* Estilos generales */
 .sidebar {
-  position: fixed; 
-  top: 52px;
-  left: 4px;
-  bottom: 1px;
+  position: fixed;
+  left: 0;
+  top: 54px;
+  margin-left: 4px;
+  bottom: 0;
+  width: 50px;
+  height: 100vh;
+  background: #02141ca8; /* Con efecto blur */
+  backdrop-filter: blur(8px); /* Desenfoque */
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  width: 170px;
-  border-radius: 10px;
-  padding: 0 16px;
-  background: var(--sidebar-bg);
-  backdrop-filter: blur(var(--blur-strength));
-  transition: width 0.4s ease, opacity 0.3s ease;
-}
-
-.sidebar header {
-  display: flex;
+  justify-content: space-between; /* Asegura que los elementos estén distribuidos */
   align-items: center;
-  height: 72px;
+  border-radius: 8px;
 }
 
-.sidebar header img {
-  height: 44px;
-}
 
-.sidebar input {
-  scale: 0;
-  position: absolute;
-}
 
-.sidebar :is(button, label) {
-  position: relative;
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  height: 50px;
-  width: 100%;
-  border-radius: 6px;
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 400;
-  padding: 0 16px;
-  color: var(--button-text-color);
-  transition: background 0.3s ease;
+.sidebar.expanded {
+  width: 200px; /* Se expande cuando se hace hover */
 }
-
-.sidebar input:checked ~ label {
-  background: var(--active-bg);
-}
-
-.sidebar label i {
-  transition: transform 0.3s ease;
-}
-
-.sidebar input:not(:checked) ~ label:hover,
-.sidebar button:hover {
-  background: var(--sidebar-hover-bg);
-}
-
-.sidebar ul {
-  display: grid;
+ 
+.sidebar-items {
   list-style: none;
   padding: 0;
   margin: 0;
-  width: 100%;
+  flex-grow: 1; /* Permite que la lista ocupe el espacio restante */
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  color: white;
+}
+
+.sidebar-label {
+  margin-left: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar.expanded .sidebar-label {
+  opacity: 1; /* Mostrar texto cuando se expande */
+}
+
+/* Estilo del toggle de tema */
+.toggleTheme {
+  position: absolute;
+  bottom: 70px; /* Ubica el toggle en la parte inferior */
+  left: 50%; /* Centra horizontalmente */
+  transform: translateX(-50%); /* Ajusta para el centrado perfecto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Responsivo: Mobile First */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 40px;
+  }
+
+  .sidebar.expanded {
+    width: 150px;
+  }
+
+  .sidebar-item {
+    margin: 15px 0;
+  }
 }
 
 .sub-menu {
-  position: relative;
-  overflow: hidden;
-  height: 0;
-  transition: height 0.5s ease;
+  padding-left: 20px; /* Para que se vea un poco desplazado hacia la derecha */
 }
 
-.sub-menu ul {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: grid;
-  padding-left: 16px;
+.ai-chevron {
+  float: right;
+  transition: transform 0.3s ease;
 }
 
-.sub-menu button {
-  padding-left: 52px;
-  color: var(--text-color);
-}
-
-/* Sidebar colapsado: solo muestra los íconos */
-.sidebar.collapsed {
-  width: 80px;
-}
-
-.sidebar.collapsed :is(button, label) {
-  justify-content: center;
-  gap: 0;
-  padding: 0;
-}
-
-.sidebar.collapsed label p {
-  display: none; /* Oculta el texto cuando está colapsado */
-}
-
-.sidebar.collapsed .sub-menu,
-.sidebar.collapsed .main-menu {
-  display: none;
-}
-
-.sidebar.collapsed header img {
-  height: 36px;
-  transition: height 0.3s ease;
-}
-
-.sidebar.collapsed .toggle-btn {
-  margin-top: auto;
-}
-
-/* Mejora de hover para la experiencia */
-.sidebar input:not(:checked) ~ label:hover i,
-.sidebar button:hover i {
-  color: var(--button-text-color);
-  transition: color 0.2s ease;
-}
-
-/* Adaptaciones móviles */
-@media (max-width: 768px) {
-  .sidebar {
-    left: 0;
-    bottom: 0;
-    width: 40%;
-    height: auto;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 16px;
-  }
-
-  .sidebar.collapsed {
-    width: 15%;
-  }
-
-  .sidebar.collapsed .main-menu,
-  .sidebar.collapsed .sub-menu {
-    display: none;
-  }
-}
-
-/* Tema oscuro */
-.bg-dark {
-  background-color: #333; /* Fondo oscuro */
-  color: #fff; /* Texto claro */
-}
-
-/* Tema claro */
-.bg-light {
-  background-color: #f0f0f5; /* Fondo claro */
-  color: #000; /* Texto oscuro */
-}
-
-/* Estilos adicionales para asegurar el contraste adecuado */
-.text-light {
-  color: #fff !important;
-}
-
-.text-dark {
-  color: #000 !important;
-}
-
-
-.app-header {
-  position: relative;
-  left: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0;
-  
-
-
-}
-
-.loading {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  padding-top: 0.3rem;
-  padding-left: 30%;
- 
-  gap: 1.1rem;
-  border-radius: 5%;
-}
-
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.78rem;
-}
-
-.navbar-tabs {
-  padding: 0;
-  width: 0;
-  font-size: 1.5rem;
-  line-height: 1.2rem;
-  align-content: center;
-  
-}
-
-.hamburger-icon {
-  margin-left: 1.78rem;
-  font-size: 38px;
-  cursor: pointer;
-}
-
-.hamburger-icon:hover {
-  padding: 0;
-  box-shadow: rgba(251, 251, 255, 0.808) 0px 7px 29px 0px;
-  border-radius: 16px;
-  z-index: 1;
-  animation: loadtwo 2.5s ease-in-out infinite;
-
-}
-@keyframes loadtwo {
-  50% {
-    transform: rotate(-80deg);
-    background-color: #8ebedae5;
-    
-  }
-}
-
-
-.side-menu {
-  position: fixed;
-  top: 0;
-  left: -250px;
-  width: 130px;
-  height: 100%;
-  background-color: #333;
-  color: #fff;
-  transition: left 0.3s ease;
-  z-index: 1000;
-  padding-top: 1.3rem;
-}
-
-.side-menu.open {
-  left: 0;
-}
-
-.toggleTheme {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1.5rem auto; /* 'auto' asegura el centrado horizontal */
-  padding: 1.2rem;
-}
-
-.side-menu ul {
-  list-style: none;
-  padding: 0;
-}
-
-.side-menu ul li {
-  padding: 0.57rem 0.87rem;
-}
-
-.side-menu ul li a {
-  color: #fff;
-  text-decoration: none;
-  display: block;
-}
-
-.side-menu ul li:hover {
-  background-color: #444;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-}
-
-.icon-ld {
-  display: flex;
-  padding-top: 0.15rem;
-  width: auto;
-  height: auto;
-  margin-left: 1.2rem;
-  margin-bottom: 0.15rem;
-}
-
-/* From Uiverse.io by milley69 */ 
-.loading svg polyline {
-  fill: none;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.loading svg polyline#back {
-  fill: none;
-  stroke: #ff4d5033;
-}
-
-.loading svg polyline#front {
-  fill: none;
-  stroke: #ff4d4f;
-  stroke-dasharray: 48, 144;
-  stroke-dashoffset: 192;
-  animation: dash_682 1.4s linear infinite;
-}
-
-@keyframes dash_682 {
-  72.5% {
-    opacity: 0;
-  }
-
-  to {
-    stroke-dashoffset: 0;
-  }
+.ai-chevron.down {
+  transform: rotate(90deg); /* Gira el ícono cuando el submenú está abierto */
 }

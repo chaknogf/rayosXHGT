@@ -1,27 +1,16 @@
 import React, { useState } from "react";
-// import NavComponent from "@/modules/home/nav";
 import PacienteTable from "@/modules/registros.module/pacientes/pacientes";
 import ConsultaTable from "@/modules/registros.module/consultas.component/consulta";
 import "@/modules/home/home.css";
 import Sidebar from "@/components/sidebar/sidebar";
 import "@/style.css";
-import AppAcordion from "@/components/acordion/acordion";
+import Header from "@/components/header/header";
 
 const HomeComponent: React.FC = () => {
   const [contenidoActual, setContenidoActual] = useState<JSX.Element | null>(
     null
   );
-  // const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
-  // useEffect(() => {
-  //   // Inicializar el tema según lo guardado en localStorage
-  //   const savedTheme = localStorage.getItem("theme") as 'light' | 'dark';
-  //   if (savedTheme) {
-  //     setTheme(savedTheme);
-  //   }
-  // }, []);
-
-  // Maneja clics para cambiar el contenido
   const handlePacienteClick = () => {
     setContenidoActual(<PacienteTable />);
   };
@@ -30,39 +19,31 @@ const HomeComponent: React.FC = () => {
     setContenidoActual(<ConsultaTable />);
   };
 
-  const handleAcordionClick = () => {
-    setContenidoActual(<AppAcordion />);
-  };
-
-  // Items para el NavComponent
+  // Items para el Sidebar
   const navItems = [
     {
-      label: "Paciente",
-      onClick: handlePacienteClick, // Cambia a la tabla de pacientes
-      href: "#", // O puedes omitir esto si no es necesario
+      label: "Registros",
+      subItems: [
+        { label: "Pacientes", onClick: handlePacienteClick },
+        { label: "Consultas", onclick: handleConsultasClick },
+      ],
     },
     {
-      label: "Consultas",
-      onClick: handleConsultasClick, // Cambia a la tabla de consultas
-      href: "#",
-    },
-
-    {
-      label: "Accordion",
-      onClick: handleAcordionClick, // Corrige 'onclick' a 'onClick'
-      href: "#",
+      label: "Settings",
+      subItems: [{ label: "Consultas", onclick: handleConsultasClick }],
     },
   ];
 
   return (
     <>
       <nav className="div-nav">
-        {/* Barra de navegación con el toggle de tema */}
-        {/* <NavComponent items={navItems} theme={"dark"} /> */}
+        <header>
+          <Header></Header>
+        </header>
         <Sidebar items={navItems} />
       </nav>
       <div className="div-content zoomable-content">
-        {/* Renderiza el contenido actual */}
+        {/* Renderiza el contenido seleccionado */}
         {contenidoActual}
       </div>
     </>
