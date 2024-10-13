@@ -1,89 +1,112 @@
-/* Estilos generales */
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 54px;
-  margin-left: 4px;
-  bottom: 0;
-  width: 50px;
-  height: 100vh;
-  background: #02141ca8; /* Con efecto blur */
-  backdrop-filter: blur(8px); /* Desenfoque */
-  transition: width 0.3s ease-in-out;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Asegura que los elementos estén distribuidos */
-  align-items: center;
-  border-radius: 8px;
-}
-
-
-
-.sidebar.expanded {
-  width: 200px; /* Se expande cuando se hace hover */
-}
- 
-.sidebar-items {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  flex-grow: 1; /* Permite que la lista ocupe el espacio restante */
-}
-
-.sidebar-item {
-  display: flex;
-  align-items: center;
-  margin: 20px 0;
+/* Estilo para el botón de hamburguesa */
+.toggle-button {
+  display: none; /* Ocultar en pantallas grandes */
+  background-color: transparent;
+  border: none;
   color: white;
+  font-size: 30px;
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
 }
 
-.sidebar-label {
-  margin-left: 10px;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.sidebar.expanded .sidebar-label {
-  opacity: 1; /* Mostrar texto cuando se expande */
-}
-
-/* Estilo del toggle de tema */
-.toggleTheme {
-  position: absolute;
-  bottom: 70px; /* Ubica el toggle en la parte inferior */
-  left: 50%; /* Centra horizontalmente */
-  transform: translateX(-50%); /* Ajusta para el centrado perfecto */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-/* Responsivo: Mobile First */
+/* Mostrar el botón de hamburguesa en pantallas pequeñas */
 @media (max-width: 768px) {
+  .toggle-button {
+    display: block;
+  }
+
   .sidebar {
-    width: 40px;
-  }
-
-  .sidebar.expanded {
+    position: fixed;
+    top: 0;
     width: 150px;
+    height: 100vh;
+    background-color: #2c3e50;
+    transition: transform 0.3s ease-in-out;
+    border-right: 2px solid #2980b9;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    visibility: hidden;
   }
 
-  .sidebar-item {
-    margin: 15px 0;
+  .sidebar.open {
+    visibility: visible;
+    padding: auto;
+  }
+
+  .sidebar.open ul {
+    visibility: visible;
+  }
+
+
+}
+
+/* Estilos para pantallas grandes */
+@media (min-width: 769px) {
+  .sidebar {
+    position: fixed; /* Siempre visible */
+    left: 2px; /* Muestra el sidebar en pantallas grandes */
+    width: 25px; /* Ancho del sidebar */
+    height: 100vh; /* Altura del sidebar */
+    background-color: #2c3e50; /* Fondo del sidebar */
+    padding: 20px; /* Espaciado interno */
+    border-right: 2px solid #2980b9; /* Borde derecho */
+    border-radius: 3px;
+    
+  }
+  .sidebar:hover {
+    width: 150px;
+    padding-right: 50px;
+  }
+
+  .sidebar:hover ul {
+    visibility: visible;
+  }
+
+  .toggle-button {
+    display: none; /* Ocultar en pantallas grandes */
   }
 }
 
+/* Resto de estilos */
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  visibility: collapse;
+}
+
+.sidebar ul li {
+  margin: 20px 0;
+}
+
+.sidebar ul li a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos para los submenús */
 .sub-menu {
-  padding-left: 20px; /* Para que se vea un poco desplazado hacia la derecha */
+  list-style-type: none;
+  padding-left: 20px; /* Indentación para los submenús */
+  margin: 10px 0; /* Margen para separar del menú principal */
 }
 
-.ai-chevron {
-  float: right;
-  transition: transform 0.3s ease;
+.sub-menu li a {
+  color: #bdc3c7; /* Color para los enlaces de los submenús */
+  padding: 8px; /* Espaciado para los submenús */
 }
 
-.ai-chevron.down {
-  transform: rotate(90deg); /* Gira el ícono cuando el submenú está abierto */
+.sub-menu li a:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Efecto hover para submenús */
 }

@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: content-box;
+  data-bs-theme: dark;
 
 }
 
@@ -10,46 +11,40 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background-image: url("/src/assets/vecteezy.svg"); 
-  background-size: cover;  
-  background-repeat: no-repeat; 
+  background-image: url("/src/assets/vecteezy.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  
-
-  
  
-  
+  filter: opacity(85%);
 }
 
-/* Fondo con un diseño de splashes */
-body::before {
-  content: '';
-  position: fixed;
-  border: none;
-  border-radius: 18px;
+.background-blur {
+  position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 10% 50%, #fffffff5, transparent 10%),
-              radial-gradient(circle at 20% 30%, #ffffff, transparent 10%),
-              radial-gradient(circle at 90% 70%, #ffffff, transparent 10%),
-              radial-gradient(circle at 80% 20%, #ffffff, transparent 10%);
-  z-index: -1; /* Colocar detrás del contenido */
-  pointer-events: none; /* Evitar interacciones con el fondo */
-  animation: splashAnimation 10s infinite alternate; /* Animación de los splashes */
+  width: 100%;
+  height: 100%;
+  background-image: inherit; /* Usa la misma imagen del fondo */
+  background-size: inherit;
+  background-position: inherit;
+  filter: blur(18px); /* Aquí aplicas el desenfoque */
+  z-index: -1; /* Mantiene el fondo por debajo del contenido */
 }
 
-/* Animación de los splashes */
-@keyframes splashAnimation {
-  0% {
-    transform: scale(0.8);
-  }
-  100% {
-    transform: scale(1.7);
-  }
+.content {
+  position: relative;
+  z-index: 1; /* Asegura que el contenido esté por encima del fondo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
+
+
+
+
 
 
 /* Estilos para la sección de contenido */

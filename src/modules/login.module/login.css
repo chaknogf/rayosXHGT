@@ -1,27 +1,27 @@
 
 
-body {
-    width: 100%;
-    height: 100%;
-    --color: rgba(114, 114, 114, 0.3);
-    background-color: #191a1a;
-    background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
-        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
-    background-size: 55px 55px;
-  }
+
    
   
   .login-box {
-    position: absolute;
+    
+    margin: 30% 0%;
+    position: relative;
     top: 50%;
     left: 50%;
     width: 350px;
-    padding: 40px;
+    padding: 30px;
     transform: translate(-50%, -50%);
     background: rgba(24, 20, 20, 0.987);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .login-box {
+      margin: 60% 0%;
+    }
   }
   
   .login-box .user-box {
@@ -103,7 +103,27 @@ body {
     left: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #03f40f);
+    background: linear-gradient(90deg, transparent, #03bcf4);
     animation: btn-anim1 2s linear infinite;
   }
+  
+  .title-login {
+    font-family: 'Montserrat', sans-serif; /* Fuente elegante, inspirada en montañas */
+    font-size: 2.5rem;
+    color: #2e8b57; /* Verde pino, representando los bosques de montaña */
+    
+    text-align: center;
+    padding: 5px 10px;
+   
+    border-radius: 8px; /* Suavizando los bordes para dar un toque natural */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1), 0 0 10px rgba(34, 139, 34, 0.2); /* Sombra suave, como la luz que filtra entre las montañas */
+    letter-spacing: 2px; /* Espaciado que evoca amplitud y tranquilidad */
+    margin: 20px auto;
+    width: fit-content;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+ 
+  
+  
   

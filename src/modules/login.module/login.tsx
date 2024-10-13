@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import './login.css';
 import HomeComponent from '../home/home';
 
@@ -18,7 +18,7 @@ const LoginComponent: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
     
 
   useEffect(() => {
@@ -53,9 +53,11 @@ const LoginComponent: React.FC = () => {
 
   return (
     <div className="containerForm">
+      
       {!isAuthenticated ? (
         <div className="container">
           <div className="login-box">
+          <h3 className='title-login'>SysHosp</h3>
             <form onSubmit={login} autoComplete="off">
               <div className="user-box">
                 <input
