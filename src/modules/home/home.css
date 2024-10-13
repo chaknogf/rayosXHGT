@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: content-box;
-  data-bs-theme: dark;
+ 
 
 }
 
@@ -42,7 +42,11 @@ body {
   min-height: 100vh;
 }
 
-
+.sidebar {
+  position: absolute; /* Mantiene la barra lateral en su posición */
+  overflow-y: auto; /* Permite el desplazamiento si el contenido excede la altura */
+  z-index: 10; /* Asegúrate de que esté por encima del contenido */
+}
 
 
 

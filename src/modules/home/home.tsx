@@ -7,17 +7,16 @@ import "@/style.css";
 import Header from "@/components/header/header";
 
 const HomeComponent: React.FC = () => {
-  const [contenidoActual, setContenidoActual] = useState<JSX.Element | null>(null);
-  
+  const [contenidoActual, setContenidoActual] = useState<JSX.Element | null>(
+    null
+  );
 
   const handlePacienteClick = () => {
-    
-      setContenidoActual(<PacienteTable />);
+    setContenidoActual(<PacienteTable />);
   };
 
   const handleConsultasClick = () => {
-  
-      setContenidoActual(<ConsultaTable />);
+    setContenidoActual(<ConsultaTable />);
   };
 
   // Items para el Sidebar
@@ -37,11 +36,13 @@ const HomeComponent: React.FC = () => {
 
   return (
     <>
-      <nav className="div-nav " >
+      <nav className="div-nav ">
         <header>
           <Header />
         </header>
-        <Sidebar items={navItems} />
+        <nav className="sidebar">
+          <Sidebar items={navItems} />
+        </nav>
       </nav>
 
       {/* Renderizado del contenido actual */}
