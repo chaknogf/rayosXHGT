@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import "@/components/sidebar/sidebar.css";
+import React, { SVGProps, useState } from "react";
+import "./sidebar.css"; // Asegúrate de tener tu archivo CSS
+import Header from "../header/header";
 
 interface NavItem {
+  icon?: (props: SVGProps<SVGSVGElement>) => JSX.Element;
   label: string;
   href?: string;
   onClick?: () => void;
@@ -14,53 +16,53 @@ interface NavComponentProps {
 
 const Sidebar: React.FC<NavComponentProps> = ({ items }) => {
   const [openSubMenuIndex, setOpenSubMenuIndex] = useState<number | null>(null);
-  const [isOpen, setIsOpen] = useState<boolean>(false); // Estado para el toggle del sidebar
 
   const toggleSubMenu = (index: number) => {
     setOpenSubMenuIndex(openSubMenuIndex === index ? null : index);
   };
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
-    <>
-      <button className="toggle-button" onClick={toggleSidebar}>
-        ☰ {/* Icono de hamburguesa */}
-      </button>
-      <aside className={`sidebar ${isOpen ? "open" : ""}`}>
-        <ul>
-          {items.map((item, index) => (
-            <li key={index}>
-              <a
-                href={item.href}
-                onClick={(e) => {
-                  if (item.subItems) {
-                    e.preventDefault(); // Previene la navegación si hay submenús
-                    toggleSubMenu(index);
-                  }
-                  item.onClick?.();
-                }}
-              >
-                {item.label}
-              </a>
-              {item.subItems && openSubMenuIndex === index && (
-                <ul className="sub-menu">
-                  {item.subItems.map((subItem, subIndex) => (
-                    <li key={subIndex}>
-                      <a href={subItem.href} onClick={subItem.onClick}>
-                        {subItem.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
-        </ul>
-      </aside>
-    </>
+    <aside className="sidebar " >
+      <h3 className="brand-logo"><Header /></h3>
+      <ul>
+        {items.map((item, index) => (
+          <li key={index}>
+            <a
+              href={item.href}
+              onClick={(e) => {
+                if (item.subItems) {
+                  e.preventDefault();
+                  toggleSubMenu(index);
+                }
+                item.onClick?.();
+              }}
+              className="nav-link"
+            >
+              {item.icon && item.icon({})}
+              {item.label}
+            </a>
+
+            {/* Submenu */}
+            {item.subItems && openSubMenuIndex === index && (
+              <ul className="sub-menu">
+                {item.subItems.map((subItem, subIndex) => (
+                  <li key={subIndex}>
+                    <a
+                      href={subItem.href}
+                      onClick={subItem.onClick}
+                      className="sub-nav-link"
+                    >
+                      {subItem.icon && subItem.icon({})}
+                      {subItem.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </aside>
   );
 };
 

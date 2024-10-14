@@ -1,5 +1,5 @@
 import React from "react";
-import "@/components/header/header"; // Importa los estilos desde un archivo CSS separado
+import "@/components/header/header.css"; // Importa los estilos desde un archivo CSS separado
 
 const Header: React.FC = () => {
   return (

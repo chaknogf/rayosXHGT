@@ -1,6 +1,6 @@
  /* Estilos del header */
  .app-header {
-    background-color: #110425;
+    /* background-color: #040108; */
     color: white;
     padding: 1rem;
     text-align: center;
@@ -13,7 +13,7 @@
   .navbar-tabs {
     display: flex;
     justify-content: center;
-    line-height: 22px;
+    line-height: 26px;
   
   }
   

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 //import { useNavigate } from 'react-router-dom';
 import './login.css';
 import HomeComponent from '../home/home';
-
+import { JamMedical} from "@/assets/icons/svg"
+ 
 interface User {
   username: string;
   password: string;
@@ -57,7 +58,7 @@ const LoginComponent: React.FC = () => {
       {!isAuthenticated ? (
         <div className="container">
           <div className="login-box">
-          <h3 className='title-login'>SysHosp</h3>
+            <h3 className='title-login'>SysHosp <JamMedical /> </h3>
             <form onSubmit={login} autoComplete="off">
               <div className="user-box">
                 <input

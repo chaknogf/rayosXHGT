@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from "react";
+//home.tsx
+import React, { useState } from "react";
 import PacienteTable from "@/modules/registros.module/pacientes/pacientes";
 import ConsultaTable from "@/modules/registros.module/consultas.component/consulta";
 import "@/modules/home/home.css";
 import Sidebar from "@/components/sidebar/sidebar";
 import "@/style.css";
-import Header from "@/components/header/header";
+import { DuoIconsDashboard, StreamlineOnlineMedicalServiceMonitor } from "@/assets/icons/svg";
+import Dashboard from "@/components/dashboard/dashboard";
+
 
 const HomeComponent: React.FC = () => {
   const [contenidoActual, setContenidoActual] = useState<JSX.Element | null>(
     null
   );
+
+  const dashboardClick = () => {
+    setContenidoActual(<Dashboard />);
+  };
 
   const handlePacienteClick = () => {
     setContenidoActual(<PacienteTable />);
@@ -22,7 +29,14 @@ const HomeComponent: React.FC = () => {
   // Items para el Sidebar
   const navItems = [
     {
+      label: "Dashboard",
+      icon: DuoIconsDashboard,
+      subItems: [{label: "Dash",  onclick: dashboardClick,}]
+     
+    },
+    {
       label: "Registros",
+      icon: StreamlineOnlineMedicalServiceMonitor,
       subItems: [
         { label: "Pacientes", onClick: handlePacienteClick },
         { label: "Consultas", onClick: handleConsultasClick },
@@ -36,22 +50,12 @@ const HomeComponent: React.FC = () => {
 
   return (
     <>
-      <nav className="div-nav ">
-        <header>
-          <Header />
-        </header>
-        <nav className="sidebar">
+      <div className="home">
+        <section className="sidebar-div">
           <Sidebar items={navItems} />
-        </nav>
-      </nav>
+        </section>
 
-      {/* Renderizado del contenido actual */}
-      <div className="div-content zoomable-content blur">
-        {contenidoActual ? (
-          contenidoActual
-        ) : (
-          <p>Selecciona una opción del menú para ver el contenido.</p>
-        )}
+        <section className="contenido">{contenidoActual}</section>
       </div>
     </>
   );
