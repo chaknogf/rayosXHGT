@@ -1,22 +1,29 @@
-
-/* home.css */
-.home {
-  display: flex; /* Utilizamos Flexbox para colocar los elementos en fila */
-  height: 100vh; /* Aseguramos que ocupe el 100% de la altura de la ventana */
-  
-}
-
+/* Estilos generales del sidebar */
 .sidebar-div {
-  flex: 0 0 250px; /* Sidebar tendrá un ancho fijo de 250px */
-  background-color: #1f2937; /* Color de fondo para el sidebar */
-  height: 100%; /* Ocupa toda la altura de la pantalla */
+  width: 100vw;
+  height: 100%;
+  transition: flex-basis 0.3s ease, margin-left 0.3s ease;
+  
 }
 
 .contenido {
-  flex: 1; /* El contenido ocupará el resto del espacio disponible */
-  padding: 20px; /* Espaciado interno para el contenido */
-  background-color: #f3f4f650; /* Color de fondo del contenido */
-  overflow-y: auto; /* Agregamos scroll si el contenido es muy largo */
- 
+  height: 100vh;
   
+  margin-left: 8vw;
+}
+
+
+
+
+/* Ocultar el botón hamburguesa en pantallas grandes */
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+    
+  }
+  .contenido {
+    height: 100vh;
+    padding-top: 60px;
+    
+  }
 }

@@ -10,10 +10,12 @@
     position: relative;
     width: 100%;
     display: inline-block;
+   
+}
     
     /* transition: all 2.3s ease-in-out;
     overflow: hidden;  */
-  }
+  
   
   .card {
     border: 1px solid #ccc;
@@ -278,6 +280,13 @@ tr:hover .dir {
 
 /* Diseño adaptable a pantallas pequeñas */
 @media screen and (max-width: 728px) {
+
+
+
+  .card-container {
+  position: relative;
+  width: 100vw;
+}
 
   .table-row {
     flex-direction: column;

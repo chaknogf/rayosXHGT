@@ -5,9 +5,11 @@ import ConsultaTable from "@/modules/registros.module/consultas.component/consul
 import "@/modules/home/home.css";
 import Sidebar from "@/components/sidebar/sidebar";
 import "@/style.css";
-import { DuoIconsDashboard, StreamlineOnlineMedicalServiceMonitor } from "@/assets/icons/svg";
+import {
+  DuoIconsDashboard,
+  StreamlineOnlineMedicalServiceMonitor,
+} from "@/assets/icons/svg";
 import Dashboard from "@/components/dashboard/dashboard";
-
 
 const HomeComponent: React.FC = () => {
   const [contenidoActual, setContenidoActual] = useState<JSX.Element | null>(
@@ -31,8 +33,7 @@ const HomeComponent: React.FC = () => {
     {
       label: "Dashboard",
       icon: DuoIconsDashboard,
-      subItems: [{label: "Dash",  onclick: dashboardClick,}]
-     
+      subItems: [{ label: "Dash", onclick: dashboardClick }],
     },
     {
       label: "Registros",
@@ -51,11 +52,14 @@ const HomeComponent: React.FC = () => {
   return (
     <>
       <div className="home">
-        <section className="sidebar-div">
-          <Sidebar items={navItems} />
-        </section>
-
-        <section className="contenido">{contenidoActual}</section>
+        <div className="grid-1">
+          <section className="sidebar-div">
+            <Sidebar items={navItems} />
+          </section>
+        </div>
+        <div className="grid-2">
+          <section className="contenido">{contenidoActual}</section>
+        </div>
       </div>
     </>
   );

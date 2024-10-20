@@ -3,8 +3,6 @@
 import React from "react";
 import { FaRibbon } from "react-icons/fa";
 import { PiHeartbeatFill } from "react-icons/pi";
-import { FaUserDoctor } from "react-icons/fa6";
-import { GiMedicalDrip } from "react-icons/gi";
 import { FcExport, FcOpenedFolder } from "react-icons/fc";
 import { calcularEdad } from "@/utils/edad";
 import { formatoFecha } from "@/utils/fecha";
@@ -27,6 +25,7 @@ import {
   // obtenerStatusDocumento,
 } from "@/dictionary/enums/enum";
 import { obtenerReferencia } from "@/dictionary/enums/hospitales";
+import { HealthiconsHospitalized } from "@/assets/icons/svg";
 // Aquí comienzan los renderizadores
 
 const renderSexoIcon = (sexo: string) => {
@@ -83,8 +82,9 @@ const renderStatusDocumento = (value: number) => {
   if (value === 1) {
     return (
       <>
-        <FaUserDoctor style={{ height: "1.5rem", width: "1.5rem" }} />
-        <GiMedicalDrip style={{ height: "1.8rem", width: "1.8rem" }} />
+        <HealthiconsHospitalized
+          style={{ height: "1.8rem", width: "1.8rem" }}
+        />
       </>
     );
   } else if (value === 2) {
