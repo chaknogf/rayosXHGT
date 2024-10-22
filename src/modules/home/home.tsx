@@ -52,14 +52,13 @@ const HomeComponent: React.FC = () => {
   return (
     <>
       <div className="home">
-        <div className="grid-1">
+       
           <section className="sidebar-div">
             <Sidebar items={navItems} />
           </section>
-        </div>
-        <div className="grid-2">
+       
           <section className="contenido">{contenidoActual}</section>
-        </div>
+  
       </div>
     </>
   );

@@ -1,83 +1,34 @@
 .sidebar {
   background-color: #030509;
   color: white;
-  width: 100vh;
   height: 100vh;
   padding: 1rem;
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
-  transition: width 0.3s ease, transform 0.3s ease;
-  border-radius: 0 20px 20px 0;
-  overflow: hidden;
   z-index: 1000;
 }
 
 .sidebar ul {
-  margin-top: 35px;
   list-style: none;
-}
-
-.hamburger-container {
-  display: none;
-  position: absolute;
-  top: px;
-  left: 30px;
-  z-index: 2000;
-
-}
-
-.hamburger {
-  background: transparent;
-  border: none;
-  color: white;
-  border-color: red;
-  font-size: 30px;
-  cursor: pointer;
-  padding: 4px;
-  margin: 4px;
-  font-size: 18px;
-  
 }
 
 /* Estilo para pantallas grandes */
 @media (min-width: 768px) {
   .sidebar {
-    width: 25px;
+    width: 200px;
   }
 
-  .sidebar:hover {
-    width: 250px;
-  }
-
-  .sidebar:hover .label {
-    display: inline; /* Muestra las etiquetas cuando se expande */
-  }
+ 
 
   .label {
-    display: none; /* Oculta las etiquetas cuando está colapsado */
+    display: inline;
   }
+
+ 
 }
 
-/* Estilo para pantallas móviles */
-@media (max-width: 767px) {
-  .hamburger-container {
-    display: block; /* El botón de hamburguesa aparece en mobile */
-  }
 
-  .sidebar {
-    width: 100%;
-    transform: translateX(-100%); /* Oculto por defecto en móvil */
-  }
-
-  .sidebar.mobile-open {
-    transform: translateX(0); /* Muestra el sidebar en móvil */
-  }
-
-  .main-content {
-    margin-left: 0;
-  }
-}
 
 /* Estilos generales */
 .nav-link {
@@ -109,15 +60,4 @@
 
 .sub-nav-link:hover {
   background-color: #374151;
-}
-
-.main-content {
-  padding: 1rem;
-  background-color: #f3f4f6;
-  flex: 1;
-  transition: margin-left 0.3s ease;
-}
-
-.sidebar:hover ~ .main-content {
-  margin-left: 250px; /* Desplaza el contenido cuando el sidebar está expandido */
 }

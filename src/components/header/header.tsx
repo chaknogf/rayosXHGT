@@ -1,28 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "@/components/header/header.css"; // Importa los estilos desde un archivo CSS separado
+import { HugeiconsMenuSquare } from "@/assets/icons/svg";
+import Sidebar from "@/components/sidebar/sidebar"; // Asegúrate de que el componente Sidebar esté importado correctamente
 
 const Header: React.FC = () => {
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+
+  // Función para alternar la visibilidad del Sidebar
+  const toggleMobileSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
+
   return (
     <div className="app-header">
-      <div className="loading">
-        <svg
-          width="auto"
-          height="44"
-          viewBox="0 0 48 54"
-          preserveAspectRatio="xMidYMid meet"
-          className="svg-ld"
-        >
-          <polyline
-            points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24"
-            id="back"
-          ></polyline>
-          <polyline
-            points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24"
-            id="front"
-          ></polyline>
-        </svg>
-        <h3 className="navbar-tabs">Sys HospTecpan</h3>
-      </div>
+      <button className="hamburger" onClick={toggleMobileSidebar}>
+        <HugeiconsMenuSquare />
+        Menu
+      </button>
+      {/* Renderiza el Sidebar solo si isSidebarVisible es true */}
+      {isSidebarVisible && <Sidebar items={[]} />}
     </div>
   );
 };
