@@ -11,20 +11,29 @@
 
 .sidebar ul {
   list-style: none;
+  visibility: hidden;
+}
+
+.sidebar:hover ul {
+  visibility: visible;
+} 
+
+.btn-menu-div:hover ul {
+  visibility: visible;
 }
 
 /* Estilo para pantallas grandes */
 @media (min-width: 768px) {
-  .sidebar {
-    width: 200px;
-  }
-
- 
-
+  
   .label {
     display: inline;
   }
 
+  .sidebar {
+    height: 100vh;
+    
+  }
+  
  
 }
 

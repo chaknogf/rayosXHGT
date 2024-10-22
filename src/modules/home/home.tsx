@@ -7,6 +7,7 @@ import Sidebar from "@/components/sidebar/sidebar";
 import "@/style.css";
 import {
   DuoIconsDashboard,
+  RiRobot2Line,
   StreamlineOnlineMedicalServiceMonitor,
 } from "@/assets/icons/svg";
 import Dashboard from "@/components/dashboard/dashboard";
@@ -15,6 +16,12 @@ const HomeComponent: React.FC = () => {
   const [contenidoActual, setContenidoActual] = useState<JSX.Element | null>(
     null
   );
+
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+  };
 
   const dashboardClick = () => {
     setContenidoActual(<Dashboard />);
@@ -51,14 +58,20 @@ const HomeComponent: React.FC = () => {
 
   return (
     <>
+      <div className="btn-menu-div">
+        <button className="btn-menu" onClick={toggleMenu}>
+          <RiRobot2Line />
+          Menu
+        </button>
+      </div>
       <div className="home">
-       
-          <section className="sidebar-div">
-            <Sidebar items={navItems} />
-          </section>
-       
-          <section className="contenido">{contenidoActual}</section>
-  
+        <section
+          className={`sidebar-div ${menuVisible ? "sidebar-div-visible" : ""}`}
+        >
+          <Sidebar items={navItems} />
+        </section>
+
+        <section className="contenido">{contenidoActual}</section>
       </div>
     </>
   );
