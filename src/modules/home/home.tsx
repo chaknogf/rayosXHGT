@@ -61,7 +61,7 @@ const HomeComponent: React.FC = () => {
       <div className="btn-menu-div">
         <button className="btn-menu" onClick={toggleMenu}>
           <RiRobot2Line />
-          Menu
+          <span>.S.y.R.M.H</span>
         </button>
       </div>
       <div className="home">

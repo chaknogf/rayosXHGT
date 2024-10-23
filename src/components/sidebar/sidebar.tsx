@@ -1,5 +1,6 @@
 import React, { SVGProps, useState } from "react";
 import "./sidebar.css"; // Importa los estilos desde un archivo CSS separado
+import { RiRobot2Line } from "@/assets/icons/svg";
 
 interface NavItem {
   icon?: (props: SVGProps<SVGSVGElement>) => JSX.Element;
@@ -22,6 +23,8 @@ const Sidebar: React.FC<NavComponentProps> = ({ items }) => {
 
   return (
     <aside className="sidebar">
+      <RiRobot2Line />
+
       <ul>
         {items.map((item, index) => (
           <li key={index}>

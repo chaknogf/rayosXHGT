@@ -63,7 +63,7 @@
   }
 
   .sidebar-div {
-    width: 20px;
+    width: 55px;
     transition: flex-basis 0.3s ease, margin-left 0.3s ease; 
     visibility: visible;
   }
