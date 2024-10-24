@@ -9,6 +9,11 @@
   z-index: 1000;
 }
 
+.rirobot {
+  justify-items: stretch;
+}
+
+
 .sidebar ul {
   list-style: none;
   visibility: hidden;
@@ -16,7 +21,9 @@
 
 .sidebar:hover ul {
   visibility: visible;
+  transition: all 0.4s;
 } 
+
 
 .btn-menu-div:hover ul {
   visibility: visible;
@@ -33,6 +40,13 @@
     height: 100vh;
     
   }
+
+  .sidebar:hover .rirobot {
+    margin-left: 30%;
+    padding-bottom: 10px;
+    transition: all 0.4s;
+  }
+  
   
  
 }

@@ -23,7 +23,9 @@ const Sidebar: React.FC<NavComponentProps> = ({ items }) => {
 
   return (
     <aside className="sidebar">
-      <RiRobot2Line />
+      <div className="rirobot">
+        <RiRobot2Line />
+      </div>
 
       <ul>
         {items.map((item, index) => (
