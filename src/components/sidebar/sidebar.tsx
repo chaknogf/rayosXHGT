@@ -17,8 +17,15 @@ interface NavComponentProps {
 const Sidebar: React.FC<NavComponentProps> = ({ items }) => {
   const [openSubMenuIndex, setOpenSubMenuIndex] = useState<number | null>(null);
 
+  const [cerrarMenu, setCerrarMenu] = useState(false);
+
   const toggleSubMenu = (index: number) => {
     setOpenSubMenuIndex(openSubMenuIndex === index ? null : index);
+  };
+
+  const closeSidebar = () => {
+    setCerrarMenu(!cerrarMenu);
+    subItem.onClick();
   };
 
   return (
@@ -51,8 +58,8 @@ const Sidebar: React.FC<NavComponentProps> = ({ items }) => {
                   <li key={subIndex}>
                     <a
                       href={subItem.href}
-                      onClick={subItem.onClick}
-                      className="sub-nav-link"
+                      onClick={closeSidebar}
+                      className={`sub-nav-link ${cerrarMenu} ? "sidebar" : ""}`}
                     >
                       {subItem.icon?.({})}
                       {subItem.label}

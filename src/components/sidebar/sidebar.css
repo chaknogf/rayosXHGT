@@ -29,6 +29,10 @@
   visibility: visible;
 }
 
+.sidebar-div-visible ul {
+visibility: visible;
+}
+
 /* Estilo para pantallas grandes */
 @media (min-width: 768px) {
   
