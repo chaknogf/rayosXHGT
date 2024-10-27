@@ -58,19 +58,43 @@ const Dashboard: React.FC = () => {
 
       {/* Cards */}
       <div style={{ display: "flex", gap: "20px", marginBottom: "30px" }}>
-        <div style={{ backgroundColor: "#f8f9fa", padding: "20px", borderRadius: "8px" }}>
+        <div
+          style={{
+            backgroundColor: "#f8f9fa",
+            padding: "20px",
+            borderRadius: "8px",
+          }}
+        >
           <h3>Total Sales</h3>
           <p>$34,245</p>
         </div>
-        <div style={{ backgroundColor: "#f8f9fa", padding: "20px", borderRadius: "8px" }}>
+        <div
+          style={{
+            backgroundColor: "#f8f9fa",
+            padding: "20px",
+            borderRadius: "8px",
+          }}
+        >
           <h3>New Users</h3>
           <p>1,234</p>
         </div>
-        <div style={{ backgroundColor: "#f8f9fa", padding: "20px", borderRadius: "8px" }}>
+        <div
+          style={{
+            backgroundColor: "#f8f9fa",
+            padding: "20px",
+            borderRadius: "8px",
+          }}
+        >
           <h3>Total Orders</h3>
           <p>567</p>
         </div>
-        <div style={{ backgroundColor: "#f8f9fa", padding: "20px", borderRadius: "8px" }}>
+        <div
+          style={{
+            backgroundColor: "#f8f9fa",
+            padding: "20px",
+            borderRadius: "8px",
+          }}
+        >
           <h3>Revenue</h3>
           <p>$98,765</p>
         </div>

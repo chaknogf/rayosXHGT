@@ -9,39 +9,29 @@
   visibility: hidden;
 }
 
-.sidebar-div:hover {
-  width: 200px;
-  transition: all 0.5s; 
-}
-
 .contenido {
+  margin-top: 30px;
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   overflow-y: auto; /* Permite el scroll solo en el eje Y */
   padding: 1rem; /* Opcional: agrega padding interno si necesitas espacio dentro del contenido */
 }
 
-.btn-menu {
-  width: 100vw;
-  background-color: #000005c1;
-  border: none;
-  box-shadow: 0 4px 6px rgba(86, 122, 221, 0.648), 
-              0 1px 3px rgba(167, 162, 218, 0.584);
-  
+.sidebar-div:hover {
+  width: 450px;
+  height: 90vh;
+  transition: width 0.8s ease;
 }
 
-.sidebar-div-visible {
-  transition: all 0.2s; 
-  width: 200px;
+.sidebar-div:hover ul {
   visibility: visible;
-
+  opacity: 1;
+  transform: translateX(0);
+  padding: 0.2rem;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-
-
-
-
-/* Ocultar el botón hamburguesa en pantallas grandes */
+/* pantallas grandes */
 @media (min-width: 768px) {
 
   .home {
@@ -49,25 +39,28 @@
 
   }
 
-  .hamburger {
-    display: none;
-    
-  }
   .contenido {
-    
+    width: 100vw;
+    height: 100vh;
     padding-top: 9px;
     overflow-y: auto;
-  }
-
-  .btn-menu-div {
-    visibility:hidden;
-    display: none;
+    margin-top: 4px;
   }
 
   .sidebar-div {
-    width: 55px;
-    transition: flex-basis 0.3s ease, margin-left 0.3s ease; 
+    width: 55px; 
     visibility: visible;
+    transition: width 0.5s ease, visibility 0s linear 0.5s;
   }
+
+  .sidebar-div:hover{
+    width: 200px;
+  }
+
+  
+  
+  
   
 }
+
+

@@ -49,7 +49,7 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
     clearTimeout(enterTimeout); // Limpiar cualquier timeout anterior de entrada
     leaveTimeout = setTimeout(() => {
       setShowBody(false);
-    }, 800); // Retraso de 300ms antes de ocultar el cuerpo
+    }, 3200); // Retraso de 300ms antes de ocultar el cuerpo
   };
 
   return (

@@ -8,6 +8,7 @@ interface NavItem {
   href?: string;
   onClick?: () => void;
   subItems?: NavItem[];
+  item?: string;
 }
 
 interface NavComponentProps {
@@ -17,15 +18,8 @@ interface NavComponentProps {
 const Sidebar: React.FC<NavComponentProps> = ({ items }) => {
   const [openSubMenuIndex, setOpenSubMenuIndex] = useState<number | null>(null);
 
-  const [cerrarMenu, setCerrarMenu] = useState(false);
-
   const toggleSubMenu = (index: number) => {
     setOpenSubMenuIndex(openSubMenuIndex === index ? null : index);
-  };
-
-  const closeSidebar = () => {
-    setCerrarMenu(!cerrarMenu);
-    subItem.onClick();
   };
 
   return (
@@ -34,7 +28,7 @@ const Sidebar: React.FC<NavComponentProps> = ({ items }) => {
         <RiRobot2Line />
       </div>
 
-      <ul>
+      <ul className="ul-side">
         {items.map((item, index) => (
           <li key={index}>
             <a
@@ -46,10 +40,10 @@ const Sidebar: React.FC<NavComponentProps> = ({ items }) => {
                 }
                 item.onClick?.();
               }}
-              className="nav-link"
+              className="nav-link-s"
             >
-              {item.icon?.({})}
-              <span className="label">{item.label}</span>
+              <div className="icon-item-s">{item.icon && item.icon({})}</div>
+              <span className="label-item-s">{item.label}</span>
             </a>
 
             {item.subItems && openSubMenuIndex === index && (
@@ -58,11 +52,13 @@ const Sidebar: React.FC<NavComponentProps> = ({ items }) => {
                   <li key={subIndex}>
                     <a
                       href={subItem.href}
-                      onClick={closeSidebar}
-                      className={`sub-nav-link ${cerrarMenu} ? "sidebar" : ""}`}
+                      onClick={subItem.onClick}
+                      className="sub-nav-link"
                     >
-                      {subItem.icon?.({})}
-                      {subItem.label}
+                      <div className="icon-subitem-s">
+                        {subItem.icon && subItem.icon({})}
+                      </div>
+                      <p className="label-subitem-s">{subItem.label}</p>
                     </a>
                   </li>
                 ))}

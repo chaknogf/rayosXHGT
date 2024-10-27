@@ -1,37 +1,58 @@
 .sidebar {
   background-color: #030509;
   color: white;
-  height: 100vh;
-  padding: 1rem;
+  padding: 0.2rem;
   position: relative;
-  top: 0;
-  left: 0;
   z-index: 1000;
 }
 
-.rirobot {
-  justify-items: stretch;
+.ul-side {
+  background: #030509;
+  visibility: visible;
+  padding: 2.6px 36px 2.5px 6.5px;
+  border-radius: 8px;
+  gap: 0.2rem;
+  visibility: hidden;
+ 
+
+}
+
+a {
+  text-decoration: none;
 }
 
 
-.sidebar ul {
+.sidebar li {
+  
   list-style: none;
   visibility: hidden;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s linear 0.5s;
 }
 
-.sidebar:hover ul {
+.sidebar:hover li {
   visibility: visible;
-  transition: all 0.4s;
-} 
+  opacity: 1;
+  transform: translateX(0);
+  padding: 0rem;
+  transition: opacity 0.5s ease, transform 0.5s ease, padding 0.5s ease;
+}
 
-
-.btn-menu-div:hover ul {
+.rirobot:hover .ul-side .sidebar{
+  
   visibility: visible;
+  background-color: #030509;
+  opacity: 1;
+  transform: translateX(0);
+  padding: 0.2rem;
+  transition: opacity 0.5s ease, transform 0.5s ease, padding 0.5s ease;
 }
 
-.sidebar-div-visible ul {
-visibility: visible;
-}
+
+
+
+
 
 /* Estilo para pantallas grandes */
 @media (min-width: 768px) {
@@ -42,30 +63,70 @@ visibility: visible;
 
   .sidebar {
     height: 100vh;
+    top: 0;
+    left: 0;
     
   }
 
-  .sidebar:hover .rirobot {
-    margin-left: 30%;
-    padding-bottom: 10px;
-    transition: all 0.4s;
+  li a {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+
+
   }
-  
+
+  .rirobot {
+    justify-items: stretch;
+    padding-left: 0.6rem;
+  }
+
   
  
 }
 
 
+/* Estilo para pantallas pequeñas */
+@media (max-width: 767px) {
+  .rirobot {
+    visibility: visible;
+    padding-left: 6px;
+    background-color: black;
+    border-radius: 20px;
+    width: 2.3rem;
+    padding: 5px;
+    margin-left: 3px;
+  }
+
+  
+
+  .rirobot:hover .ul-side{
+    padding: 2.6px 36px 200.5px 6.5px;
+    visibility: visible;
+    transition: opacity 0.8s ease, transform 0.8s ease, padding 0.8s ease;
+  }
+
+  .ul-side {
+    margin-top: 10px;
+  }
+
+
+
+
+}
+
+
 
 /* Estilos generales */
-.nav-link {
+.nav-link-s {
   display: flex;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0;
   color: white;
   text-decoration: none;
   border-radius: 4px;
   transition: background-color 0.3s;
+  gap: 0.1rem;
 }
 
 .nav-link:hover {
@@ -73,18 +134,43 @@ visibility: visible;
 }
 
 .sub-menu {
-  padding-left: 1rem;
-  margin-top: 0.5rem;
-}
+  padding-left: 0.3rem;
+  margin: 0;
+}.n
 
 .sub-nav-link {
-  display: block;
-  padding: 0.5rem 1rem;
+  padding: 0;
   color: white;
   text-decoration: none;
   border-radius: 4px;
 }
 
-.sub-nav-link:hover {
-  background-color: #374151;
+
+
+.label-subitem-s {
+  text-decoration:none;
+  font-size: 12px;
+  font-weight: lighter;
+  color: azure;
+  margin: 3px;
+  padding: 2px;
+  
+}
+
+/* Estilo cuando el elemento está activo o seleccionado */
+.nav-link-s:focus .label-item-s,
+.nav-link-s::after .label-item-s {
+  color: #ffcc00; 
+  font-weight: bold;
+}
+
+/* Estilo adicional para el hover */
+.nav-link-s:hover .label-item-s {
+  color: #ffa500; 
+}
+
+.sub-nav-link:focus .label-subitem-s,
+.sub-nav-link:active .label-subitem-s {
+  color: #ffcc00; 
+  font-weight: bold;
 }

@@ -7,28 +7,24 @@ import Sidebar from "@/components/sidebar/sidebar";
 import "@/style.css";
 import {
   DuoIconsDashboard,
-  RiRobot2Line,
   StreamlineOnlineMedicalServiceMonitor,
 } from "@/assets/icons/svg";
-import Dashboard from "@/components/dashboard/dashboard";
+
+import Dashboard_ from "@/components/dashboard/dashboard";
 
 const HomeComponent: React.FC = () => {
   const [contenidoActual, setContenidoActual] = useState<JSX.Element | null>(
     null
   );
 
-  const [menuVisible, setMenuVisible] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuVisible(!menuVisible);
-  };
-
-  const dashboardClick = () => {
-    setContenidoActual(<Dashboard />);
+  const handleDashboardClick = () => {
+    setContenidoActual(<Dashboard_ />);
+    console.log("dashboard");
   };
 
   const handlePacienteClick = () => {
     setContenidoActual(<PacienteTable />);
+    console.log("pacientes");
   };
 
   const handleConsultasClick = () => {
@@ -40,7 +36,7 @@ const HomeComponent: React.FC = () => {
     {
       label: "Dashboard",
       icon: DuoIconsDashboard,
-      subItems: [{ label: "Dash", onclick: dashboardClick }],
+      onClick: handleDashboardClick,
     },
     {
       label: "Registros",
@@ -58,16 +54,8 @@ const HomeComponent: React.FC = () => {
 
   return (
     <>
-      <div className="btn-menu-div">
-        <button className="btn-menu" onClick={toggleMenu}>
-          <RiRobot2Line />
-          <span>.S.y.R.M.H</span>
-        </button>
-      </div>
       <div className="home">
-        <section
-          className={`sidebar-div ${menuVisible ? "sidebar-div-visible" : ""}`}
-        >
+        <section className="sidebar-div">
           <Sidebar items={navItems} />
         </section>
 
