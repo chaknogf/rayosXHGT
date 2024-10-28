@@ -8,7 +8,6 @@ interface NavItem {
   href?: string;
   onClick?: () => void;
   subItems?: NavItem[];
-  item?: string;
 }
 
 interface NavComponentProps {
@@ -17,9 +16,14 @@ interface NavComponentProps {
 
 const Sidebar: React.FC<NavComponentProps> = ({ items }) => {
   const [openSubMenuIndex, setOpenSubMenuIndex] = useState<number | null>(null);
+  const [activeLink, setActiveLink] = useState<string | null>(null);
 
   const toggleSubMenu = (index: number) => {
     setOpenSubMenuIndex(openSubMenuIndex === index ? null : index);
+  };
+
+  const handleLinkClick = (link: string) => {
+    setActiveLink(link);
   };
 
   return (
@@ -37,10 +41,12 @@ const Sidebar: React.FC<NavComponentProps> = ({ items }) => {
                 if (item.subItems) {
                   e.preventDefault();
                   toggleSubMenu(index);
+                } else {
+                  handleLinkClick(item.href || "");
                 }
                 item.onClick?.();
               }}
-              className="nav-link-s"
+              className={`nav-link-s ${activeLink === item.href ? "active" : ""}`}
             >
               <div className="icon-item-s">{item.icon && item.icon({})}</div>
               <span className="label-item-s">{item.label}</span>
@@ -52,8 +58,13 @@ const Sidebar: React.FC<NavComponentProps> = ({ items }) => {
                   <li key={subIndex}>
                     <a
                       href={subItem.href}
-                      onClick={subItem.onClick}
-                      className="sub-nav-link"
+                      onClick={(e) => {
+                        handleLinkClick(subItem.href || "");
+                        subItem.onClick?.();
+                      }}
+                      className={`sub-nav-link ${
+                        activeLink === subItem.href ? "active" : ""
+                      }`}
                     >
                       <div className="icon-subitem-s">
                         {subItem.icon && subItem.icon({})}
