@@ -1,30 +1,74 @@
 import React, { useState } from "react";
+import "./search.css"; // Asegúrate de agregar este archivo de estilos
 
-interface SearchProps {
-  onSearch: (term: string) => void; // función para enviar el término de búsqueda
-  placeholder?: string; // placeholder opcional
+interface InputConfig {
+  name: string;
+  type: string;
+  placeholder?: string;
 }
 
-const Search: React.FC<SearchProps> = ({ onSearch, placeholder = "Buscar..." }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+interface SearchProps {
+  inputs: InputConfig[]; // Lista de configuraciones para cada input
+  onSearch: (values: { [key: string]: string }) => void; // Función que recibe los valores de los inputs
+}
 
-  // Manejar cambios en el input
+const Search: React.FC<SearchProps> = ({ inputs, onSearch }) => {
+  const [formValues, setFormValues] = useState<{ [key: string]: string }>(
+    inputs.reduce((acc, input) => ({ ...acc, [input.name]: "" }), {})
+  );
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const term = event.target.value;
-    setSearchTerm(term);
-    onSearch(term); // enviar el término de búsqueda a la función proporcionada
+    const { name, value } = event.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    // Verificar si al menos un campo tiene valor
+    const hasValues = Object.values(formValues).some(
+      (value) => value.trim() !== ""
+    );
+
+    if (hasValues) {
+      onSearch(formValues); // Enviar los valores del formulario
+    } else {
+      console.log(
+        "Al menos un campo debe tener valor para realizar la búsqueda."
+      );
+    }
+  };
+
+  const handleClear = () => {
+    // Restablecer todos los valores del formulario
+    setFormValues(
+      inputs.reduce((acc, input) => ({ ...acc, [input.name]: "" }), {})
+    );
   };
 
   return (
-    <div className="search-container">
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={handleChange}
-        placeholder={placeholder}
-        className="search-input"
-      />
-    </div>
+    <form className="search-container" onSubmit={handleSubmit}>
+      {inputs.map((input) => (
+        <input
+          key={input.name}
+          type={input.type}
+          name={input.name}
+          value={formValues[input.name]}
+          onChange={handleChange}
+          placeholder={input.placeholder}
+          className="search-input"
+        />
+      ))}
+      <button type="submit" className="search-button">
+        Buscar
+      </button>
+      <button type="button" onClick={handleClear} className="search-button">
+        Borrar
+      </button>
+    </form>
   );
 };
 

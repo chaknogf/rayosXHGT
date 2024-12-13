@@ -1,12 +1,8 @@
-
-import "@/components/card/card.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PacienteForm from "@/modules/registros.module/pacientes/formularioPaciente";
 import DataCards from "@/components/card/card";
-
 import { FaEdit } from "react-icons/fa";
-// import "@/customstyles.css"
-
+import { getPacientes } from "@/services/pacientes"; // Importar el servicio
 
 interface Paciente {
   id: number;
@@ -22,173 +18,49 @@ interface Paciente {
   dpi?: string;
 }
 
-const paciente: Paciente[] = [
-  {
-    id: 1,
-    nombre: "David",
-    apellido: "Pérez",
-    nacimiento: "1986-08-12",
-    expediente: 23555,
-    estado: "v",
-    sexo: "m",
-    direccion: "aldea buena vistas",
-    municipio: 401,
-    departamento: 4,
-    dpi: "1344678900101"
-  },
-  {
-    id: 2,
-    nombre: "María",
-    apellido: "González",
-    nacimiento: "1982-01-23",
-    expediente: 24490,
-    estado: "m",
-    sexo: "f",
-    dpi: "6789013450406"
-  },
-  {
-    id: 3,
-    nombre: "Carlos Gudiel",
-    apellido: "López Aragon",
-    nacimiento: "1999-02-17",
-    expediente: 1245,
-    estado: "v",
-    sexo: "m",
-  },
-  {
-    id: 4,
-    nombre: "Juan",
-    apellido: "Pérez",
-    nacimiento: "1986-08-12",
-    expediente: 23555,
-    estado: "v",
-    sexo: "m",
-    direccion: "aldea buena vistas",
-    municipio: 401,
-    departamento: 4,
-    dpi: "1344678900101"
-  },
-  {
-    id: 5,
-    nombre: "Juan",
-    apellido: "Pérez",
-    nacimiento: "1986-08-12",
-    expediente: 23555,
-    estado: "v",
-    sexo: "m",
-    direccion: "aldea buena vistas",
-    municipio: 401,
-    departamento: 4,
-    dpi: "1344678900101"
-  },
-  {
-    id: 6,
-    nombre: "Juan",
-    apellido: "Pérez",
-    nacimiento: "1986-08-12",
-    expediente: 23555,
-    estado: "v",
-    sexo: "m",
-    direccion: "aldea buena vistas",
-    municipio: 401,
-    departamento: 4,
-    dpi: "1344678900101"
-  },
-  {
-    id: 1,
-    nombre: "Juan",
-    apellido: "Pérez",
-    nacimiento: "1986-08-12",
-    expediente: 23555,
-    estado: "v",
-    sexo: "m",
-    direccion: "aldea buena vistas",
-    municipio: 401,
-    departamento: 4,
-    dpi: "1344678900101"
-  },
-  {
-    id: 2,
-    nombre: "María",
-    apellido: "González",
-    nacimiento: "1982-01-23",
-    expediente: 24490,
-    estado: "m",
-    sexo: "f",
-    dpi: "6789013450406"
-  },
-  {
-    id: 3,
-    nombre: "Carlos Gudiel",
-    apellido: "López Aragon",
-    nacimiento: "1999-02-17",
-    expediente: 1245,
-    estado: "v",
-    sexo: "m",
-  },
-  {
-    id: 4,
-    nombre: "Juan",
-    apellido: "Pérez",
-    nacimiento: "1986-08-12",
-    expediente: 23555,
-    estado: "v",
-    sexo: "m",
-    direccion: "aldea buena vistas",
-    municipio: 401,
-    departamento: 4,
-    dpi: "1344678900101"
-  },
-  {
-    id: 5,
-    nombre: "Juan",
-    apellido: "Pérez",
-    nacimiento: "1986-08-12",
-    expediente: 23555,
-    estado: "v",
-    sexo: "m",
-    direccion: "aldea buena vistas",
-    municipio: 401,
-    departamento: 4,
-    dpi: "1344678900101"
-  },
-  {
-    id: 6,
-    nombre: "Juan",
-    apellido: "Pérez",
-    nacimiento: "1986-08-12",
-    expediente: 23555,
-    estado: "v",
-    sexo: "m",
-    direccion: "aldea buena vistas",
-    municipio: 401,
-    departamento: 4,
-    dpi: "1344678900101"
-  }
-];
-
-
 const IconReactEdit = () => {
-  
-  return (
-    <FaEdit style={{ height: "1.7rem", width: "1.7rem"}} />
-  )
-
-}
+  return <FaEdit style={{ height: "0.83rem", width: "0.83rem" }} />;
+};
 
 const PacienteTable: React.FC = () => {
+  const [pacientes, setPacientes] = useState<Paciente[]>([]); // Estado para los pacientes
   const [showForm, setShowForm] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Para manejar la carga
+
+  useEffect(() => {
+    const fetchPacientes = async () => {
+      try {
+        const data = await getPacientes(); // Llama al servicio
+        setPacientes(data); // Actualiza el estado
+      } catch (error) {
+        console.error("Error al obtener los pacientes:", error);
+      } finally {
+        setIsLoading(false); // Finaliza la carga
+      }
+    };
+
+    fetchPacientes(); // Ejecuta la función al montar el componente
+  }, []);
 
   const handleButtonClick = () => {
     setShowForm(true);
   };
 
   const items = [
-    { label: "agregar", onClick: handleButtonClick, section: 'option', render: () => <IconReactEdit /> },
-    { label: "agregar", onClick: handleButtonClick, section: 'option' },
-    { label: "agregar", onClick: handleButtonClick, section: 'option'},
-    { label: "Expediente", key: "expediente", section: 'header' },
-    { label: "paciente", key: "nombre", section: 'header' },
+    {
+      label: "agregar",
+      onClick: handleButtonClick,
+      section: "option",
+      render: () => <IconReactEdit />,
+    },
+    {
+      label: "agregar",
+      onClick: handleButtonClick,
+      section: "option",
+      render: () => <IconReactEdit />,
+    },
+    { label: "Id", key: "id", section: "header", className: "text-90" },
+    { label: "paciente", key: "nombre", section: "header" },
     { label: "Sexo", key: "sexo", section: "header" },
     { label: "Direccion", key: "direccion", section: "body" },
     { label: "F.Nac edad", key: "nacimiento", section: "body" },
@@ -196,14 +68,17 @@ const PacienteTable: React.FC = () => {
     { label: "id", key: "id" },
     { label: "DPI", key: "dpi", section: "body" },
   ];
-  
+
+  if (isLoading) {
+    return <div>Cargando datos...</div>; // Mostrar un mensaje mientras carga
+  }
 
   return (
     <div>
       {showForm ? (
         <PacienteForm /> // Renderiza el formulario si showForm es true
       ) : (
-        <DataCards data={paciente} items={items} /> // Renderiza los datos si showForm es false
+        <DataCards data={pacientes} items={items} /> // Renderiza los datos obtenidos
       )}
     </div>
   );

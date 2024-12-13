@@ -26,11 +26,20 @@ import {
 } from "@/dictionary/enums/enum";
 import { obtenerReferencia } from "@/dictionary/enums/hospitales";
 import { HealthiconsHospitalized } from "@/assets/icons/svg";
+import "@/components/card/css/render.css";
 // Aquí comienzan los renderizadores
+
+function formatAgeText(text: string, cls: string): React.ReactNode {
+  const formattedText = text.replace(
+    /\b(años|meses|días)\b/g,
+    (match) => `<span class="${cls}">${match}</span>`
+  );
+  return <span dangerouslySetInnerHTML={{ __html: formattedText }} />;
+}
 
 const renderSexoIcon = (sexo: string) => {
   const iconZice: string = "1.6rem";
-  if (sexo === "m") {
+  if (sexo === "M") {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +52,7 @@ const renderSexoIcon = (sexo: string) => {
         <path d="M8 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M6 6.75v8.5a.75.75 0 0 0 1.5 0V10.5a.5.5 0 0 1 1 0v4.75a.75.75 0 0 0 1.5 0v-8.5a.25.25 0 1 1 .5 0v2.5a.75.75 0 0 0 1.5 0V6.5a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v2.75a.75.75 0 0 0 1.5 0v-2.5a.25.25 0 0 1 .5 0" />
       </svg>
     );
-  } else if (sexo === "f") {
+  } else if (sexo === "F") {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -60,14 +69,14 @@ const renderSexoIcon = (sexo: string) => {
   return "";
 };
 
-const renderExpediente = (value: number) => {
+const renderExpediente = (value: string) => {
   return <p className="text-exp expand-text">{value}</p>;
 };
 
 const renderEstado = (estado: string) => {
-  if (estado === "m") {
+  if (estado === "M") {
     return <FaRibbon style={{ height: "1.6rem", width: "1.6rem" }} />;
-  } else if (estado === "v") {
+  } else if (estado === "V") {
     return (
       <PiHeartbeatFill
         className="pulse zero"
@@ -109,10 +118,13 @@ const renderNombreColor = (sexo: string, nombre: string, apellido: string) => {
 };
 
 const renderEdadFunction = (nacimiento: string) => {
+  const ageText = formatoFecha(nacimiento); // Se llama directamente a la función para obtener el texto
+  const cls = "edad"; // Clase CSS para resaltar palabras específicas
+
   return (
     <div className="renE zero">
-      <p className="renEdad zero">{formatoFecha(nacimiento)}</p>
-      <p className="renEdad_ zero"> {calcularEdad(nacimiento)}</p>
+      <p className="renEdad zero edad">{formatAgeText(ageText, cls)}</p>
+      <p className="renEdad_ zero">{calcularEdad(nacimiento)}</p>
     </div>
   );
 };

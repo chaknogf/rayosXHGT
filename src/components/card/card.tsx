@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "@/components/card/card.css";
-import Loader from "../loader/loader";
+import "@/components/card/css/card.css";
+import { LoaderHamster as Loader } from "@/components/loader/loader";
 import { renderFunctions } from "@/components/card/rendersFunctions";
-import Search from "../search/search";
+import CardHeader from "@/components/card/CardHeader";
+import TableVertical from "@/components/card/TableVertical";
+import CardOptions from "@/components/card/CardOptions";
+import { CloseIcon } from "@/assets/icons/svg";
+import ConsultasCard from "./consultas";
 
 // Interfaz para definir las propiedades de cada campo en el card
 interface RegistoCard<T> {
@@ -34,91 +38,57 @@ interface ObjetX {
 
 const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
   const [showBody, setShowBody] = useState<boolean>(false);
-  let enterTimeout: ReturnType<typeof setTimeout>;
-  let leaveTimeout: ReturnType<typeof setTimeout>;
 
-  const handleMouseEnter = () => {
-    clearTimeout(leaveTimeout);
-    enterTimeout = setTimeout(() => setShowBody(true), 100);
+  const handleToggleBody = () => {
+    setShowBody(true);
   };
 
-  const handleMouseLeave = () => {
-    clearTimeout(enterTimeout);
-    leaveTimeout = setTimeout(() => setShowBody(false), 3200);
+  const handleCloseBody = () => {
+    setShowBody(false);
   };
 
   return (
     <div className="card-container" tabIndex={0}>
-      <div
-        className="card"
-        onClick={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className="card-header">
-          <div className="titulos">
-            {items
-              .filter((item) => item.section === "header")
-              .map((item, itemIndex) => {
-                const renderFnHeader =
-                  item.render || renderFunctions[item.key as string];
-                return (
-                  <div key={itemIndex} className={`item-label ${item.className || ""}`}>
-                    <strong className="labelStrong zero">{item.label}<br /></strong>
-                    {renderFnHeader
-                      ? renderFnHeader(data[0])
-                      : item.key && data[0][item.key] !== undefined
-                      ? String(data[0][item.key])
-                      : null}
-                  </div>
-                );
-              })}
-          </div>
-        </div>
+      <div className="card" onClick={handleToggleBody}>
+        {/* Usamos CardHeader para el encabezado */}
+        <CardHeader
+          data={data[0]}
+          items={items}
+          renderFunctions={renderFunctions}
+        />
 
         {showBody && (
-          <div>
-            <div className="card-options">
-              {items
-                .filter((item) => item.section === "option")
-                .map((item, itemIndex) => {
-                  const renderFnHeader =
-                    item.render || renderFunctions[item.key as string];
-                  return (
-                    <div key={itemIndex} className="card-options-item">
-                      <div className="btn-container">
-                        <button
-                          className="btn btn-opt zero"
-                          onClick={item.onClick}
-                        >
-                          {renderFnHeader ? renderFnHeader(data[0]) : item.key && data[0][item.key] !== undefined ? String(data[0][item.key]) : null}
-                        </button>
-                        <p className="label-btn">{item.label}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-            </div>
+          <>
+            <button
+              className=" btn btn-close-body"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCloseBody();
+              }}
+            >
+              <CloseIcon />
+            </button>
 
-            <div className="table-vertical">
-              {data.map((rowData, index) => (
-                <div key={index} className="table-row">
-                  {items
-                    .filter((item) => item.section === "body")
-                    .map((item, itemIndex) => {
-                      const renderFn = item.render || renderFunctions[item.key as string];
-                      return (
-                        <div className="table-item" key={itemIndex}>
-                          <div className="table-header">{item.label}:</div>
-                          <div className="table-body">
-                            {renderFn ? renderFn(rowData) : item.svgIcon ? item.svgIcon : item.key && rowData[item.key] !== undefined ? String(rowData[item.key]) : null}
-                          </div>
-                        </div>
-                      );
-                    })}
-                </div>
-              ))}
-            </div>
-          </div>
+            {/* Usamos TableVertical para la tabla */}
+            <TableVertical
+              data={data}
+              items={items}
+              renderFunctions={renderFunctions}
+            />
+
+            <ConsultasCard
+              data={data}
+              items={items}
+              renderFunctions={renderFunctions}
+            />
+
+            {/* Usamos CardOptions para las opciones */}
+            <CardOptions
+              data={data[0]}
+              items={items}
+              renderFunctions={renderFunctions}
+            />
+          </>
         )}
       </div>
     </div>
@@ -133,40 +103,25 @@ const DataCards = <T extends ObjetX>({
   items: RegistoCard<T>[];
 }) => {
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState<string>("");
-
-  const filteredData = data.filter((item) =>
-    items.some((field) =>
-      field.key ? String(item[field.key]).toLowerCase().includes(searchTerm.toLowerCase()) : false
-    )
-  );
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
+    const timer = setTimeout(() => setLoading(false), 400);
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <>
-      <div className="registro-card-container">
-        {loading ? (
-          <div className="loader-container">
-            <Loader />
-          </div>
-        ) : (
-          filteredData.map((item, index) => (
-            <DataCard key={index} data={[item]} items={items} />
-          ))
-        )}
-      </div>
-      
-      {/* Contenedor fijo para el componente de búsqueda */}
-      <div className="search-container">
-        <Search onSearch={setSearchTerm} /> {/* Componente de búsqueda */}
-      </div>
-    </>
+    <div className="registro-card-container">
+      {loading ? (
+        <div className="loader-container">
+          <Loader />
+        </div>
+      ) : (
+        data.map((item, index) => (
+          <DataCard key={index} data={[item]} items={items} />
+        ))
+      )}
+    </div>
   );
-  
 };
 
 export default DataCards;

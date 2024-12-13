@@ -4,7 +4,6 @@
 
 /* Estilos generales del sidebar */
 .sidebar-div {
-  
   width: 0;
   visibility: hidden;
 }
@@ -33,10 +32,8 @@
 
 /* pantallas grandes */
 @media (min-width: 768px) {
-
   .home {
     display: flex;
-
   }
 
   .contenido {
@@ -48,19 +45,12 @@
   }
 
   .sidebar-div {
-    width: 55px; 
+    width: 55px;
     visibility: visible;
     transition: width 0.5s ease, visibility 0s linear 0.5s;
   }
 
-  .sidebar-div:hover{
+  .sidebar-div:hover {
     width: 200px;
   }
-
-  
-  
-  
-  
 }
-
-

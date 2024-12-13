@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const Loader = () => {
+const LoaderHamster = () => {
   return (
-    <StyledWrapper>
+    <StyledWrapperHamster>
       <div
         aria-label="Orange and tan hamster running in a metal wheel"
         role="img"
@@ -49,11 +49,11 @@ const Loader = () => {
           </div>
         </div>
       </div>
-    </StyledWrapper>
+    </StyledWrapperHamster>
   );
 };
 
-const StyledWrapper = styled.div`
+const StyledWrapperHamster = styled.div`
   .wheel-and-hamster {
     --dur: 1s;
     position: relative;
@@ -509,4 +509,136 @@ const StyledWrapper = styled.div`
   }
 `;
 
-export default Loader;
+export { LoaderHamster };
+
+const LoaderBar = () => {
+  return (
+    <StyledWrapperBar>
+      <div className="loader" />
+    </StyledWrapperBar>
+  );
+};
+
+const StyledWrapperBar = styled.div`
+  .loader {
+    display: block;
+    position: relative;
+    height: 32px;
+    width: 500px;
+    background: #140f07;
+    border: 2px solid #08b5ff;
+    border-radius: 8px;
+    color: #102947;
+    font-weight: bolder;
+    overflow: hidden;
+  }
+
+  .loader::before {
+    content: "";
+    background: #0efff9;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    color: #102947;
+    animation: loading_302 10s linear infinite;
+  }
+
+  .loader:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 18px;
+    line-height: 32px;
+    color: #0efff9;
+    mix-blend-mode: difference;
+    animation: percentage_302 10s linear infinite;
+  }
+
+  @keyframes loading_302 {
+    0% {
+      width: 0;
+    }
+
+    100% {
+      width: 100%;
+    }
+  }
+
+  @keyframes percentage_302 {
+    0% {
+      content: "0%";
+    }
+
+    5% {
+      content: "5%";
+    }
+
+    10% {
+      content: "10%";
+    }
+
+    20% {
+      content: "20%";
+    }
+
+    30% {
+      content: "30%";
+    }
+
+    40% {
+      content: "40%";
+    }
+
+    50% {
+      content: "50%";
+    }
+
+    60% {
+      content: "60%";
+    }
+
+    70% {
+      content: "70%";
+    }
+
+    80% {
+      content: "80%";
+    }
+
+    90% {
+      content: "90%";
+    }
+
+    95% {
+      content: "95%";
+    }
+
+    96% {
+      content: "96%";
+    }
+
+    97% {
+      content: "97%";
+    }
+
+    98% {
+      content: "98%";
+    }
+
+    99% {
+      content: "99%";
+    }
+
+    100% {
+      content: "100%";
+    }
+  }
+`;
+
+export { LoaderBar };
