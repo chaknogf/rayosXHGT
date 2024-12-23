@@ -1,0 +1,8 @@
+.edad {
+  color: rgb(255, 179, 0);
+  font-weight: bold;
+}
+
+.nombre-propio {
+  text-transform: capitalize;
+}

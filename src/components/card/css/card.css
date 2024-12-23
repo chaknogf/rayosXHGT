@@ -1,0 +1,276 @@
+/* Estilo base para mobile-first */
+.registro-card-container {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr; /* Columna única en dispositivos móviles */
+  gap: 0.15rem;
+  padding: 0;
+  padding-right: 20px;
+  width: 100vw;
+  padding-bottom: 60px; /* Espacio inferior para que el search no se superponga */
+  flex-wrap: wrap; 
+}
+
+
+
+/* Para pantallas medianas y grandes */
+@media (min-width: 768px) {
+  .registro-card-container {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    width: 95vw;
+    flex: content;
+  }
+
+
+}
+
+@media (min-width: 1024px) {
+  .registro-card-container {
+    grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+  }
+
+  
+}
+
+.card-container {
+  position: relative;
+  width: 100%;
+  display: flexbox;
+}
+
+/* transition: all 2.3s ease-in-out;
+    overflow: hidden;  */
+
+.card {
+  border: 1px solid #ccc;
+  padding: 0.09rem;
+  border-radius: 5px;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  
+}
+
+.card-body {
+  resize: horizontal;
+  margin: 0;
+  padding: 0;
+  line-height: 3;
+}
+
+.card-content {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
+  gap: 0.28rem;
+  width: 60%;
+  margin-left: 0.5rem;
+  text-align: center; /* Centra el texto horizontalmente */
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: lighter;
+}
+
+
+.card-body-item {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: flex-end; /* Centra verticalmente el contenido */
+  line-height: 1.2; /* Ajusta el espaciado de línea para mejor apariencia */
+  border-radius: 8px;
+  padding: 0.05rem; /* Agrega padding para mejor visualización */
+  text-align: center; /* Centra el texto horizontalmente */
+  box-shadow: 0px 1.6px 1.9px #8884847a; /* Agrega una sombra ligera */
+  transition: box-shadow 0.3s ease; /* Transición suave al hover */
+}
+
+.card-body-item:hover {
+  box-shadow: 0px 2px 4px #4f81f6e7; /* Aumenta la sombra al hacer hover */
+}
+
+.label-item-body {
+  margin-right: 0.32rem;
+  font-weight: bolder;
+  font-size: 0.8rem;
+}
+
+
+
+.zero {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+.loader-container {
+  display: flex;
+  justify-content: start; /* Empieza desde la izquierda */
+  align-items: center; /* Centra verticalmente */
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+  margin-left: -150px;
+}
+
+/* Diseño adaptable a pantallas pequeñas */
+@media screen and (max-width: 728px) {
+  .card-container {
+    position: relative;
+    width: 100vw;
+  }
+
+
+
+  .loader-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: start; /* Centra verticalmente */
+    grid-column: 1 / -1; /* Asegúrate de que cubra todas las columnas */
+    height: 100vh; /* Ocupa toda la altura del viewport */
+  }
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: start; /* Centra verticalmente */
+  grid-column: 1 / -1; /* Asegúrate de que cubra todas las columnas */
+  height: 100vh; /* Ocupa toda la altura del viewport */
+}
+
+.btn-close-body {
+  width: 4px;
+  padding: 1px;
+  margin-left: 0;
+
+
+}
+
+
+.text-90 {
+  transform: rotate(-90deg);
+  overflow-wrap: anywhere;
+  font-size: x-small;
+  justify-items: start;
+  padding: 0;
+  margin: 0;
+}
+
+/* Contenedor de columnas dentro de cada tarjeta */
+.card-expanded-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+  gap: 0.1rem; /* Espaciado entre columnas */
+  width: 100%; /* Asegura que el contenedor use todo el ancho disponible */
+  padding: 0.1rem; /* Espaciado interno */
+  transition: all 0.3s ease-in-out; /* Animación suave al expandir */
+}
+
+/* Ajuste de las columnas individuales */
+.columna1,
+.columna2 {
+  
+  padding: 0.3rem; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
+}
+
+/* Responsividad: Apilar columnas en pantallas pequeñas */
+@media (max-width: 768px) {
+  .card-expanded-content {
+    grid-template-columns: 1fr; /* Una sola columna */
+  }
+
+  .columna1,
+  .columna2 {
+    margin-bottom: 1rem; /* Espaciado entre columnas apiladas */
+  }
+}
+
+/* Tabla principal */
+.styled-dark-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #03152f; /* Color de fondo general (color1) */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  ;
+}
+
+/* Encabezados */
+.dark-table-header {
+  background-color: #181223; /* Color del encabezado (color3) */
+  color: #e2d4ed; /* Color claro para el texto del encabezado */
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 10px;
+  text-align: left;
+  padding: 2px;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
+/* Filas alternadas */
+.dark-table-row:nth-child(even) {
+  background-color: #15193b; /* Color alternado (color2) */
+}
+
+.dark-table-row:nth-child(odd) {
+  background-color: #03152f; /* Color de fondo general (color1) */
+}
+
+.dark-table-row:hover {
+  background-color: #a58eb7; 
+  color: #2d1c49;
+  font-weight: bold;
+}
+
+.dark-table-row:hover .dark-table-cell {
+  color: #2d1c49;
+  font-weight: bold;
+}
+
+/* Celdas */
+.dark-table-cell {
+  padding: 2px;
+  font-size: 11px;
+  color: #e2d4ed; /* Texto claro */
+  overflow-wrap: break-word;
+  text-align: center;
+  vertical-align: middle;
+  
+}
+
+/* Hover en celdas */
+.dark-table-cell:hover {
+  background-color: hsl(34, 56%, 62%); 
+  color: #2d1c49;
+  font-weight: bold;
+}
+
+/* Espaciado adicional */
+.dark-spacing-wrapper {
+  margin-top: 10px;
+}
+
+/* Clases para texto */
+.text-color1 {
+  color: #03152f;
+}
+
+.text-color2 {
+  color: #15193b;
+}
+
+.text-color3 {
+  color: #2d1c49;
+}
+
+.text-color4 {
+  color: #4e1d58;
+}
+
+.text-color5 {
+  color: #791865;
+}

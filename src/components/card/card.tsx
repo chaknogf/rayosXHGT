@@ -3,10 +3,11 @@ import "@/components/card/css/card.css";
 import { LoaderHamster as Loader } from "@/components/loader/loader";
 import { renderFunctions } from "@/components/card/rendersFunctions";
 import CardHeader from "@/components/card/CardHeader";
-import TableVertical from "@/components/card/TableVertical";
 import CardOptions from "@/components/card/CardOptions";
 import { CloseIcon } from "@/assets/icons/svg";
-import ConsultasCard from "./consultas";
+import DataBody from "@/components/card/DataBody";
+import DataConsultas from "./DataConsultas";
+import DataConTabla from "./DataConTabla";
 
 // Interfaz para definir las propiedades de cada campo en el card
 interface RegistoCard<T> {
@@ -60,7 +61,7 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
         {showBody && (
           <>
             <button
-              className=" btn btn-close-body"
+              className="btn btn-close-body"
               onClick={(e) => {
                 e.stopPropagation();
                 handleCloseBody();
@@ -69,20 +70,28 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
               <CloseIcon />
             </button>
 
-            {/* Usamos TableVertical para la tabla */}
-            <TableVertical
-              data={data}
-              items={items}
-              renderFunctions={renderFunctions}
-            />
-
-            <ConsultasCard
-              data={data}
-              items={items}
-              renderFunctions={renderFunctions}
-            />
-
-            {/* Usamos CardOptions para las opciones */}
+            {/* Contenedor de contenido expandido */}
+            <div className="card-expanded-content">
+              <div className="columna1">
+                <DataBody
+                  data={data}
+                  items={items}
+                  renderFunctions={renderFunctions}
+                />
+              </div>
+              <div className="columna2">
+                <DataConTabla
+                  data={data}
+                  items={items}
+                  renderFunctions={renderFunctions}
+                />
+                <DataConsultas
+                  data={data}
+                  items={items}
+                  renderFunctions={renderFunctions}
+                />
+              </div>
+            </div>
             <CardOptions
               data={data[0]}
               items={items}

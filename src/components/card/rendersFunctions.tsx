@@ -104,20 +104,37 @@ const renderStatusDocumento = (value: number) => {
 };
 
 const renderNombreColor = (sexo: string, nombre: string, apellido: string) => {
-  const className = sexo === "m" ? "hombre zero" : "mujer zero";
+  // Clase condicional basada en el sexo (sin toLowerCase)
+  const className = sexo === "M" ? "hombre zero" : "mujer zero";
+
+  // Función para convertir a formato título (Primera letra en mayúscula)
+  const toTitleCase = (value: string) => {
+    const exceptions = ["de", "del", "la", "y", "el", "en", "con"];
+    return value
+      .toLowerCase()
+      .split(" ")
+      .map(
+        (word) =>
+          exceptions.includes(word)
+            ? word // Si la palabra está en excepciones, no la cambia
+            : word.charAt(0).toUpperCase() + word.slice(1) // Si no está, la convierte en formato título
+      )
+      .join(" ");
+  };
+
   return (
     <div className="zero">
       <span className="zero expand-text">
         <span className={className} style={{ marginRight: "0.23rem" }}>
-          {nombre}
+          {toTitleCase(nombre)}
         </span>
-        <span className="zero">{apellido}</span>
+        <span>{toTitleCase(apellido)}</span>
       </span>
     </div>
   );
 };
 
-const renderEdadFunction = (nacimiento: string) => {
+const renderEdadFunction = (nacimiento: string, defuncion?: string) => {
   const ageText = formatoFecha(nacimiento); // Se llama directamente a la función para obtener el texto
   const cls = "edad"; // Clase CSS para resaltar palabras específicas
 
@@ -125,10 +142,14 @@ const renderEdadFunction = (nacimiento: string) => {
     <div className="renE zero">
       <p className="renEdad zero edad">{formatAgeText(ageText, cls)}</p>
       <p className="renEdad_ zero">{calcularEdad(nacimiento)}</p>
+      {defuncion && (
+        <p className="renDefuncion zero">
+          Defunción: {formatoFecha(defuncion)}
+        </p>
+      )}
     </div>
   );
 };
-
 const renderFecha = (value: string) => {
   return (
     <>
@@ -143,6 +164,10 @@ const renderDPI = (value: string) => {
       <p className="dpi">{FormartDPI(value)}</p>
     </>
   );
+};
+
+const renderTextOracion = (value: string) => {
+  return <p className="nombre-propio">{value}</p>;
 };
 
 const renderDireccion = (direccion: string, municipio: number) => {
@@ -177,7 +202,7 @@ const renderTipoConsulta = (value: number) => {
   const etiqueta: string = obtenerTipoConsulta(value);
   return (
     <>
-      <p>{etiqueta}</p>
+      <p className="m-0">{etiqueta}</p>
     </>
   );
 };
@@ -283,7 +308,8 @@ export const renderFunctions: Record<
   estadia: (item) => renderEstadia(item.estadia),
   sexo: (item) => renderSexoIcon(item.sexo),
   nombre: (item) => renderNombreColor(item.sexo, item.nombre, item.apellido),
-  nombres: (item) => renderNombreColor(item.sexo, item.nombre, item.apellido),
+  textoNombre: (item) => renderTextOracion(item.nombre),
+  textoApellido: (item) => renderTextOracion(item.apellido),
   estado: (item) => renderEstado(item.estado as string),
   nacimiento: (item) => renderEdadFunction(item.nacimiento as string),
   direccion: (item) => renderDireccion(item.direccion, item.municipio),
@@ -295,7 +321,7 @@ export const renderFunctions: Record<
   servicio: (item) => renderServicio(Number(item.servicio)),
   tipoConsulta: (item) => renderTipoConsulta(Number(item.tipoConsulta)),
   tipo_consulta: (item) => renderTipoConsulta(Number(item.tipo_consulta)),
-  status: (item) => renderStatusDocumento(Number(item.status)),
+  estatus: (item) => renderStatusDocumento(Number(item.estatus)),
   statusDocumento: (item) =>
     renderStatusDocumento(Number(item.statusDocumento)),
   referencias: (item) => renderReferencia(Number(item.referencias)),
@@ -303,5 +329,6 @@ export const renderFunctions: Record<
   estado_salud: (item) => renderEstadoSalud(Number(item.estado_salud)),
   especialistas: (item) => renderEspecialistas(Number(item.especialistas)),
   dpi: (item) => renderDPI(String(item.dpi)),
+
   // Asegúrate de cerrar la lista de claves correctamente
 };

@@ -2,20 +2,44 @@ import React, { useEffect, useState } from "react";
 import PacienteForm from "@/modules/registros.module/pacientes/formularioPaciente";
 import DataCards from "@/components/card/card";
 import { FaEdit } from "react-icons/fa";
-import { getPacientes } from "@/services/pacientes"; // Importar el servicio
+import { getPacientesVistas } from "@/services/pacientes";
+import { getConsultasPaciente } from "@/services/consultas";
 
-interface Paciente {
-  id: number;
+interface VistaPacientes {
+  paciente_id: number;
   nombre?: string;
   apellido?: string;
-  nacimiento?: string;
-  expediente: number;
-  estado?: string;
-  sexo?: string;
-  direccion?: string;
-  municipio?: number;
-  departamento?: number;
   dpi?: string;
+  pasaporte?: string;
+  sexo?: string;
+  nacimiento?: string;
+  nacionalidad?: string;
+  defuncion?: string;
+  estado?: string;
+  direccion?: string;
+  municipio?: string;
+  telefono1?: string;
+  telefono2?: string;
+  telefono3?: string;
+  email?: string;
+  expediente_id?: number;
+  expediente?: string;
+  hoja_emergencia?: string;
+  referencia_anterior?: string;
+  expediente_madre?: string;
+}
+
+interface ConsultaRapida {
+  id: number;
+  exp_id?: number;
+  paciente_id: number;
+  historia_clinica?: string;
+  fecha_consulta?: string;
+  hora?: string;
+  fecha_egreso?: string;
+  tipo_consulta?: number;
+  estatus?: number;
+  created_at?: string;
 }
 
 const IconReactEdit = () => {
@@ -23,23 +47,24 @@ const IconReactEdit = () => {
 };
 
 const PacienteTable: React.FC = () => {
-  const [pacientes, setPacientes] = useState<Paciente[]>([]); // Estado para los pacientes
+  const [pacientes, setPacientes] = useState<VistaPacientes[]>([]);
+  const [consultas, setConsultas] = useState<ConsultaRapida[]>([]);
   const [showForm, setShowForm] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // Para manejar la carga
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchPacientes = async () => {
       try {
-        const data = await getPacientes(); // Llama al servicio
+        const data = await getPacientesVistas(); // Llama al servicio
         setPacientes(data); // Actualiza el estado
       } catch (error) {
         console.error("Error al obtener los pacientes:", error);
       } finally {
-        setIsLoading(false); // Finaliza la carga
+        setIsLoading(false);
       }
     };
 
-    fetchPacientes(); // Ejecuta la función al montar el componente
+    fetchPacientes();
   }, []);
 
   const handleButtonClick = () => {
@@ -54,19 +79,24 @@ const PacienteTable: React.FC = () => {
       render: () => <IconReactEdit />,
     },
     {
-      label: "agregar",
-      onClick: handleButtonClick,
-      section: "option",
-      render: () => <IconReactEdit />,
+      label: "Id",
+      key: "paciente_id",
+      section: "header",
+      className: "text-90",
     },
-    { label: "Id", key: "id", section: "header", className: "text-90" },
     { label: "paciente", key: "nombre", section: "header" },
     { label: "Sexo", key: "sexo", section: "header" },
+    { label: "Expediente", key: "expediente", section: "body" },
     { label: "Direccion", key: "direccion", section: "body" },
     { label: "F.Nac edad", key: "nacimiento", section: "body" },
+    { label: "defuncion", key: "defuncion", section: "body" },
     { label: "estado", key: "estado", section: "header" },
-    { label: "id", key: "id" },
     { label: "DPI", key: "dpi", section: "body" },
+    { label: "Historia Clinica", key: "historia_clinica", section: "tabla" },
+    { label: "fecha de consulta", key: "fecha_consulta", section: "tabla" },
+    { label: "hora", key: "hora", section: "tabla" },
+    { label: "tipo de consulta", key: "tipo_consulta", section: "tabla" },
+    { label: "Estatus", key: "estatus", section: "tabla" },
   ];
 
   if (isLoading) {

@@ -1,0 +1,66 @@
+.card-options {
+  display: flex;
+  flex-direction: row; /* Mantiene los elementos en línea horizontal */
+  justify-content: flex-end; /* Alinea los elementos al final del contenedor */
+  align-items: center; /* Centra verticalmente los elementos */
+  gap: 0.22rem; /* Espacio entre los elementos */
+  margin: 0; /* Elimina márgenes adicionales */
+  
+}
+
+/* Contenedor del botón y la etiqueta */
+.btn-container {
+  display: flex;
+  flex-direction: column; /* Cambia a columna si botón y etiqueta van uno sobre otro */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  padding: 2px;
+  height: 100%; /* Asegura que ocupe el 100% de la altura disponible */
+ 
+ 
+}
+
+.btn-container:hover .label-btn {
+  color: #9beb1be6; /* Cambia el color de la etiqueta en hover */
+  font-weight: bold; /* Resalta la etiqueta al pasar el mouse */
+  
+}
+
+/* Estilo de la etiqueta */
+.label-btn {
+  font-weight: 300; /* Letras más ligeras */
+  line-height: 0.6; /* Ajusta el espacio entre líneas */
+  font-size: 0.8rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  padding: 4px;
+  margin: 0;
+  text-align: center; /* Alinea el texto al centro */
+  
+}
+
+/* Estilo del botón */
+.btn-opt {
+  border-radius: 4px; /* Bordes redondeados */
+  margin-right: 0.3rem; /* Espacio a la derecha */
+  padding: 8px 10px; /* Ajusta el tamaño del botón */
+  cursor: pointer; /* Cambia el puntero al pasar sobre el botón */
+  transition: background-color 0.3s ease; /* Animación suave */
+  
+}
+
+.btn-opt:hover {
+  background-color: #e6f7ff; /* Color de fondo al pasar el mouse */
+}
+
+/* Botón con estilo específico (detalles) */
+.detalle-btn {
+  border: 2px solid #1bc5e6; /* Borde azul claro */
+  background-color: transparent; /* Fondo transparente */
+  color: #1bc5e6; /* Texto azul */
+  
+}
+
+.detalle-btn:hover {
+  background-color: #1bc5e6; /* Fondo azul al pasar el mouse */
+  color: #ffffff; /* Texto blanco */
+}

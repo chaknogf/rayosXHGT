@@ -1,0 +1,66 @@
+.table-vertical {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+
+.table-body {
+  flex: 2;
+  padding: auto;
+}
+
+
+/* Diseño adaptable a pantallas pequeñas */
+@media screen and (max-width: 728px) {
+  
+
+  .table-row {
+    flex-direction: column;
+  }
+
+  .table-header {
+    width: 0.3rem;
+    text-align: center;
+    padding: 1px;
+    margin: 0;
+    
+  }
+
+  .table-body {
+    text-align: center;
+  }
+ 
+}
+
+.rotate-text-90 {
+  transform: rotate(-90deg);
+}
+
+.data-card {
+  display: inline;
+}
+.data-item {
+  padding: auto;
+  font-size: 13px;
+}
+
+.data-header {
+  font-weight: bold;
+  text-align: left;
+  overflow-wrap: anywhere;
+  padding: 1.2px;
+  margin-right: 0.3rem;
+  transform: rotate( 0deg);
+  font-size: medium;
+}
+
+.data-item:hover {
+  background-color: #55e5d7ab;
+  color: #010c0e;
+  font-size: large;
+  border-radius: 3px;
+}
+
