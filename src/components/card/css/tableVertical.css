@@ -5,18 +5,13 @@
   border-collapse: collapse;
 }
 
-
-
 .table-body {
   flex: 2;
   padding: auto;
 }
 
-
 /* Diseño adaptable a pantallas pequeñas */
 @media screen and (max-width: 728px) {
-  
-
   .table-row {
     flex-direction: column;
   }
@@ -26,13 +21,11 @@
     text-align: center;
     padding: 1px;
     margin: 0;
-    
   }
 
   .table-body {
     text-align: center;
   }
- 
 }
 
 .rotate-text-90 {
@@ -53,14 +46,14 @@
   overflow-wrap: anywhere;
   padding: 1.2px;
   margin-right: 0.3rem;
-  transform: rotate( 0deg);
+  transform: rotate(0deg);
   font-size: medium;
 }
 
 .data-item:hover {
   background-color: #55e5d7ab;
-  color: #010c0e;
-  font-size: large;
+  color: #b7f6fc;
+  font-weight: bolder;
+  text-shadow: #0e1b2ffd 1px 1px 2px;
   border-radius: 3px;
 }
-

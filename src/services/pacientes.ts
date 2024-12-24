@@ -1,6 +1,6 @@
 
-
-const API = "http://192.168.0.44:8000";
+import { UrlApi } from "./api";
+const API = UrlApi;
 
 
 interface Paciente {

@@ -27,7 +27,34 @@ import {
 import { obtenerReferencia } from "@/dictionary/enums/hospitales";
 import { HealthiconsHospitalized } from "@/assets/icons/svg";
 import "@/components/card/css/render.css";
-// Aquí comienzan los renderizadores
+import CopyableText from "@/components/card/CopyableText";
+
+const copyToClipboard = (e: React.MouseEvent<HTMLParagraphElement>) => {
+  const element = e.currentTarget;
+  const range = document.createRange();
+  range.selectNodeContents(element);
+  const selection = window.getSelection();
+  if (selection) {
+    selection.removeAllRanges();
+    selection.addRange(range);
+    document.execCommand("copy");
+    console.log("Texto copiado:", element.textContent);
+    // Crear el mensaje de alerta
+    const alert = document.createElement("div");
+    alert.className = "alert";
+    alert.textContent = "Texto copiado al portapapeles";
+
+    // Añadir el mensaje al DOM
+    document.body.appendChild(alert);
+
+    // Eliminar el mensaje después de 1 segundo
+    setTimeout(() => {
+      alert.remove();
+    }, 1000);
+
+    selection.removeAllRanges(); // Para deseleccionar después de copiar
+  }
+};
 
 function formatAgeText(text: string, cls: string): React.ReactNode {
   const formattedText = text.replace(
@@ -70,7 +97,13 @@ const renderSexoIcon = (sexo: string) => {
 };
 
 const renderExpediente = (value: string) => {
-  return <p className="text-exp expand-text">{value}</p>;
+  return (
+    <>
+      <p onClick={copyToClipboard} className="text-exp expand-text">
+        {value}
+      </p>
+    </>
+  );
 };
 
 const renderEstado = (estado: string) => {
@@ -140,7 +173,9 @@ const renderEdadFunction = (nacimiento: string, defuncion?: string) => {
 
   return (
     <div className="renE zero">
-      <p className="renEdad zero edad">{formatAgeText(ageText, cls)}</p>
+      <p onClick={copyToClipboard} className="renEdad zero edad">
+        {formatAgeText(ageText, cls)}
+      </p>
       <p className="renEdad_ zero">{calcularEdad(nacimiento)}</p>
       {defuncion && (
         <p className="renDefuncion zero">
@@ -153,21 +188,27 @@ const renderEdadFunction = (nacimiento: string, defuncion?: string) => {
 const renderFecha = (value: string) => {
   return (
     <>
-      <p className="m-0">{formatoFecha(value)}</p>
+      <p onClick={copyToClipboard} className="m-0">
+        {formatoFecha(value)}
+      </p>
     </>
   );
 };
 
 const renderDPI = (value: string) => {
   return (
-    <>
-      <p className="dpi">{FormartDPI(value)}</p>
-    </>
+    <p onClick={copyToClipboard} className="dpi">
+      {FormartDPI(value)}
+    </p>
   );
 };
 
 const renderTextOracion = (value: string) => {
-  return <p className="nombre-propio">{value}</p>;
+  return (
+    <p onClick={copyToClipboard} className="nombre-propio">
+      {value}
+    </p>
+  );
 };
 
 const renderDireccion = (direccion: string, municipio: number) => {
@@ -175,7 +216,10 @@ const renderDireccion = (direccion: string, municipio: number) => {
 
   return (
     <>
-      {direccion}, {etiqueta}
+      <p onClick={copyToClipboard} className="m-0">
+        {" "}
+        {direccion}, {etiqueta}
+      </p>
     </>
   );
 };
@@ -329,6 +373,6 @@ export const renderFunctions: Record<
   estado_salud: (item) => renderEstadoSalud(Number(item.estado_salud)),
   especialistas: (item) => renderEspecialistas(Number(item.especialistas)),
   dpi: (item) => renderDPI(String(item.dpi)),
-
+  copyableText: (item) => <CopyableText value={item.copyableText} />,
   // Asegúrate de cerrar la lista de claves correctamente
 };

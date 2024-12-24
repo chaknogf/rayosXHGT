@@ -3,7 +3,7 @@ import PacienteForm from "@/modules/registros.module/pacientes/formularioPacient
 import DataCards from "@/components/card/card";
 import { FaEdit } from "react-icons/fa";
 import { getPacientesVistas } from "@/services/pacientes";
-import { getConsultasPaciente } from "@/services/consultas";
+import useCopyToClipboard from "@/utils/copyClick";
 
 interface VistaPacientes {
   paciente_id: number;
@@ -27,12 +27,7 @@ interface VistaPacientes {
   hoja_emergencia?: string;
   referencia_anterior?: string;
   expediente_madre?: string;
-}
-
-interface ConsultaRapida {
-  id: number;
   exp_id?: number;
-  paciente_id: number;
   historia_clinica?: string;
   fecha_consulta?: string;
   hora?: string;
@@ -48,7 +43,6 @@ const IconReactEdit = () => {
 
 const PacienteTable: React.FC = () => {
   const [pacientes, setPacientes] = useState<VistaPacientes[]>([]);
-  const [consultas, setConsultas] = useState<ConsultaRapida[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -91,7 +85,11 @@ const PacienteTable: React.FC = () => {
     { label: "F.Nac edad", key: "nacimiento", section: "body" },
     { label: "defuncion", key: "defuncion", section: "body" },
     { label: "estado", key: "estado", section: "header" },
-    { label: "DPI", key: "dpi", section: "body" },
+    {
+      label: "DPI",
+      key: "dpi",
+      section: "body",
+    },
     { label: "Historia Clinica", key: "historia_clinica", section: "tabla" },
     { label: "fecha de consulta", key: "fecha_consulta", section: "tabla" },
     { label: "hora", key: "hora", section: "tabla" },
