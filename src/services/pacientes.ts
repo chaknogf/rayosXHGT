@@ -73,29 +73,70 @@ export const getPacientesVistas = async (): Promise<VistaPacientes[]> => {
     console.table(response);
 };
 
-// export async function getPacienteById(id: number) {
-//     return (`${API}/paciente_id/?${id}`);
-// }
+export const consultarapida = async (paciente: number): Promise<VistaPacientes[]> => {
+    try {
+        const response = await fetch(`${API}/consultarapida/?paciente_id=${paciente}`);
 
-// export async function crearPaciente(data: Partial<Paciente>): Promise<Paciente> {
-//     return fetchData<Paciente>("/pacientes", {
-//         method: "POST",
-//         body: JSON.stringify(data),
-//     });
-// }
+        if (!response.ok) {
+            throw new Error(`Error al obtener los pacientes: ${response.status} ${response.statusText}`);
+        }
 
-// export async function actualizarPaciente(
-//     id: number,
-//     data: Partial<Paciente>
-// ): Promise<Paciente> {
-//     return fetchData<Paciente>(`/pacientes/${id}`, {
-//         method: "PUT",
-//         body: JSON.stringify(data),
-//     });
-// }
+        const data = await response.json();
+        console.table(data); // Mostrar los datos en formato de tabla
+        return data;
+    } catch (error) {
+        console.error("Error en consultarapida:", error);
+        throw error; // Rethrow para que sea manejado por la función que lo llama
+    }
+};
 
-// export async function eliminarPaciente(id: number): Promise<void> {
-//     return fetchData<void>(`/pacientes/${id}`, {
-//         method: "DELETE",
-//     });
-// }
+export const getPacientes_id = async (filter: Record<string, any>): Promise<VistaPacientes[]> => {
+    // Construir la URL base
+    let url = `${API}/paciente_id`;  // Asumimos que el endpoint correcto es '/paciente_id'
+    // Verificar y agregar parámetros dinámicos según los filtros
+    const params = new URLSearchParams();
+    if (filter.id) {  // Corregir el nombre del filtro a 'id'
+        params.append("id", filter.id); // El primer parámetro no debe tener el signo de interrogación
+    }
+    if (filter.expediente) {
+        params.append("expediente", filter.expediente);
+    }
+    if (filter.nombre) {
+        params.append("nombre", filter.nombre);
+    }
+    if (filter.apellido) {
+        params.append("apellido", filter.apellido);
+    }
+    if (filter.dpi) {
+        params.append("dpi", filter.dpi);
+    }
+    if (filter.nacimiento) {
+        params.append("nacimiento", filter.nacimiento);
+    }
+    if (filter.madre) {
+        params.append("madre", filter.madre);
+    }
+    // Construir la URL final con los parámetros
+    if (params.toString()) {
+        url += `?${params.toString()}`;
+    }
+    // Realizar la petición
+    const response = await fetch(url);
+    // Manejar errores de la respuesta
+    if (!response.ok) {
+        throw new Error("Error al obtener los pacientes");
+    }
+
+    // Retornar los datos en formato JSON
+    const data = await response.json();
+
+
+
+    // Verificar si la respuesta es un arreglo
+    if (Array.isArray(data)) {
+        return data;
+    } else {
+        console.error("La respuesta no es un arreglo:", data);
+        return []; // En caso de que no sea un arreglo, retornamos un arreglo vacío
+    }
+};

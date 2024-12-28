@@ -56,6 +56,28 @@ const copyToClipboard = (e: React.MouseEvent<HTMLParagraphElement>) => {
   }
 };
 
+// const handleCopy = (e: React.MouseEvent<HTMLElement>) => {
+//   const text = e.target instanceof HTMLElement ? e.target.textContent : "";
+
+//   if (text) {
+//     // Crear un ClipboardItem para usar con navigator.clipboard.write
+//     const clipboardItem = new ClipboardItem({
+//       "text/plain": new Blob([text], { type: "text/plain" }),
+//     });
+
+//     navigator.clipboard
+//       .write([clipboardItem]) // Usar write con ClipboardItem
+//       .then(() => {
+//         console.log("Texto copiado usando ClipboardItem:", text);
+//       })
+//       .catch((err) => {
+//         console.error("Error al copiar:", err);
+//       });
+//   } else {
+//     console.warn("El elemento no tiene texto para copiar.");
+//   }
+// };
+
 function formatAgeText(text: string, cls: string): React.ReactNode {
   const formattedText = text.replace(
     /\b(años|meses|días)\b/g,
@@ -124,15 +146,13 @@ const renderStatusDocumento = (value: number) => {
   if (value === 1) {
     return (
       <>
-        <HealthiconsHospitalized
-          style={{ height: "1.8rem", width: "1.8rem" }}
-        />
+        <HealthiconsHospitalized className="contorno icon-status" />
       </>
     );
   } else if (value === 2) {
-    return <FcOpenedFolder style={{ height: "1.8rem", width: "1.8rem" }} />;
+    return <FcOpenedFolder className="contorno icon-status" />;
   } else if (value === 3) {
-    return <FcExport style={{ height: "1.8rem", width: "1.8rem" }} />;
+    return <FcExport className="contorno icon-status" />;
   }
 };
 
@@ -157,7 +177,7 @@ const renderNombreColor = (sexo: string, nombre: string, apellido: string) => {
 
   return (
     <div className="zero">
-      <span className="zero expand-text">
+      <span onClick={copyToClipboard} className="zero expand-text">
         <span className={className} style={{ marginRight: "0.23rem" }}>
           {toTitleCase(nombre)}
         </span>
@@ -167,7 +187,7 @@ const renderNombreColor = (sexo: string, nombre: string, apellido: string) => {
   );
 };
 
-const renderEdadFunction = (nacimiento: string, defuncion?: string) => {
+const renderEdadFunction = (nacimiento: string) => {
   const ageText = formatoFecha(nacimiento); // Se llama directamente a la función para obtener el texto
   const cls = "edad"; // Clase CSS para resaltar palabras específicas
 
@@ -177,19 +197,42 @@ const renderEdadFunction = (nacimiento: string, defuncion?: string) => {
         {formatAgeText(ageText, cls)}
       </p>
       <p className="renEdad_ zero">{calcularEdad(nacimiento)}</p>
-      {defuncion && (
-        <p className="renDefuncion zero">
-          Defunción: {formatoFecha(defuncion)}
-        </p>
-      )}
     </div>
   );
 };
+
+const renderDefuncionFunction = (defuncion: string | null) => {
+  const ageText = formatoFecha(defuncion || ""); // Si defuncion es null, usamos cadena vacía
+  const cls = "edad"; // Clase CSS para resaltar palabras específicas
+  const isHidden = !defuncion; // Condición para ocultar el elemento
+
+  return (
+    <div className="renE zero">
+      <p
+        onClick={copyToClipboard}
+        className={`renEdad zero edad ${isHidden ? "hidden" : ""}`} // Aplica 'hidden' si no hay defuncion
+      >
+        {formatAgeText(ageText, cls)}
+      </p>
+    </div>
+  );
+};
+
 const renderFecha = (value: string) => {
   return (
     <>
       <p onClick={copyToClipboard} className="m-0">
         {formatoFecha(value)}
+      </p>
+    </>
+  );
+};
+
+const renderId = (value: number) => {
+  return (
+    <>
+      <p onClick={copyToClipboard} className="m-0">
+        {value}
       </p>
     </>
   );
@@ -340,6 +383,7 @@ export const renderFunctions: Record<
   string,
   (item: ObjetX) => React.ReactNode
 > = {
+  paciente_id: (item) => renderId(Number(item.paciente_id)),
   expediente: (item) => renderExpediente(item.expediente),
   fecha: (item) => renderFecha(item.fecha),
   fecha_consulta: (item) => renderFecha(item.fecha_consulta),
@@ -356,6 +400,7 @@ export const renderFunctions: Record<
   textoApellido: (item) => renderTextOracion(item.apellido),
   estado: (item) => renderEstado(item.estado as string),
   nacimiento: (item) => renderEdadFunction(item.nacimiento as string),
+  defuncion: (item) => renderDefuncionFunction(item.defuncion as string),
   direccion: (item) => renderDireccion(item.direccion, item.municipio),
   cita: (item) => renderCitas(Number(item.cita)),
   citas: (item) => renderCitas(Number(item.citas)),

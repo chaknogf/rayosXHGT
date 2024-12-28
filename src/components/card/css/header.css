@@ -115,8 +115,8 @@ tr:hover .dir {
     rgb(24, 223, 24),
     rgb(247, 146, 247)
   );
-  background-size: 400%;
-  background-clip: text; /* Propiedad estándar */
+  background-size: 300%;
+  background-clip:border-box;
   -webkit-background-clip: text; /* Para compatibilidad con WebKit (Safari, Chrome) */
   color: transparent;
   animation: rainbow 8s ease infinite;

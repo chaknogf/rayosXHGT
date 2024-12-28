@@ -12915,3 +12915,49 @@ thead th {
 }
 
 /* Otros estilos comunes */
+
+.modal {
+  width: 50%;
+  border: none;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.open-modal-button {
+  background-color: #007bff; /* Color principal */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.open-modal-button:hover {
+  background-color: #0056b3; /* Color más oscuro al pasar el cursor */
+}
+
+.open-modal-button:active {
+  background-color: #004085; /* Color aún más oscuro al hacer clic */
+}

@@ -9,6 +9,7 @@ interface TableVerticalProps<T> {
     render?: (data: T) => React.ReactNode;
     svgIcon?: React.ReactNode;
     section?: "tabla";
+    onClick?: () => void;
   }>;
   renderFunctions?: Record<string, (data: T) => React.ReactNode>;
 }
@@ -37,8 +38,10 @@ const DataConTabla = <T,>({
             {items
               .filter((item) => item.section === "tabla")
               .map((item, itemIndex) => {
+                // Prioridad de renderizado
                 const renderFn =
-                  item.render || renderFunctions[item.key as string];
+                  item.render ||
+                  (item.key && renderFunctions[item.key as string]);
                 return (
                   <td key={itemIndex} className="dark-table-cell">
                     {renderFn
