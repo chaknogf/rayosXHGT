@@ -42,7 +42,10 @@ const IconReactEdit: React.FC = () => (
 const PacienteTable: React.FC = () => {
   // Estados
   const [pacientes, setPacientes] = useState<VistaPacientes[]>([]);
-  const [consultas, setConsultas] = useState<ConsultaRapida[]>([]);
+  // const [consultas, setConsultas] = useState<ConsultaRapida[]>([]);
+  const [consultas, setConsultas] = useState<Record<number, ConsultaRapida[]>>(
+    {}
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
     id: "",
@@ -61,20 +64,27 @@ const PacienteTable: React.FC = () => {
   const fetchPacientes = async () => {
     setIsLoading(true);
     try {
-      const data = await getPacientesVistas();
-      setPacientes(data);
+      const pacientesData = await getPacientesVistas();
+      setPacientes(pacientesData);
 
-      // if (data.length > 0) {
-      //   const consultaRapida = await consultarapida(data[0].paciente_id);
-      //   setConsultas(consultaRapida);
-      // }
+      // Recuperar consultas para todos los pacientes
+      const allConsultas = await Promise.all(
+        pacientesData.map((paciente) => consultarapida(paciente.paciente_id))
+      );
+
+      // Agrupar las consultas por paciente_id
+      const consultasGrouped = pacientesData.reduce((acc, paciente, index) => {
+        acc[paciente.paciente_id] = allConsultas[index];
+        return acc;
+      }, {} as Record<number, ConsultaRapida[]>);
+
+      setConsultas(consultasGrouped); // Guarda las consultas agrupadas
     } catch (error) {
-      console.error("Error al obtener los pacientes:", error);
+      console.error("Error al obtener los datos:", error);
     } finally {
       setIsLoading(false);
     }
   };
-
   // Función para buscar pacientes con filtros
   const searchPacientes = async () => {
     try {
@@ -83,13 +93,35 @@ const PacienteTable: React.FC = () => {
       if (!Array.isArray(data) || data.length === 0) {
         alert("No se encontraron pacientes con los criterios de búsqueda.");
         setPacientes([]);
+        setConsultas([]); // Limpiar las consultas
         return;
       }
 
       setPacientes(data);
 
+      // Obtener las consultas para el primer paciente (como en el código original)
       const consultaRapida = await consultarapida(data[0].paciente_id);
-      setConsultas(consultaRapida);
+
+      // Ajustar el estado de consultas para todos los pacientes
+      // Modificar el setConsultas para que almacene las consultas correspondientes a todos los pacientes
+      const consultasPorPaciente = await Promise.all(
+        data.map(async (paciente) => {
+          const consultas = await consultarapida(paciente.paciente_id);
+          return { paciente_id: paciente.paciente_id, consultas };
+        })
+      );
+
+      // Crear un objeto de consultas agrupadas por paciente_id
+      const consultasMapeadas = consultasPorPaciente.reduce(
+        (acc, { paciente_id, consultas }) => {
+          acc[paciente_id] = consultas;
+          return acc;
+        },
+        {} as Record<number, ConsultaRapida[]>
+      );
+
+      // Establecer el estado de las consultas con el objeto de consultas agrupadas
+      setConsultas(consultasMapeadas);
     } catch (error) {
       console.error("Error al buscar pacientes:", error);
       alert("Ocurrió un error al buscar pacientes.");
@@ -135,16 +167,7 @@ const PacienteTable: React.FC = () => {
   const handleCloseModal = () => {
     modalRef.current?.close();
   };
-
-  const handleConsultas = async (paciente_id: number) => {
-    try {
-      const data = await consultarapida(paciente_id);
-      setConsultas(data);
-      console.table(data);
-    } catch (error) {
-      console.error("Error al buscar pacientes:", error);
-    }
-  };
+  // Función para actualizar el estado de consultas
 
   // Configuración de columnas e ítems
   const items = [
@@ -170,12 +193,9 @@ const PacienteTable: React.FC = () => {
     {
       label: "Consultas",
       render: (item: VistaPacientes) => {
-        // Filtrar las consultas para ese paciente en particular
-        const consultasFiltradas = consultas.filter(
-          (consulta) => consulta.paciente_id === item.paciente_id
-        );
+        // Obtener las consultas del paciente actual
+        const consultasFiltradas = consultas[item.paciente_id] || [];
 
-        // Si hay consultas para el paciente, las mostramos
         return (
           <DataConTabla
             data={consultasFiltradas}
@@ -185,12 +205,6 @@ const PacienteTable: React.FC = () => {
         );
       },
       section: "tabla",
-    },
-    {
-      label: "",
-      onClick: (paciente: VistaPacientes) =>
-        handleConsultas(paciente.paciente_id),
-      section: "header",
     },
   ];
 
@@ -210,7 +224,7 @@ const PacienteTable: React.FC = () => {
   return (
     <div>
       {/* Modal */}
-      <dialog ref={modalRef} className="modal">
+      <dialog ref={modalRef} className="modal_dialog">
         <PacienteForm />
         <button onClick={handleCloseModal}>Cerrar</button>
       </dialog>

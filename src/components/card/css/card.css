@@ -43,6 +43,8 @@
   display: flexbox;
 }
 
+
+
 /* transition: all 2.3s ease-in-out;
     overflow: hidden;  */
 
@@ -59,9 +61,10 @@
 }
 
 .card:hover {
-   transform: scale(1.03);  
+  height: 120%;  
   z-index: 100;
-   width: 98%;
+  
+   
  /* padding:3px;
    */
   

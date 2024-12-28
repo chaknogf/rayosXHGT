@@ -240,9 +240,11 @@ const renderId = (value: number) => {
 
 const renderDPI = (value: string) => {
   return (
-    <p onClick={copyToClipboard} className="dpi">
-      {FormartDPI(value)}
-    </p>
+    <>
+      <p onClick={copyToClipboard} className="dpi">
+        {FormartDPI(value)}
+      </p>
+    </>
   );
 };
 

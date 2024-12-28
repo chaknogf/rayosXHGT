@@ -8,6 +8,7 @@ import { CloseIcon } from "@/assets/icons/svg";
 import DataBody from "@/components/card/DataBody";
 import DataConsultas from "./DataConsultas";
 import DataConTabla from "./DataConTabla";
+import { consultarapida } from "@/services/pacientes";
 
 // Interfaz para definir las propiedades de cada campo en el card
 interface RegistoCard<T> {
@@ -37,9 +38,14 @@ interface ObjetX {
   [key: string]: string | number | undefined;
 }
 
-const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
+const DataCard = <T extends ObjetX>({
+  data,
+  items,
+  onDataUpdate,
+}: CardProps<T> & { onDataUpdate: (data: any) => void }) => {
   const [showBody, setShowBody] = useState<boolean>(false);
 
+  // Manejo del toggle para mostrar el cuerpo de la tarjeta
   const handleToggleBody = () => {
     setShowBody(true);
   };
@@ -48,14 +54,27 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
     setShowBody(false);
   };
 
+  // Función para manejar consultas (o cualquier dato específico)
+  const handleConsultas = async (paciente_id: number) => {
+    try {
+      console.log(`Consultando datos para el paciente con ID: ${paciente_id}`);
+      const data = await consultarapida(paciente_id);
+      onDataUpdate(data); // Pasamos los datos al padre
+      console.table(data);
+    } catch (error) {
+      console.error("Error al buscar datos del paciente:", error);
+    }
+  };
+
   return (
     <div className="card-container" tabIndex={0}>
       <div className="card" onClick={handleToggleBody}>
-        {/* Usamos CardHeader para el encabezado */}
         <CardHeader
           data={data[0]}
           items={items}
           renderFunctions={renderFunctions}
+          dataId={data[0].paciente_id}
+          onClick={() => handleConsultas(data[0].paciente_id)}
         />
 
         {showBody && (
@@ -70,7 +89,7 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
               <CloseIcon />
             </button>
 
-            {/* Contenedor de contenido expandido */}
+            {/* Contenido expandido */}
             <div className="card-expanded-content">
               <div className="columna1">
                 <DataBody
@@ -103,18 +122,19 @@ const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
     </div>
   );
 };
-
 const DataCards = <T extends ObjetX>({
   data,
   items,
+  onDataUpdate,
 }: {
   data: T[];
   items: RegistoCard<T>[];
+  onDataUpdate: (data: any) => void; // Función dinámica para manejar los datos
 }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 400);
+    const timer = setTimeout(() => setLoading(false), 100);
     return () => clearTimeout(timer);
   }, []);
 
@@ -126,11 +146,15 @@ const DataCards = <T extends ObjetX>({
         </div>
       ) : (
         data.map((item, index) => (
-          <DataCard key={index} data={[item]} items={items} />
+          <DataCard
+            key={index}
+            data={[item]}
+            items={items}
+            onDataUpdate={onDataUpdate} // Pasamos la función
+          />
         ))
       )}
     </div>
   );
 };
-
 export default DataCards;
