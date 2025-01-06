@@ -4644,6 +4644,7 @@ fieldset:disabled .btn {
   margin-bottom: var(--bs-card-title-spacer-y);
   color: var(--bs-card-title-color);
 }
+{}
 
 .card-subtitle {
   margin-top: calc(-0.5 * var(--bs-card-title-spacer-y));
@@ -12943,21 +12944,34 @@ thead th {
   background: rgba(0, 0, 0, 0.5);
 }
 
-.open-modal-button {
-  background-color: #007bff; /* Color principal */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+@media (max-width: 768px) {
+  
+  /* .card-card {
+    flex-direction: row-reverse;
+    align-items: stretch;
+    margin-right: 10px;
+    scale: 0.95;
+  } */
+  .contenido {
+    height: 96.2vh;
+    overflow-y: scroll;
+  }
+
 }
 
-.open-modal-button:hover {
-  background-color: #0056b3; /* Color más oscuro al pasar el cursor */
-}
+@media (max-width: 485px) {
+  
+  /* .card-card_ {
+    flex-direction: row-reverse;
+    align-items: stretch;
+    margin-right: 10px;
+    padding: 0.5rem;
+    scale: 0.95;
+    gap: 0.01rem
+  } */
+  .contenido {
+    height: 96.2vh;
+    overflow-y: scroll;
+  }
 
-.open-modal-button:active {
-  background-color: #004085; /* Color aún más oscuro al hacer clic */
 }

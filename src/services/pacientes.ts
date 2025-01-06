@@ -15,6 +15,26 @@ interface Paciente {
     municipio?: number;
     departamento?: number;
     dpi?: string;
+    telefono1?: string;
+    telefono2?: string;
+    telefono3?: string;
+    email?: string;
+    created_at?: string;
+    updated_at?: string;
+    lugar_nacimiento?: string;
+    nacionalidad?: string;
+    estado_civil?: number;
+    educacion?: number;
+    pueblo?: number;
+    idioma?: number;
+    ocupacion?: string;
+    padre?: string;
+    madre?: string;
+    conyugue?: string;
+    defuncion?: string;
+    tiempo_defuncion?: string;
+    nacionalidad_iso?: string;
+
 }
 
 interface VistaPacientes {
@@ -61,7 +81,7 @@ export const getPacientes = async (): Promise<Paciente[]> => {
         throw new Error("Error al obtener los pacientes");
     }
     return await response.json();
-    console.table(response);
+    // console.table(response);
 };
 
 export const getPacientesVistas = async (): Promise<VistaPacientes[]> => {
@@ -70,7 +90,7 @@ export const getPacientesVistas = async (): Promise<VistaPacientes[]> => {
         throw new Error("Error al obtener los pacientes");
     }
     return await response.json();
-    console.table(response);
+    // console.table(response);
 };
 
 export const consultarapida = async (paciente: number): Promise<VistaPacientes[]> => {
@@ -82,7 +102,7 @@ export const consultarapida = async (paciente: number): Promise<VistaPacientes[]
         }
 
         const data = await response.json();
-        console.table(data); // Mostrar los datos en formato de tabla
+        // console.table(data); 
         return data;
     } catch (error) {
         console.error("Error en consultarapida:", error);
@@ -139,4 +159,14 @@ export const getPacientes_id = async (filter: Record<string, any>): Promise<Vist
         console.error("La respuesta no es un arreglo:", data);
         return []; // En caso de que no sea un arreglo, retornamos un arreglo vacío
     }
+};
+
+export const getPacienteData = async (id: number): Promise<Paciente | Paciente[]> => {
+    const response = await fetch(`${API}/datapaciente/${id}`);
+
+    if (!response.ok) {
+        throw new Error("Error al obtener el paciente");
+    }
+
+    return await response.json();
 };

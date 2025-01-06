@@ -13,7 +13,7 @@
 /* Diseño adaptable a pantallas pequeñas */
 @media screen and (max-width: 728px) {
   .table-row {
-    flex-direction: column;
+    flex-direction: column; 
   }
 
   .table-header {

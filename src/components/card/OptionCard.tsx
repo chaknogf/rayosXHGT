@@ -1,43 +1,50 @@
 import React from "react";
-import "@/components/card/css/tableVertical.css";
-interface TableVerticalProps<T> {
+import "@/components/card/css/option.css";
+
+interface OptionsProps<T> {
   data: T[];
   items: Array<{
     label?: string;
     key?: keyof T;
     render?: (data: T) => React.ReactNode;
     svgIcon?: React.ReactNode;
-    section?: "consulta";
+    section?: "option";
+    onClick?: (data: T) => void; // Nuevo: manejador de clics
   }>;
   renderFunctions?: Record<string, (data: T) => React.ReactNode>;
 }
 
-const DataConsultas = <T,>({
+const OptionCard = <T,>({
   data,
   items,
   renderFunctions = {},
-}: TableVerticalProps<T>) => {
+}: OptionsProps<T>) => {
   return (
-    <div className="table-vertical">
+    <div className=" zero">
       {data.map((rowData, index) => (
-        <div key={index} className="table-row_">
+        <div key={index} className="card-options">
           {items
-            .filter((item) => item.section === "consulta")
+            .filter((item) => item.section === "option")
             .map((item, itemIndex) => {
               const renderFn =
                 item.render || renderFunctions[item.key as string];
+
+              // Asegúrate de pasar la función handleCopy correctamente
+              const handleClick = item.onClick;
+
               return (
-                <div className="table-item" key={itemIndex}>
-                  <div className="table-header">{item.label}:</div>
-                  <div className="table-body">
+                <div className="card-options-item" key={itemIndex}>
+                  <div
+                    className="btn-opt"
+                    onClick={() => handleClick?.(rowData)}
+                  >
                     {renderFn
                       ? renderFn(rowData)
-                      : item.svgIcon
-                      ? item.svgIcon
                       : item.key && rowData[item.key] !== undefined
                       ? String(rowData[item.key])
                       : null}
                   </div>
+                  <div className="btn-container">{item.label}</div>
                 </div>
               );
             })}
@@ -47,4 +54,4 @@ const DataConsultas = <T,>({
   );
 };
 
-export default DataConsultas;
+export default OptionCard;

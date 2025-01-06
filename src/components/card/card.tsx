@@ -3,12 +3,11 @@ import "@/components/card/css/card.css";
 import { LoaderHamster as Loader } from "@/components/loader/loader";
 import { renderFunctions } from "@/components/card/rendersFunctions";
 import CardHeader from "@/components/card/CardHeader";
-import CardOptions from "@/components/card/CardOptions";
+import OptionsCard from "@/components/card/OptionCard";
 import { CloseIcon } from "@/assets/icons/svg";
 import DataBody from "@/components/card/DataBody";
 import DataConsultas from "./DataConsultas";
 import DataConTabla from "./DataConTabla";
-import { consultarapida } from "@/services/pacientes";
 
 // Interfaz para definir las propiedades de cada campo en el card
 interface RegistoCard<T> {
@@ -18,7 +17,7 @@ interface RegistoCard<T> {
   svgIcon?: React.ReactNode;
   customFunction?: (data: T) => React.ReactNode;
   className?: string;
-  section?: "header" | "body" | "option";
+  section?: "header" | "body" | "option" | "tabla";
   buttons?: Button[];
   iconReact?: string;
 }
@@ -32,21 +31,23 @@ interface CardProps<T> {
   data: T[];
   items: RegistoCard<T>[];
   renderFunctions?: Record<string, (data: T) => React.ReactNode>;
+  showBody: boolean;
+  onToggleBody: () => void;
+  pacienteId: number;
 }
 
 interface ObjetX {
   [key: string]: string | number | undefined;
 }
 
-const DataCard = <T extends ObjetX>({
-  data,
-  items,
-  onDataUpdate,
-}: CardProps<T> & { onDataUpdate: (data: any) => void }) => {
-  const [showBody, setShowBody] = useState<boolean>(false);
+const DataCard = <T extends ObjetX>({ data, items }: CardProps<T>) => {
+  const [showBody, setShowBody] = useState<boolean>(false); // Estado local para cada tarjeta
 
-  // Manejo del toggle para mostrar el cuerpo de la tarjeta
   const handleToggleBody = () => {
+    setShowBody((prev) => !prev); // Alterna entre expandido y colapsado
+  };
+
+  const handleshowBody = () => {
     setShowBody(true);
   };
 
@@ -54,27 +55,14 @@ const DataCard = <T extends ObjetX>({
     setShowBody(false);
   };
 
-  // Función para manejar consultas (o cualquier dato específico)
-  const handleConsultas = async (paciente_id: number) => {
-    try {
-      console.log(`Consultando datos para el paciente con ID: ${paciente_id}`);
-      const data = await consultarapida(paciente_id);
-      onDataUpdate(data); // Pasamos los datos al padre
-      console.table(data);
-    } catch (error) {
-      console.error("Error al buscar datos del paciente:", error);
-    }
-  };
-
   return (
     <div className="card-container" tabIndex={0}>
-      <div className="card" onClick={handleToggleBody}>
+      <div className="card card-card" onClick={handleshowBody}>
         <CardHeader
           data={data[0]}
           items={items}
           renderFunctions={renderFunctions}
           dataId={data[0].paciente_id}
-          onClick={() => handleConsultas(data[0].paciente_id)}
         />
 
         {showBody && (
@@ -82,8 +70,8 @@ const DataCard = <T extends ObjetX>({
             <button
               className="btn btn-close-body"
               onClick={(e) => {
-                e.stopPropagation();
-                handleCloseBody();
+                e.stopPropagation(); // Evita que el evento cierre accidentalmente la tarjeta
+                handleCloseBody(); // Cierra la tarjeta
               }}
             >
               <CloseIcon />
@@ -111,8 +99,8 @@ const DataCard = <T extends ObjetX>({
                 />
               </div>
             </div>
-            <CardOptions
-              data={data[0]}
+            <OptionsCard
+              data={data}
               items={items}
               renderFunctions={renderFunctions}
             />
@@ -125,11 +113,9 @@ const DataCard = <T extends ObjetX>({
 const DataCards = <T extends ObjetX>({
   data,
   items,
-  onDataUpdate,
 }: {
   data: T[];
   items: RegistoCard<T>[];
-  onDataUpdate: (data: any) => void; // Función dinámica para manejar los datos
 }) => {
   const [loading, setLoading] = useState(true);
 
@@ -149,12 +135,12 @@ const DataCards = <T extends ObjetX>({
           <DataCard
             key={index}
             data={[item]}
-            items={items}
-            onDataUpdate={onDataUpdate} // Pasamos la función
+            items={items} // Pasamos las configuraciones
           />
         ))
       )}
     </div>
   );
 };
+
 export default DataCards;

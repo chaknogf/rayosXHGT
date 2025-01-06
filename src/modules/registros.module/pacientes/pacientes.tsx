@@ -1,17 +1,52 @@
 import React, { useEffect, useState, useRef } from "react";
-import PacienteForm from "@/modules/registros.module/pacientes/formularioPaciente";
+// import PacienteForm from "@/modules/registros.module/pacientes/formularioPaciente";
 import DataCards from "@/components/card/card";
 import { FaEdit } from "react-icons/fa";
 import {
   getPacientesVistas,
   getPacientes_id,
   consultarapida,
+  getPacienteData,
 } from "@/services/pacientes";
-import "./search.css";
+import { InfoIcon } from "@/assets/icons/svg";
 import DataConTabla from "@/components/card/DataConTabla";
 import { renderFunctions } from "@/components/card/rendersFunctions";
+//import DataConsultas from "@/components/card/DataConsultas";
 
 // Interfaces
+
+interface Paciente {
+  id: number;
+  nombre?: string;
+  apellido?: string;
+  nacimiento?: string;
+  expediente: number;
+  estado?: string;
+  sexo?: string;
+  direccion?: string;
+  municipio?: number;
+  departamento?: number;
+  dpi?: string;
+  telefono1?: string;
+  telefono2?: string;
+  telefono3?: string;
+  email?: string;
+  created_at?: string;
+  updated_at?: string;
+  lugar_nacimiento?: string;
+  nacionalidad?: string;
+  estado_civil?: number;
+  educacion?: number;
+  pueblo?: number;
+  idioma?: number;
+  ocupacion?: string;
+  padre?: string;
+  madre?: string;
+  conyugue?: string;
+  defuncion?: string;
+  tiempo_defuncion?: string;
+  nacionalidad_iso?: string;
+}
 interface VistaPacientes {
   paciente_id: number;
   nombre?: string;
@@ -33,19 +68,26 @@ interface ConsultaRapida {
   tipo_consulta?: number;
   estatus?: number;
 }
-
 // Icono Editar
 const IconReactEdit: React.FC = () => (
-  <FaEdit style={{ height: "0.83rem", width: "0.83rem" }} />
+  <FaEdit style={{ height: "0.93rem", width: "0.93rem" }} />
+);
+
+const IconReactInfo: React.FC = () => (
+  <InfoIcon style={{ height: "0.93rem", width: "0.93rem" }} />
 );
 
 const PacienteTable: React.FC = () => {
   // Estados
   const [pacientes, setPacientes] = useState<VistaPacientes[]>([]);
-  // const [consultas, setConsultas] = useState<ConsultaRapida[]>([]);
   const [consultas, setConsultas] = useState<Record<number, ConsultaRapida[]>>(
     {}
   );
+
+  const [dataPaciente, setDataPaciente] = useState<
+    Paciente | Paciente[] | undefined
+  >(undefined);
+
   const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
     id: "",
@@ -57,21 +99,16 @@ const PacienteTable: React.FC = () => {
     madre: "",
   });
 
-  // Referencia para el modal
-  const modalRef = useRef<HTMLDialogElement | null>(null);
-
   // Función para obtener pacientes
   const fetchPacientes = async () => {
     setIsLoading(true);
     try {
       const pacientesData = await getPacientesVistas();
       setPacientes(pacientesData);
-
       // Recuperar consultas para todos los pacientes
       const allConsultas = await Promise.all(
         pacientesData.map((paciente) => consultarapida(paciente.paciente_id))
       );
-
       // Agrupar las consultas por paciente_id
       const consultasGrouped = pacientesData.reduce((acc, paciente, index) => {
         acc[paciente.paciente_id] = allConsultas[index];
@@ -99,9 +136,6 @@ const PacienteTable: React.FC = () => {
 
       setPacientes(data);
 
-      // Obtener las consultas para el primer paciente (como en el código original)
-      const consultaRapida = await consultarapida(data[0].paciente_id);
-
       // Ajustar el estado de consultas para todos los pacientes
       // Modificar el setConsultas para que almacene las consultas correspondientes a todos los pacientes
       const consultasPorPaciente = await Promise.all(
@@ -125,6 +159,16 @@ const PacienteTable: React.FC = () => {
     } catch (error) {
       console.error("Error al buscar pacientes:", error);
       alert("Ocurrió un error al buscar pacientes.");
+    }
+  };
+
+  const allDataPaciente = async (id: number) => {
+    try {
+      const dataP = await getPacienteData(id);
+      setDataPaciente(dataP);
+    } catch (error) {
+      console.error("Error al obtener los datos del paciente:", error);
+      alert("404: Datos del paciente no encontrados");
     }
   };
 
@@ -159,23 +203,19 @@ const PacienteTable: React.FC = () => {
     fetchPacientes();
   };
 
-  // Control del modal
-  const handleOpenModal = () => {
-    modalRef.current?.showModal();
-  };
-
-  const handleCloseModal = () => {
-    modalRef.current?.close();
-  };
-  // Función para actualizar el estado de consultas
-
   // Configuración de columnas e ítems
   const items = [
     {
       label: "Agregar",
-      onClick: handleOpenModal,
       section: "option",
       render: () => <IconReactEdit />,
+    },
+    {
+      label: "Info",
+      key: "paciente_id",
+      onClick: (item: VistaPacientes) => allDataPaciente(item.paciente_id),
+      section: "option",
+      render: () => <IconReactInfo />,
     },
     {
       label: "Id",
@@ -217,26 +257,72 @@ const PacienteTable: React.FC = () => {
     { label: "Estatus", key: "estatus", section: "tabla" },
   ];
 
+  const dataItem = [
+    { label: "Nombre", key: "nombre", section: "consulta" },
+    { label: "Apellido", key: "apellido", section: "consulta" },
+    { label: "DPI", key: "dpi", section: "consulta" },
+    { label: "Sexo", key: "sexo", section: "consulta" },
+    { label: "Nacimiento", key: "nacimiento", section: "consulta" },
+    { label: "Madre", key: "madre", section: "consulta" },
+    { label: "Padre", key: "padre", section: "consulta" },
+    { label: "Domicilio", key: "direccion", section: "consulta" },
+    { label: "Teléfono", key: "telefono1", section: "consulta" },
+    { label: "Email", key: "email", section: "consulta" },
+    { label: "Ocupación", key: "ocupacion", section: "consulta" },
+    { label: "Profesión", key: "educacion", section: "consulta" },
+    { label: "Nacionalidad", key: "nacionalidad", section: "consulta" },
+    { label: "Estado Civil", key: "estado_civil", section: "consulta" },
+    {
+      label: "Lugar de Nacimiento",
+      key: "lugar_nacimiento",
+      section: "consulta",
+    },
+  ];
+
   if (isLoading) {
     return <div className="cargando">Cargando datos...</div>;
   }
 
   return (
-    <div>
-      {/* Modal */}
-      <dialog ref={modalRef} className="modal_dialog">
-        <PacienteForm />
-        <button onClick={handleCloseModal}>Cerrar</button>
-      </dialog>
-
+    <>
       {/* Tarjetas */}
-      <DataCards
-        data={pacientes}
-        items={items}
-        secondaryItems={titems}
-        secondaryData={consultas}
-      />
+      <>
+        <div className="container">
+          <div className="card-body-data">hola</div>
+        </div>
 
+        <DataCards
+          data={pacientes}
+          items={items}
+          secondaryData={consultas}
+          pData={dataPaciente}
+        />
+
+        <form className="search-bar" onSubmit={handleSearchSubmit}>
+          {/* Campos de filtro */}
+          <input
+            type="number"
+            name="id"
+            value={filters.id}
+            onChange={handleFilterChange}
+            placeholder="ID"
+          />
+          <input
+            type="text"
+            name="expediente"
+            value={filters.expediente}
+            onChange={handleFilterChange}
+            placeholder="Expediente"
+          />
+          {/* Otros campos */}
+          <button type="submit" className="btn">
+            Buscar
+          </button>
+          <button type="button" onClick={handleClearFilters} className="btn">
+            Limpiar
+          </button>
+        </form>
+      </>
       {/* Barra de búsqueda */}
       <form className="search-bar" onSubmit={handleSearchSubmit}>
         <input
@@ -294,7 +380,7 @@ const PacienteTable: React.FC = () => {
           Limpiar
         </button>
       </form>
-    </div>
+    </>
   );
 };
 

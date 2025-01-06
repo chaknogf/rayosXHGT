@@ -32,7 +32,7 @@ const DataConTabla = <T,>({
             ))}
         </tr>
       </thead>
-      <tbody>
+      <tbody className="dark-table-body">
         {data.map((rowData, rowIndex) => (
           <tr key={rowIndex} className="dark-table-row">
             {items

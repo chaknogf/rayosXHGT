@@ -1,21 +1,27 @@
 .card-options {
   display: flex;
   flex-direction: row; /* Mantiene los elementos en línea horizontal */
-  justify-content: flex-end; /* Alinea los elementos al final del contenedor */
+  justify-content: center; /* Alinea los elementos al final del contenedor */
   align-items: center; /* Centra verticalmente los elementos */
   gap: 0.22rem; /* Espacio entre los elementos */
-  margin: 0; /* Elimina márgenes adicionales */
+  margin-bottom: 2px; /* Elimina márgenes adicionales */
   
 }
 
-/* Contenedor del botón y la etiqueta */
-.btn-container {
+.card-options-item {
   display: flex;
   flex-direction: column; /* Cambia a columna si botón y etiqueta van uno sobre otro */
   justify-content: center; /* Centra horizontalmente */
   align-items: center; /* Centra verticalmente */
-  padding: 2px;
-  height: 100%; /* Asegura que ocupe el 100% de la altura disponible */
+  gap: 0.12rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor del botón y la etiqueta */
+.btn-container {
+  margin: 0; 
+  font-size: 12px;
  
  
 }
@@ -41,15 +47,17 @@
 /* Estilo del botón */
 .btn-opt {
   border-radius: 4px; /* Bordes redondeados */
-  margin-right: 0.3rem; /* Espacio a la derecha */
-  padding: 8px 10px; /* Ajusta el tamaño del botón */
+  padding: 2px 2px 2px 2px; /* Ajusta el tamaño del botón */
   cursor: pointer; /* Cambia el puntero al pasar sobre el botón */
   transition: background-color 0.3s ease; /* Animación suave */
   
 }
 
 .btn-opt:hover {
-  background-color: #e6f7ff; /* Color de fondo al pasar el mouse */
+  border-radius: 24px;
+  z-index: 1;
+ box-shadow: #e80686de 1px 2px 1px 1px;
+
 }
 
 /* Botón con estilo específico (detalles) */
@@ -61,6 +69,12 @@
 }
 
 .detalle-btn:hover {
-  background-color: #1bc5e6; /* Fondo azul al pasar el mouse */
-  color: #ffffff; /* Texto blanco */
+  background-color: #1bc5e6; 
+  color: #ffffff; 
 }
+
+svg {
+  vertical-align: sub;
+  align-content: center;
+}
+

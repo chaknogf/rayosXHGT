@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PacienteTable from "./pacientes";
-import CustomForm from "@/components/formularioData/formularioData";
+import CustomForm from "@/components/formularioData/CustomForm";
 import "@/components/formularioData/formularioData.css";
 
 interface UserFormValues {
