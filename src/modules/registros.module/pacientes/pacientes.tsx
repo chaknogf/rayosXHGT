@@ -8,7 +8,7 @@ import {
   consultarapida,
   getPacienteData,
 } from "@/services/pacientes";
-import { InfoIcon } from "@/assets/icons/svg";
+import { CloseIcon, InfoIcon } from "@/assets/icons/svg";
 import DataConTabla from "@/components/card/DataConTabla";
 import { renderFunctions } from "@/components/card/rendersFunctions";
 //import DataConsultas from "@/components/card/DataConsultas";
@@ -98,6 +98,7 @@ const PacienteTable: React.FC = () => {
     nacimiento: "",
     madre: "",
   });
+  const [showDataCard, setShowDataCard] = useState(false);
 
   // Función para obtener pacientes
   const fetchPacientes = async () => {
@@ -203,6 +204,14 @@ const PacienteTable: React.FC = () => {
     fetchPacientes();
   };
 
+  const handleVerData = () => {
+    setShowDataCard(true);
+  };
+
+  const handleCerrarData = () => {
+    setShowDataCard(false);
+  };
+
   // Configuración de columnas e ítems
   const items = [
     {
@@ -288,7 +297,21 @@ const PacienteTable: React.FC = () => {
       {/* Tarjetas */}
       <>
         <div className="container">
-          <div className="card-body-data">hola</div>
+          <div>
+            <button onClick={handleVerData} className="btn-open">
+              Abrir Data Card
+            </button>
+            <div
+              className={`card-body-data ${
+                showDataCard ? "visible" : "collapsed"
+              }`}
+            >
+              <button onMouseEnter={handleCerrarData} className="btn">
+                <CloseIcon />
+              </button>
+              <p>Contenido aquí...</p>
+            </div>
+          </div>
         </div>
 
         <DataCards

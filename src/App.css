@@ -1,23 +1,19 @@
 /* Reset básico */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: content-box;
-   
-  
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    background-image: url("/src/assets/vecteezy.svg") ;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    
-    filter: opacity(85%);
-  }
-  
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  background-image: url("/src/assets/vecteezy.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+
+  filter: opacity(90%);
+}
