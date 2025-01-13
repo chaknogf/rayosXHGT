@@ -116,7 +116,7 @@ tr:hover .dir {
     rgb(247, 146, 247)
   );
   background-size: 300%;
-  background-clip:border-box;
+  background-clip: border-box;
   -webkit-background-clip: text; /* Para compatibilidad con WebKit (Safari, Chrome) */
   color: transparent;
   animation: rainbow 8s ease infinite;
@@ -127,9 +127,10 @@ tr:hover .dir {
 
 .card:hover {
   background-color: #000000;
-  box-shadow: #ffff;
+  box-shadow: 0 3px 10px #e802f4a8;
 }
 
 .card:not(:hover) {
-  filter: opacity(0.95) blur(0.2px);
+  filter: opacity(0.92);
+  font-weight: 10;
 }

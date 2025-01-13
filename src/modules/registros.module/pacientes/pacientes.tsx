@@ -8,9 +8,10 @@ import {
   consultarapida,
   getPacienteData,
 } from "@/services/pacientes";
-import { CloseIcon, InfoIcon } from "@/assets/icons/svg";
+import { InfoIcon } from "@/assets/icons/svg";
 import DataConTabla from "@/components/card/DataConTabla";
 import { renderFunctions } from "@/components/card/rendersFunctions";
+import GenericCards from "@/components/card/genericCard";
 //import DataConsultas from "@/components/card/DataConsultas";
 
 // Interfaces
@@ -102,24 +103,30 @@ const PacienteTable: React.FC = () => {
 
   // Función para obtener pacientes
   const fetchPacientes = async () => {
-    setIsLoading(true);
+    setIsLoading(true); // Inicia el indicador de carga
     try {
+      // 1. Obtener datos de los pacientes
       const pacientesData = await getPacientesVistas();
       setPacientes(pacientesData);
-      // Recuperar consultas para todos los pacientes
+
+      // 2. Obtener todas las consultas usando Promise.all
       const allConsultas = await Promise.all(
         pacientesData.map((paciente) => consultarapida(paciente.paciente_id))
       );
-      // Agrupar las consultas por paciente_id
-      const consultasGrouped = pacientesData.reduce((acc, paciente, index) => {
-        acc[paciente.paciente_id] = allConsultas[index];
-        return acc;
-      }, {} as Record<number, ConsultaRapida[]>);
 
-      setConsultas(consultasGrouped); // Guarda las consultas agrupadas
+      // 3. Agrupar consultas por paciente_id
+      const consultasGrouped: Record<number, ConsultaRapida[]> = {};
+      pacientesData.forEach((paciente, index) => {
+        consultasGrouped[paciente.paciente_id] = allConsultas[index];
+      });
+
+      // 4. Guardar las consultas agrupadas en el estado
+      setConsultas(consultasGrouped);
     } catch (error) {
+      // Manejo de errores
       console.error("Error al obtener los datos:", error);
     } finally {
+      // Finaliza el indicador de carga
       setIsLoading(false);
     }
   };
@@ -297,21 +304,17 @@ const PacienteTable: React.FC = () => {
       {/* Tarjetas */}
       <>
         <div className="container">
-          <div>
-            <button onClick={handleVerData} className="btn-open">
-              Abrir Data Card
-            </button>
-            <div
-              className={`card-body-data ${
-                showDataCard ? "visible" : "collapsed"
-              }`}
-            >
-              <button onMouseEnter={handleCerrarData} className="btn">
-                <CloseIcon />
-              </button>
-              <p>Contenido aquí...</p>
-            </div>
-          </div>
+          <GenericCards
+            data={[]}
+            items={[]}
+            showDetailCard={false}
+            onOpenDetail={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+            onCloseDetail={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
         </div>
 
         <DataCards
@@ -408,3 +411,9 @@ const PacienteTable: React.FC = () => {
 };
 
 export default PacienteTable;
+function groupBy(
+  arg0: { pacienteId: number; consultas: VistaPacientes[] }[],
+  arg1: (item: any) => any
+) {
+  throw new Error("Function not implemented.");
+}
