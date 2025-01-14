@@ -127,7 +127,7 @@ tr:hover .dir {
 
 .card:hover {
   background-color: #000000;
-  box-shadow: 0 3px 10px #e802f4a8;
+  box-shadow: 0 3px 10px #285048ce;
 }
 
 .card:not(:hover) {

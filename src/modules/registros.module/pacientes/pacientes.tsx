@@ -11,7 +11,7 @@ import {
 import { InfoIcon } from "@/assets/icons/svg";
 import DataConTabla from "@/components/card/DataConTabla";
 import { renderFunctions } from "@/components/card/rendersFunctions";
-import GenericCards from "@/components/card/genericCard";
+import AuxCard from "./auxCard";
 //import DataConsultas from "@/components/card/DataConsultas";
 
 // Interfaces
@@ -304,17 +304,7 @@ const PacienteTable: React.FC = () => {
       {/* Tarjetas */}
       <>
         <div className="container">
-          <GenericCards
-            data={[]}
-            items={[]}
-            showDetailCard={false}
-            onOpenDetail={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-            onCloseDetail={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
+          <AuxCard />
         </div>
 
         <DataCards
